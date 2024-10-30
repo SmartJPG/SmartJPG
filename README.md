@@ -1,6 +1,6 @@
 <div align="center">
   <img
-    src="SmartJPG.png"
+    src="./public/SmartJPG.png"
     alt="Icon"
     width="100"
     height="100"
