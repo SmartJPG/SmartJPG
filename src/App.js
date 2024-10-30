@@ -102,7 +102,7 @@ const App = () => {
       >
         <input
           type="file"
-          accept="image/jpeg, image/png, image/webp, image/avif"
+          accept="image/jpeg, image/png, image/webp, image/avif, image/heic"
           onChange={handleFileChange}
           style={{ margin: "10px 0" }}
         />
