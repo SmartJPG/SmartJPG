@@ -28,7 +28,7 @@ const App = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/convert",
+        "https://smartjpg-backend.onrender.com/convert",
         formData,
         {
           responseType: "blob",
