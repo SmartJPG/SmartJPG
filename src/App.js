@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./App.css";
 import { motion } from "framer-motion";
+import "bootstrap/dist/css/bootstrap.min.css";
+import LoadingBar from "react-top-loading-bar";
 
 const App = () => {
+  const ref = useRef(null);
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [downloadLink, setDownloadLink] = useState(null);
+  const [blobData, setBlobData] = useState(null);
   const [showDonate, setShowDonate] = useState(true);
   const [counting, setCounting] = useState(4);
+  const downloadAnchorRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+  const [loadingColor, setLoadingColor] = useState("#f11946");
 
   useEffect(() => {
     if (counting > 0) {
@@ -22,6 +28,15 @@ const App = () => {
     }
   }, [counting]);
 
+  useEffect(() => {
+    if (blobData && downloadAnchorRef.current) {
+      const downloadUrl = URL.createObjectURL(blobData);
+      downloadAnchorRef.current.href = downloadUrl;
+      downloadAnchorRef.current.click();
+      URL.revokeObjectURL(downloadUrl);
+    }
+  }, [blobData]);
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
@@ -33,6 +48,15 @@ const App = () => {
     }
   };
 
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   const handleConvert = async () => {
     if (!file) {
       alert("Please upload an image.");
@@ -42,20 +66,38 @@ const App = () => {
     const formData = new FormData();
     formData.append("image", file);
 
+    setLoadingColor(getRandomColor());
+
     try {
+      ref.current.continuousStart();
+
       const response = await axios.post(
         "https://smartjpg-backend.onrender.com/convert",
         formData,
         {
           responseType: "blob",
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 50) / progressEvent.total
+            );
+            setProgress(percentCompleted);
+          },
+          onDownloadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              50 + (progressEvent.loaded * 50) / progressEvent.total
+            );
+            setProgress(percentCompleted);
+          },
         }
       );
 
-      const url = URL.createObjectURL(new Blob([response.data]));
-      setDownloadLink(url);
+      setBlobData(response.data);
+
+      ref.current.complete();
     } catch (error) {
       console.error("Image conversion failed:", error);
       alert("Failed to convert the image.");
+      ref.current.complete();
     }
   };
 
@@ -71,6 +113,13 @@ const App = () => {
         background: "linear-gradient(#e66465, #9198e5)",
       }}
     >
+      <LoadingBar
+        ref={ref}
+        color={loadingColor}
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+        height={6}
+      />
       <img
         src="SmartJPG.png"
         alt="Icon"
@@ -81,7 +130,7 @@ const App = () => {
           marginBottom: "20px",
         }}
       />
-      <h1
+      <h2
         style={{
           margin: "0px",
           fontSize: "3.5rem",
@@ -91,12 +140,13 @@ const App = () => {
         }}
       >
         SmartJPG
-      </h1>
+      </h2>
       <h4
         style={{
           color: "lightgray",
           textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
           fontWeight: "800",
+          marginBottom: "10px",
         }}
       >
         Convert Image to JPEG for FREE
@@ -120,7 +170,7 @@ const App = () => {
           onChange={handleFileChange}
           style={{ margin: "10px 0" }}
         />
-        <button onClick={handleConvert} style={{ marginBottom: "20px" }}>
+        <button className="convert-btn" onClick={handleConvert}>
           Convert to JPEG
         </button>
 
@@ -150,13 +200,12 @@ const App = () => {
           </div>
         )}
 
-        {downloadLink && (
-          <div style={{ marginTop: "20px" }}>
-            <a href={downloadLink} download="converted-image.jpg">
-              Download JPEG
-            </a>
-          </div>
-        )}
+        {/* Hidden download link */}
+        {/* <div style={{ display: "none" }}>
+          <a href="#" download="converted-image.jpg" ref={downloadAnchorRef}>
+            Download JPEG
+          </a>
+        </div> */}
       </div>
 
       <footer style={{ width: "100%" }}>
@@ -173,7 +222,7 @@ const App = () => {
             fontWeight: "600",
           }}
         >
-          © 2024 Copyright:SmartJPG.app
+          © 2024 Copyright: SmartJPG.app
         </div>
       </footer>
 
@@ -185,14 +234,14 @@ const App = () => {
           className="donate-container"
           style={{
             position: "absolute",
-            maxWidth: "350px",
+            maxWidth: "400px",
             width: "100%",
             bottom: "20px",
             right: "20px",
             borderRadius: "20px",
             backgroundColor: "white",
             textAlign: "center",
-            padding: "20px 30px",
+            padding: "30px 40px",
             zIndex: "2",
           }}
         >
@@ -204,12 +253,14 @@ const App = () => {
             <div
               style={{
                 position: "absolute",
-                top: "0px",
-                right: "0px",
+                top: "-20px",
+                right: "-35px",
                 fontWeight: "600",
                 padding: "5px 10px",
                 color: "white",
                 textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                width: "40px",
+                height: "40px",
               }}
               className="gradient-border"
             >
