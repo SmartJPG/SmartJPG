@@ -208,7 +208,7 @@ const App = () => {
         </div>
       </div>
 
-      <footer style={{ width: "100%" }}>
+      <footer>
         <div
           style={{
             position: "fixed",
