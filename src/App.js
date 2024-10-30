@@ -193,6 +193,7 @@ const App = () => {
             backgroundColor: "white",
             textAlign: "center",
             padding: "20px 30px",
+            zIndex: "2",
           }}
         >
           <div
