@@ -44,31 +44,105 @@ const App = () => {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Image Converter: Convert Image to JPEG for Free </h1>
-      <input
-        type="file"
-        accept="image/jpeg, image/png, image/webp, image/avif"
-        onChange={handleFileChange}
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        textAlign: "center",
+        background: "linear-gradient(#e66465, #9198e5)",
+      }}
+    >
+      <img
+        src="SmartJPG.png"
+        alt="Icon"
+        style={{
+          width: "100px",
+          height: "100px",
+          borderRadius: "50%",
+          marginBottom: "20px",
+        }}
       />
-      <button onClick={handleConvert} style={{ marginLeft: "10px" }}>
-        Convert to JPEG
-      </button>
+      <h1
+        style={{
+          margin: "0px",
+          fontSize: "3.5rem",
+          color: "#fff",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
+          fontWeight: "800",
+        }}
+      >
+        SmartJPG
+      </h1>
+      <h4
+        style={{
+          color: "lightgray",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
+          fontWeight: "800",
+        }}
+      >
+        Convert Image to JPEG for FREE
+      </h4>
 
-      {preview && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>Preview:</h3>
-          <img src={preview} alt="Preview" style={{ maxWidth: "400px" }} />
-        </div>
-      )}
+      <div
+        style={{
+          maxWidth: "500px",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          backgroundColor: "#f9f9f9",
+          borderRadius: "20px",
+          padding: "20px",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+        }}
+      >
+        <input
+          type="file"
+          accept="image/jpeg, image/png, image/webp, image/avif"
+          onChange={handleFileChange}
+          style={{ margin: "10px 0" }}
+        />
+        <button onClick={handleConvert} style={{ marginBottom: "20px" }}>
+          Convert to JPEG
+        </button>
 
-      {downloadLink && (
-        <div style={{ marginTop: "20px" }}>
-          <a href={downloadLink} download="converted-image.jpg">
-            Download JPEG
-          </a>
-        </div>
-      )}
+        {preview && (
+          <div
+            style={{
+              marginTop: "20px",
+              width: "100%",
+              maxHeight: "300px",
+              overflow: "hidden",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "10px",
+              backgroundColor: "#fff",
+            }}
+          >
+            <img
+              src={preview}
+              alt="Preview"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+        )}
+
+        {downloadLink && (
+          <div style={{ marginTop: "20px" }}>
+            <a href={downloadLink} download="converted-image.jpg">
+              Download JPEG
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
