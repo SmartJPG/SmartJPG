@@ -201,11 +201,11 @@ const App = () => {
         )}
 
         {/* Hidden download link */}
-        {/* <div style={{ display: "none" }}>
+        <div style={{ display: "none" }}>
           <a href="#" download="converted-image.jpg" ref={downloadAnchorRef}>
             Download JPEG
           </a>
-        </div> */}
+        </div>
       </div>
 
       <footer style={{ width: "100%" }}>
