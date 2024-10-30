@@ -154,6 +154,7 @@ const App = () => {
 
       <div
         style={{
+          width: "70%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
