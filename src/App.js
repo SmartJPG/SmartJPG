@@ -88,14 +88,14 @@ const App = () => {
 
       <div
         style={{
-          maxWidth: "500px",
+          maxWidth: "350px",
           width: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#f9f9f9",
           borderRadius: "20px",
-          padding: "20px",
+          padding: "25px",
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
         }}
       >
@@ -143,6 +143,26 @@ const App = () => {
           </div>
         )}
       </div>
+
+      <footer style={{ width: "100%" }}>
+        <div
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "80%",
+            backgroundColor: "white",
+            padding: "15px",
+            borderRadius: "40px",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+            color: "gray",
+            fontWeight: "600",
+          }}
+        >
+          © 2024 Copyright:SmartJPG.app
+        </div>
+      </footer>
     </div>
   );
 };
