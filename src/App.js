@@ -149,7 +149,7 @@ const App = () => {
           marginBottom: "10px",
         }}
       >
-        Convert Image to JPEG for FREE
+        Simple. Fast. Smart.
       </h4>
 
       <div
