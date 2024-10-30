@@ -88,15 +88,16 @@ const App = () => {
 
       <div
         style={{
-          maxWidth: "350px",
-          width: "100%",
+          // maxWidth: "500px",
+          // width: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#f9f9f9",
           borderRadius: "20px",
-          padding: "25px",
+          padding: "25px 40px",
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+          zIndex: "1",
         }}
       >
         <input
@@ -149,11 +150,11 @@ const App = () => {
           style={{
             position: "fixed",
             bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "80%",
+            left: "20px",
+            // left: "50%",
+            // transform: "translateX(-50%)",
             backgroundColor: "white",
-            padding: "15px",
+            padding: "15px 40px",
             borderRadius: "40px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
             color: "gray",
