@@ -1,25 +1,76 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
 
-function App() {
+const App = () => {
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [downloadLink, setDownloadLink] = useState(null);
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => setPreview(reader.result);
+      reader.readAsDataURL(selectedFile);
+    }
+  };
+
+  const handleConvert = async () => {
+    if (!file) {
+      alert("Please upload an image.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/convert",
+        formData,
+        {
+          responseType: "blob",
+        }
+      );
+
+      const url = URL.createObjectURL(new Blob([response.data]));
+      setDownloadLink(url);
+    } catch (error) {
+      console.error("Image conversion failed:", error);
+      alert("Failed to convert the image.");
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Image Converter: Convert Image to JPEG for Free </h1>
+      <input
+        type="file"
+        accept="image/jpeg, image/png, image/webp, image/avif"
+        onChange={handleFileChange}
+      />
+      <button onClick={handleConvert} style={{ marginLeft: "10px" }}>
+        Convert to JPEG
+      </button>
+
+      {preview && (
+        <div style={{ marginTop: "20px" }}>
+          <h3>Preview:</h3>
+          <img src={preview} alt="Preview" style={{ maxWidth: "400px" }} />
+        </div>
+      )}
+
+      {downloadLink && (
+        <div style={{ marginTop: "20px" }}>
+          <a href={downloadLink} download="converted-image.jpg">
+            Download JPEG
+          </a>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
