@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
+import { motion } from "framer-motion";
 
 const App = () => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [downloadLink, setDownloadLink] = useState(null);
+  const [showDonate, setShowDonate] = useState(true);
+  const [counting, setCounting] = useState(4);
+
+  useEffect(() => {
+    if (counting > 0) {
+      const timer = setTimeout(() => {
+        setCounting((prevCount) => prevCount - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowDonate(false);
+    }
+  }, [counting]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -61,7 +77,7 @@ const App = () => {
         style={{
           width: "100px",
           height: "100px",
-          borderRadius: "50%",
+          borderRadius: "30px",
           marginBottom: "20px",
         }}
       />
@@ -88,8 +104,6 @@ const App = () => {
 
       <div
         style={{
-          // maxWidth: "500px",
-          // width: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -151,8 +165,6 @@ const App = () => {
             position: "fixed",
             bottom: "20px",
             left: "20px",
-            // left: "50%",
-            // transform: "translateX(-50%)",
             backgroundColor: "white",
             padding: "15px 40px",
             borderRadius: "40px",
@@ -164,6 +176,63 @@ const App = () => {
           © 2024 Copyright:SmartJPG.app
         </div>
       </footer>
+
+      {showDonate && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="donate-container"
+          style={{
+            position: "absolute",
+            maxWidth: "350px",
+            width: "100%",
+            bottom: "20px",
+            right: "20px",
+            borderRadius: "20px",
+            backgroundColor: "white",
+            textAlign: "center",
+            padding: "20px 30px",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: "0px",
+                right: "0px",
+                fontWeight: "600",
+                padding: "5px 10px",
+                color: "white",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+              }}
+              className="gradient-border"
+            >
+              <span>{counting}</span>
+            </div>
+
+            <h1>Please donate us!</h1>
+            <p>Your support can help us keep developing free resources.</p>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://buymeacoffee.com/leohoncana1"
+            >
+              <img
+                align="center"
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                height="50"
+                width="210"
+                alt="Donate us"
+              />
+            </a>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 };
