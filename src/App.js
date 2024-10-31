@@ -212,12 +212,12 @@ const App = () => {
       <footer>
         <div
           style={{
-            position: "fixed",
+            position: "absolute",
             bottom: "10px",
             left: "50%",
             transform: "translateX(-50%)",
-            padding: "15px 40px",
             fontWeight: "600",
+            width: "100%",
           }}
         >
           © 2024 Copyright: SmartJPG.app
