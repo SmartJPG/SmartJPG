@@ -48,6 +48,24 @@ const App = () => {
     }
   };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const droppedFile = e.dataTransfer.files[0];
+    setFile(droppedFile);
+
+    if (droppedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => setPreview(reader.result);
+      reader.readAsDataURL(droppedFile);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -120,16 +138,7 @@ const App = () => {
         onLoaderFinished={() => setProgress(0)}
         height={6}
       />
-      {/* <img
-        src={`${process.env.PUBLIC_URL}/SmartJPG.svg`}
-        alt="Icon"
-        style={{
-          width: "100px",
-          height: "100px",
-          borderRadius: "30px",
-          marginBottom: "20px",
-        }}
-      /> */}
+
       <svg
         version="1.1"
         id="Layer_1"
@@ -1273,27 +1282,48 @@ z"
 
       <div
         className="input-container"
+        onClick={() => document.getElementById("fileInput").click()}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "#f9f9f9",
           borderRadius: "20px",
-          padding: "25px 40px",
+          padding: "40px 40px",
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
           zIndex: "1",
+          cursor: "pointer",
         }}
       >
         <input
+          id="fileInput"
           className="input"
           type="file"
           accept="image/jpeg, image/png, image/webp, image/avif"
           onChange={handleFileChange}
-          style={{ margin: "10px 0" }}
+          style={{ margin: "10px 0", display: "none" }}
         />
-        <button className="convert-btn" onClick={handleConvert}>
-          Convert to JPEG
-        </button>
+
+        {!file && (
+          <div>
+            <img
+              src="add-image.png"
+              alt="Add here"
+              style={{ width: "30%", marginBottom: "20px" }}
+            />
+
+            <h3>Drag & drop an image here 👋🏻</h3>
+            <span>File must be JPEG, PNG, WEBP and AVIF</span>
+          </div>
+        )}
+
+        {file && (
+          <button className="convert-btn" onClick={handleConvert}>
+            Convert to JPEG
+          </button>
+        )}
 
         {preview && (
           <div
