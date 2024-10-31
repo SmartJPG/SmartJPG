@@ -72,7 +72,6 @@ svg:hover {
 @media screen and (max-width: 500px) {
   .donate-container {
     max-width: 100% !important;
-    bottom: 0px !important;
     right: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
