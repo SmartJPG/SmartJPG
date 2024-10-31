@@ -104,7 +104,7 @@ const App = () => {
   return (
     <div
       style={{
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -153,8 +153,8 @@ const App = () => {
       </h4>
 
       <div
+        className="input-container"
         style={{
-          width: "70%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -166,6 +166,7 @@ const App = () => {
         }}
       >
         <input
+          className="input"
           type="file"
           accept="image/jpeg, image/png, image/webp, image/avif"
           onChange={handleFileChange}
@@ -180,7 +181,6 @@ const App = () => {
             style={{
               marginTop: "20px",
               width: "100%",
-              maxHeight: "300px",
               overflow: "hidden",
               display: "flex",
               justifyContent: "center",
@@ -213,13 +213,10 @@ const App = () => {
         <div
           style={{
             position: "fixed",
-            bottom: "20px",
-            left: "20px",
-            backgroundColor: "white",
+            bottom: "10px",
+            left: "50%",
+            transform: "translateX(-50%)",
             padding: "15px 40px",
-            borderRadius: "40px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            color: "gray",
             fontWeight: "600",
           }}
         >
@@ -244,6 +241,7 @@ const App = () => {
             textAlign: "center",
             padding: "30px 40px",
             zIndex: "2",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
           }}
         >
           <div
@@ -268,7 +266,7 @@ const App = () => {
               <span>{counting}</span>
             </div>
 
-            <h1>Please donate us!</h1>
+            <h1>Support us!</h1>
             <p>Your support can help us keep developing free resources.</p>
             <a
               target="_blank"
