@@ -73,6 +73,7 @@ svg:hover {
   .donate-container {
     max-width: 100% !important;
     right: 0px !important;
+    bottom: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
   }
