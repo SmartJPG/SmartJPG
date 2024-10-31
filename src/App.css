@@ -43,3 +43,13 @@
   text-decoration: none !important;
   color: white !important;
 }
+
+.input {
+  width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    width: 90% !important;
+  }
+}
