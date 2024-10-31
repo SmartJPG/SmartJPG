@@ -1,3 +1,8 @@
+h3 {
+  font-weight: bold !important;
+  color: rgb(59, 59, 59) !important;
+}
+
 .gradient-border {
   position: relative;
   border: 2px solid transparent;
@@ -50,6 +55,12 @@
 
 svg {
   border-radius: 26px;
+  transition: all 0.15s ease;
+}
+
+svg:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 @media screen and (max-width: 700px) {
