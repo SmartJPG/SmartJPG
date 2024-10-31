@@ -48,6 +48,10 @@
   width: 100%;
 }
 
+svg {
+  border-radius: 26px;
+}
+
 @media screen and (max-width: 700px) {
   .input-container {
     width: 90% !important;
