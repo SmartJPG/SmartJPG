@@ -8,6 +8,7 @@ import LoadingBar from "react-top-loading-bar";
 const App = () => {
   const ref = useRef(null);
   const [file, setFile] = useState(null);
+  const [fileLoaded, setFileLoaded] = useState(false);
   const [preview, setPreview] = useState(null);
   const [blobData, setBlobData] = useState(null);
   const [showDonate, setShowDonate] = useState(true);
@@ -36,6 +37,14 @@ const App = () => {
       URL.revokeObjectURL(downloadUrl);
     }
   }, [blobData]);
+
+  useEffect(() => {
+    if (file) {
+      setFileLoaded(true);
+    } else {
+      setFileLoaded(false);
+    }
+  }, [file]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -1277,7 +1286,7 @@ z"
           marginBottom: "10px",
         }}
       >
-        Simple. Fast. Smart.
+        Simple. Secure. Smart.
       </h4>
 
       <div
@@ -1306,24 +1315,23 @@ z"
           style={{ margin: "10px 0", display: "none" }}
         />
 
-        {!file && (
-          <div>
-            <img
-              src="add-image.png"
-              alt="Add here"
-              style={{ width: "30%", marginBottom: "20px" }}
-            />
-
-            <h3>Drag & drop an image here 👋🏻</h3>
-            <span>File must be JPEG, PNG, WEBP and AVIF</span>
-          </div>
-        )}
-
-        {file && (
-          <button className="convert-btn" onClick={handleConvert}>
-            Convert to JPEG
-          </button>
-        )}
+        <div>
+          {fileLoaded ? (
+            <button className="convert-btn" onClick={handleConvert}>
+              Convert to JPEG
+            </button>
+          ) : (
+            <div>
+              <img
+                src="add-image.png"
+                alt="Add here"
+                style={{ width: "25%", marginBottom: "10px" }}
+              />
+              <h3>Drag & drop an image here 👋🏻</h3>
+              <span>File must be JPEG, PNG, WEBP and AVIF</span>
+            </div>
+          )}
+        </div>
 
         {preview && (
           <div
