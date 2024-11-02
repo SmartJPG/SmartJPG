@@ -171,7 +171,7 @@ const Home = () => {
           alignItems: "center",
           backgroundColor: "white",
           borderRadius: "20px",
-          padding: "40px 40px",
+          padding: "20px",
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
           zIndex: "1",
           cursor: "pointer",
