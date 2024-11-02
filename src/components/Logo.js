@@ -9,7 +9,7 @@ const Logo = () => (
     x="0px"
     y="0px"
     viewBox="0 0 500 500"
-    enable-background="new 0 0 500 500"
+    enableBackground="new 0 0 500 500"
     width="100px"
     height="100px"
     // xml:space="preserve"
