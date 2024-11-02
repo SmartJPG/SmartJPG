@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./../App.css";
-import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoadingBar from "react-top-loading-bar";
 import Footer from "./Footer";
 import { saveAs } from "file-saver";
 import Donate from "./Donate";
 import Logo from "./Logo";
+import Slogan from "./Slogan";
 const { REACT_APP_API_URL } = process.env;
 
 const Home = () => {
@@ -15,6 +15,7 @@ const Home = () => {
   const [file, setFile] = useState(null);
   const [fileLoaded, setFileLoaded] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
   const [showDonate, setShowDonate] = useState(true);
   const [counting, setCounting] = useState(4);
   const [progress, setProgress] = useState(0);
@@ -35,6 +36,7 @@ const Home = () => {
   useEffect(() => {
     if (file) {
       setFileLoaded(true);
+      setPreviewLoading(true);
     } else {
       setFileLoaded(false);
     }
@@ -155,18 +157,9 @@ const Home = () => {
       >
         SmartJPG
       </h2>
-      <div className="slogan">
-        <div className="slogan-item">
-          <span>Simple. </span>
-        </div>
-        <div className="slogan-item">
-          <span>Secure. </span>
-        </div>
-        <div className="slogan-item highlight-text-container">
-          <span>Smart. </span>
-          <span className="highlight"></span>
-        </div>
-      </div>
+
+      <Slogan />
+
       <div
         className="input-container"
         onClick={() => document.getElementById("fileInput").click()}
@@ -176,12 +169,13 @@ const Home = () => {
           maxWidth: "350px",
           flexDirection: "column",
           alignItems: "center",
-          backgroundColor: "#f9f9f9",
+          backgroundColor: "white",
           borderRadius: "20px",
           padding: "40px 40px",
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
           zIndex: "1",
           cursor: "pointer",
+          border: "2px dashed grey",
         }}
       >
         <input
@@ -196,7 +190,18 @@ const Home = () => {
         <div>
           {fileLoaded ? (
             <button className="convert-btn" onClick={handleConvert}>
-              Convert to JPEG
+              Convert to JPG
+              <span>
+                <svg
+                  className="icon-control icon-control-chevronright"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 36 36"
+                  aria-hidden="true"
+                  role="img"
+                >
+                  <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                </svg>
+              </span>
             </button>
           ) : (
             <div>
@@ -206,7 +211,9 @@ const Home = () => {
                 style={{ width: "25%", marginBottom: "10px" }}
               />
               <h3>Drag & drop an image here 👋🏻</h3>
-              <span>File must be JPEG, PNG, WEBP and AVIF</span>
+              <span style={{ fontSize: "13px" }}>
+                File must be JPEG, PNG, WEBP, or AVIF
+              </span>
             </div>
           )}
         </div>
@@ -220,17 +227,32 @@ const Home = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderRadius: "10px",
+              borderRadius: "20px",
               backgroundColor: "#fff",
+              position: "relative",
             }}
           >
+            {previewLoading && (
+              <div>
+                <img
+                  src="loading.gif"
+                  alt="Loading"
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                />
+                <p>One second...</p>
+              </div>
+            )}
             <img
               src={preview}
               alt="Preview"
+              onLoad={() => setTimeout(() => setPreviewLoading(false), 300)}
               style={{
                 maxWidth: "100%",
                 maxHeight: "100%",
                 objectFit: "contain",
+                display: previewLoading ? "none" : "block",
               }}
             />
           </div>
