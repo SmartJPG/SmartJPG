@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
-import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => (
   <footer>
@@ -13,6 +14,7 @@ const Footer = () => (
         fontWeight: "600",
         width: "100%",
         color: "white",
+        borderTop: "1px solid rgba(255, 255, 255, 0.2)",
       }}
     >
       {/* <div className="info-box row">
@@ -38,7 +40,17 @@ const Footer = () => (
           </Link>
         </div>
       </div> */}
-
+      <div style={{ marginTop: "10px" }}>
+        <a
+          className="github-icon"
+          href="https://github.com/SmartJPG/SmartJPG"
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: "white" }}
+        >
+          <FontAwesomeIcon icon={faGithub} size="2xl" />
+        </a>
+      </div>
       <p className="copyright">© 2024 SmartJPG - All rights reserved.</p>
     </div>
   </footer>
