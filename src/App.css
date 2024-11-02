@@ -118,9 +118,11 @@ footer {
 }
 
 .copyright {
+  width: 90%;
   margin: 0px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 10px;
+  margin: auto;
 }
 
 .info-box {
