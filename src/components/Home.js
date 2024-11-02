@@ -36,7 +36,6 @@ const Home = () => {
   useEffect(() => {
     if (file) {
       setFileLoaded(true);
-      setPreviewLoading(true);
     } else {
       setFileLoaded(false);
     }
@@ -47,8 +46,16 @@ const Home = () => {
     setFile(selectedFile);
 
     if (selectedFile) {
+      setPreviewLoading(true);
       const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result);
+      reader.onloadend = () => {
+        setPreview(reader.result);
+        // setPreviewLoading(false);
+
+        setTimeout(() => {
+          setPreviewLoading(false);
+        }, 1000);
+      };
       reader.readAsDataURL(selectedFile);
     }
   };
@@ -60,8 +67,15 @@ const Home = () => {
     setFile(droppedFile);
 
     if (droppedFile) {
+      setPreviewLoading(true);
       const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result);
+      reader.onloadend = () => {
+        setPreview(reader.result);
+        // setPreviewLoading(false);
+        setTimeout(() => {
+          setPreviewLoading(false);
+        }, 1000);
+      };
       reader.readAsDataURL(droppedFile);
     }
   };
@@ -126,6 +140,11 @@ const Home = () => {
     }
   };
 
+  const fileInputRef = useRef(null);
+  const handleContainerClick = () => {
+    fileInputRef.current.click();
+  };
+
   return (
     <div
       style={{
@@ -162,7 +181,7 @@ const Home = () => {
 
       <div
         className="input-container"
-        onClick={() => document.getElementById("fileInput").click()}
+        onClick={handleContainerClick}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         style={{
@@ -179,6 +198,7 @@ const Home = () => {
         }}
       >
         <input
+          ref={fileInputRef}
           id="fileInput"
           className="input"
           type="file"
@@ -230,9 +250,10 @@ const Home = () => {
               borderRadius: "20px",
               backgroundColor: "#fff",
               position: "relative",
+              minHeight: "200px", // To prevent layout shifting
             }}
           >
-            {previewLoading && (
+            {previewLoading ? (
               <div>
                 <img
                   src="loading.gif"
@@ -241,20 +262,20 @@ const Home = () => {
                     marginBottom: "10px",
                   }}
                 />
-                <p>One second...</p>
+                <p>Loading, please wait...</p>
               </div>
+            ) : (
+              <img
+                src={preview}
+                alt="Preview"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
             )}
-            <img
-              src={preview}
-              alt="Preview"
-              onLoad={() => setTimeout(() => setPreviewLoading(false), 300)}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-                display: previewLoading ? "none" : "block",
-              }}
-            />
           </div>
         )}
       </div>
