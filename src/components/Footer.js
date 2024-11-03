@@ -12,7 +12,7 @@ const Footer = () => (
         left: "50%",
         transform: "translateX(-50%)",
         fontWeight: "600",
-        width: "100%",
+        width: "90%",
         color: "white",
         borderTop: "1px solid rgba(255, 255, 255, 0.2)",
       }}
