@@ -140,8 +140,7 @@ const Main = ({ page }) => {
     }
   };
 
-  const handlePdfMerge = async (e) => {
-    e.preventDefault();
+  const handlePdfMerge = async () => {
     if (pdfFiles.length < 2) {
       alert("Please upload at least two PDFs to merge.");
       return;
@@ -185,12 +184,20 @@ const Main = ({ page }) => {
   };
 
   const fileInputRef = useRef(null);
+  const pdfFileInputRef = useRef(null);
+
   const handleContainerClick = () => {
     fileInputRef.current.click();
   };
 
+  const handlePdfContainerClick = () => {
+    pdfFileInputRef.current.click();
+  };
+
   const handlePdfFilesChange = (e) => {
     setPdfFiles(Array.from(e.target.files));
+
+    handlePdfMerge();
   };
 
   return (
@@ -249,6 +256,7 @@ const Main = ({ page }) => {
       {page === "pdf" && (
         <div
           className="input-container"
+          onClick={handlePdfContainerClick}
           style={{
             maxWidth: "350px",
             flexDirection: "column",
@@ -264,11 +272,26 @@ const Main = ({ page }) => {
         >
           <input
             type="file"
+            ref={pdfFileInputRef}
+            id="fileInput"
             accept="application/pdf"
             multiple
             onChange={handlePdfFilesChange}
+            style={{ margin: "10px 0", display: "none" }}
           />
-          <button onClick={handlePdfMerge}>Merge PDFs</button>
+
+          <div>
+            <img
+              src="add-image.gif"
+              alt="Add here"
+              style={{ width: "25%", marginBottom: "10px" }}
+            />
+            <h3>Drag & drop PDFs here 👋🏻</h3>
+            <span style={{ fontSize: "13px" }}>
+              Files must be in PDF format
+            </span>
+          </div>
+          {/* <button onClick={handlePdfMerge}>Merge PDFs</button> */}
         </div>
       )}
 
