@@ -227,6 +227,25 @@ const Main = ({ page }) => {
 
       <Slogan />
 
+      {page === "jpg" && (
+        <div>
+          <button
+            className="swap"
+            onClick={() => (window.location.href = "/pdf")}
+          >
+            Merge PDFs
+          </button>
+        </div>
+      )}
+
+      {page === "pdf" && (
+        <div>
+          <button className="swap" onClick={() => (window.location.href = "/")}>
+            Convert to JPG
+          </button>
+        </div>
+      )}
+
       {page === "pdf" && (
         <div
           className="input-container"
