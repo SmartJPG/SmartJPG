@@ -148,7 +148,9 @@ const Main = ({ page }) => {
     }
   };
 
-  const handlePdfMerge = async () => {
+  const handlePdfMerge = async (e) => {
+    e.stopPropagation();
+
     if (pdfFiles.length < 1) {
       alert("Please upload at least two PDFs to merge.");
       return;
@@ -321,10 +323,11 @@ const Main = ({ page }) => {
               Files must be in PDF format
             </span>
           </div>
-
-          <button className="swap" onClick={handlePdfMerge}>
-            Merge PDFs
-          </button>
+          {pdfFiles.length > 1 && (
+            <button className="swap" onClick={handlePdfMerge}>
+              Merge PDFs
+            </button>
+          )}
         </div>
       )}
 
