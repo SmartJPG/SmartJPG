@@ -229,7 +229,8 @@ const Main = ({ page }) => {
           fontWeight: "800",
         }}
       >
-        SmartJPG
+        <span>Smart</span>
+        <span>{page.toUpperCase()}</span>
       </h2>
 
       <Slogan />
@@ -240,7 +241,7 @@ const Main = ({ page }) => {
             className="swap"
             onClick={() => (window.location.href = "/pdf")}
           >
-            Merge PDFs
+            Merge PDFs 📄
           </button>
         </div>
       )}
@@ -248,7 +249,7 @@ const Main = ({ page }) => {
       {page === "pdf" && (
         <div>
           <button className="swap" onClick={() => (window.location.href = "/")}>
-            Convert to JPG
+            Convert to JPG 🎇
           </button>
         </div>
       )}
