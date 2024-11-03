@@ -210,6 +210,9 @@ footer {
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
   }
+  .check-here-div {
+    display: none;
+  }
 }
 
 ::selection {
