@@ -8,6 +8,8 @@ import { saveAs } from "file-saver";
 import Donate from "./Donate";
 import Logo from "./Logo";
 import Slogan from "./Slogan";
+import { motion } from "framer-motion";
+
 const { REACT_APP_API_URL } = process.env;
 
 const Main = ({ page }) => {
@@ -21,6 +23,7 @@ const Main = ({ page }) => {
   const [counting, setCounting] = useState(4);
   const [progress, setProgress] = useState(0);
   const [loadingColor, setLoadingColor] = useState("#f11946");
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     if (counting > 0) {
@@ -131,8 +134,13 @@ const Main = ({ page }) => {
       );
 
       saveAs(response.data, "smartjpg-converted-image.jpg");
-
       ref.current.complete();
+
+      setCheck(true);
+
+      setTimeout(() => {
+        setCheck(false);
+      }, 3000);
     } catch (error) {
       console.error("Image conversion failed:", error);
       alert("Failed to convert the image.");
@@ -141,7 +149,7 @@ const Main = ({ page }) => {
   };
 
   const handlePdfMerge = async () => {
-    if (pdfFiles.length < 2) {
+    if (pdfFiles.length < 1) {
       alert("Please upload at least two PDFs to merge.");
       return;
     }
@@ -176,6 +184,12 @@ const Main = ({ page }) => {
 
       saveAs(response.data, "merged.pdf");
       ref.current.complete();
+
+      setCheck(true);
+
+      setTimeout(() => {
+        setCheck(false);
+      }, 3000);
     } catch (error) {
       console.error("PDF merging failed:", error);
       alert("Failed to merge PDFs.");
@@ -196,8 +210,6 @@ const Main = ({ page }) => {
 
   const handlePdfFilesChange = (e) => {
     setPdfFiles(Array.from(e.target.files));
-
-    handlePdfMerge();
   };
 
   return (
@@ -212,6 +224,23 @@ const Main = ({ page }) => {
         background: "linear-gradient(#e66465, #9198e5)",
       }}
     >
+      {check ? (
+        <div className="check-here-div">
+          <img src="arrow.gif" alt="here!" className="arrow" />
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="donate-container"
+          >
+            {page === "jpg" && <h4 className="check-here">☝🏻 🎇</h4>}
+
+            {page === "pdf" && <h4 className="check-here">☝🏻 📄📄</h4>}
+          </motion.div>
+        </div>
+      ) : null}
+
       <LoadingBar
         ref={ref}
         color={loadingColor}
@@ -292,7 +321,10 @@ const Main = ({ page }) => {
               Files must be in PDF format
             </span>
           </div>
-          {/* <button onClick={handlePdfMerge}>Merge PDFs</button> */}
+
+          <button className="swap" onClick={handlePdfMerge}>
+            Merge PDFs
+          </button>
         </div>
       )}
 

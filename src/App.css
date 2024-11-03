@@ -178,6 +178,24 @@ footer {
   text-align: left;
 }
 
+.check-here-div {
+  position: absolute;
+  top: 5%;
+  right: 15%;
+}
+
+.arrow {
+  width: "150px";
+  transform: scaleX(-1);
+}
+
+.check-here {
+  margin-top: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 30px;
+}
+
 @media screen and (max-width: 700px) {
   .input-container {
     width: 90% !important;
