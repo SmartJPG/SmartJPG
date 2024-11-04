@@ -97,19 +97,46 @@ const Main = ({ page }) => {
     e.preventDefault();
     e.stopPropagation();
     const droppedFile = e.dataTransfer.files[0];
-    setFile(droppedFile);
 
     if (droppedFile) {
+      setFile(droppedFile);
       setPreviewLoading(true);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-        // setPreviewLoading(false);
-        setTimeout(() => {
-          setPreviewLoading(false);
-        }, 1000);
-      };
-      reader.readAsDataURL(droppedFile);
+
+      if (droppedFile.type === "image/heic") {
+        const formData = new FormData();
+        formData.append("image", droppedFile);
+
+        axios
+          .post(`${REACT_APP_API_URL}/convert`, formData, {
+            responseType: "blob",
+          })
+          .then((response) => {
+            if (preview) {
+              URL.revokeObjectURL(preview);
+            }
+            const convertedBlob = new Blob([response.data], {
+              type: "image/jpeg",
+            });
+            const previewUrl = URL.createObjectURL(convertedBlob);
+            setPreview(previewUrl);
+          })
+          .catch((error) => {
+            console.error("HEIC conversion failed:", error);
+            alert("Failed to preview HEIC image.");
+          })
+          .finally(() => setPreviewLoading(false));
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (preview) {
+            URL.revokeObjectURL(preview);
+          }
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(droppedFile);
+
+        setTimeout(() => setPreviewLoading(false), 1000);
+      }
     }
   };
 
@@ -357,7 +384,7 @@ const Main = ({ page }) => {
                 alt="Add here"
                 style={{ width: "25%", marginBottom: "10px" }}
               />
-              <h3>Drag & drop PDFs here 👋🏻</h3>
+              <h3>Click to upload PDFs here 👋🏻</h3>
               <span style={{ fontSize: "13px" }}>
                 Files must be in PDF format
               </span>
