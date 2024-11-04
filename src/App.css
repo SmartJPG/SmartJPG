@@ -199,13 +199,14 @@ footer {
 .underline {
   height: 13px;
   width: 40%;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="10" viewBox="0 0 100 10"><path fill="none" stroke="royalblue" stroke-width="2" d="M0 5 Q 25 0 50 5 T 100 5"/></svg>')
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="10" viewBox="0 0 100 10"><path fill="none" stroke="gray" stroke-width="2" d="M0 5 Q 25 0 50 5 T 100 5"/></svg>')
     repeat-x;
   background-size: cover;
   margin-right: 0;
   margin-left: auto;
   transform: rotate(-5deg);
   transform-origin: left;
+  margin-bottom: -7px;
 }
 
 @media screen and (max-width: 700px) {

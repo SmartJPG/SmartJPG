@@ -327,6 +327,7 @@ const Main = ({ page }) => {
         <span>Smart</span>
         <span>{page.toUpperCase()}</span>
         <div className="underline"></div>
+        <div className="underline"></div>
       </h2>
 
       <Slogan />
