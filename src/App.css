@@ -183,7 +183,6 @@ svg:hover {
 footer {
   position: relative;
   font-size: 0.875rem;
-  z-index: 1;
 }
 
 .copyright {
@@ -225,10 +224,16 @@ footer {
   text-align: left;
 }
 
+.input-container {
+  position: relative;
+  z-index: 5;
+}
+
 .check-here-div {
   position: absolute;
   top: 5%;
   right: 15%;
+  z-index: 10;
 }
 
 .arrow {
