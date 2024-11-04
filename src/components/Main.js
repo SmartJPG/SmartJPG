@@ -45,21 +45,51 @@ const Main = ({ page }) => {
     }
   }, [file]);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
 
     if (selectedFile) {
       setPreviewLoading(true);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
 
-        setTimeout(() => {
-          setPreviewLoading(false);
-        }, 1000);
-      };
-      reader.readAsDataURL(selectedFile);
+      if (selectedFile.type === "image/heic") {
+        try {
+          const formData = new FormData();
+          formData.append("image", selectedFile);
+
+          const response = await axios.post(
+            `${REACT_APP_API_URL}/convert`,
+            formData,
+            { responseType: "blob" }
+          );
+
+          if (preview) {
+            URL.revokeObjectURL(preview);
+          }
+
+          const convertedBlob = new Blob([response.data], {
+            type: "image/jpeg",
+          });
+          const previewUrl = URL.createObjectURL(convertedBlob);
+          setPreview(previewUrl);
+        } catch (error) {
+          console.error("HEIC conversion failed:", error);
+          alert("Failed to preview HEIC image.");
+        }
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (preview) {
+            URL.revokeObjectURL(preview);
+          }
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(selectedFile);
+      }
+
+      setTimeout(() => {
+        setPreviewLoading(false);
+      }, 1000);
     }
   };
 
@@ -362,7 +392,7 @@ const Main = ({ page }) => {
             id="fileInput"
             className="input"
             type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif"
+            accept="image/jpeg, image/png, image/webp, image/avif, image/heic"
             onChange={handleFileChange}
             style={{ margin: "10px 0", display: "none" }}
           />
@@ -392,7 +422,7 @@ const Main = ({ page }) => {
                 />
                 <h3>Drag & drop an image here 👋🏻</h3>
                 <span style={{ fontSize: "13px" }}>
-                  File must be JPEG, PNG, WEBP, or AVIF
+                  File must be HEIC, JPEG, PNG, WEBP, AVIF
                 </span>
               </div>
             )}
