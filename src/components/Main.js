@@ -262,6 +262,7 @@ const Main = ({ page }) => {
       >
         <span>Smart</span>
         <span>{page.toUpperCase()}</span>
+        <div className="underline"></div>
       </h2>
 
       <Slogan />
@@ -312,21 +313,27 @@ const Main = ({ page }) => {
             style={{ margin: "10px 0", display: "none" }}
           />
 
-          <div>
-            <img
-              src="add-image.gif"
-              alt="Add here"
-              style={{ width: "25%", marginBottom: "10px" }}
-            />
-            <h3>Drag & drop PDFs here 👋🏻</h3>
-            <span style={{ fontSize: "13px" }}>
-              Files must be in PDF format
-            </span>
-          </div>
+          {pdfFiles.length < 1 && (
+            <div>
+              <img
+                src="add-document.gif"
+                alt="Add here"
+                style={{ width: "25%", marginBottom: "10px" }}
+              />
+              <h3>Drag & drop PDFs here 👋🏻</h3>
+              <span style={{ fontSize: "13px" }}>
+                Files must be in PDF format
+              </span>
+            </div>
+          )}
+
           {pdfFiles.length > 1 && (
-            <button className="swap" onClick={handlePdfMerge}>
-              Merge PDFs
-            </button>
+            <div>
+              <h4>📄 {pdfFiles.length} PDF documents ready to merge!</h4>
+              <button className="swap" onClick={handlePdfMerge}>
+                Merge PDFs
+              </button>
+            </div>
           )}
         </div>
       )}
