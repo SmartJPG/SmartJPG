@@ -279,17 +279,7 @@ const Main = ({ page }) => {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        textAlign: "center",
-        background: "linear-gradient(#e66465, #9198e5)",
-      }}
-    >
+    <div className="main">
       {check ? (
         <div className="check-here-div">
           <img src="arrow.gif" alt="here!" className="arrow" />
@@ -315,15 +305,7 @@ const Main = ({ page }) => {
         height={6}
       />
       <Logo />
-      <h2
-        style={{
-          margin: "0px",
-          fontSize: "3.5rem",
-          color: "#fff",
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
-          fontWeight: "800",
-        }}
-      >
+      <h2 className="SmartJPG">
         <span>Smart</span>
         <span>{page.toUpperCase()}</span>
         <div className="underline"></div>
