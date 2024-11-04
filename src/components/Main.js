@@ -181,7 +181,7 @@ const Main = ({ page }) => {
   const handlePdfMerge = async (e) => {
     e.stopPropagation();
 
-    if (pdfFiles.length < 1) {
+    if (pdfFiles.length <= 1) {
       alert("Please upload at least two PDFs to merge.");
       return;
     }
@@ -241,7 +241,14 @@ const Main = ({ page }) => {
   };
 
   const handlePdfFilesChange = (e) => {
-    setPdfFiles(Array.from(e.target.files));
+    const selectedFiles = Array.from(e.target.files);
+
+    if (selectedFiles.length === 1) {
+      alert("Only one PDF selected. Please upload at least two PDFs to merge.");
+      return;
+    }
+
+    setPdfFiles(selectedFiles);
   };
 
   return (
