@@ -181,7 +181,9 @@ svg:hover {
 }
 
 footer {
+  position: relative;
   font-size: 0.875rem;
+  z-index: 1;
 }
 
 .copyright {

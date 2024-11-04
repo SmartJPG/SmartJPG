@@ -338,6 +338,7 @@ const Main = ({ page }) => {
           className="input-container"
           onClick={handlePdfContainerClick}
           style={{
+            position: "relative",
             maxWidth: "350px",
             flexDirection: "column",
             alignItems: "center",
@@ -345,7 +346,7 @@ const Main = ({ page }) => {
             borderRadius: "20px",
             padding: "20px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            zIndex: "1",
+            zIndex: "5",
             cursor: "pointer",
             border: "2px dashed grey",
           }}
@@ -400,7 +401,7 @@ const Main = ({ page }) => {
             borderRadius: "20px",
             padding: "20px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            zIndex: "1",
+            zIndex: "5",
             cursor: "pointer",
             border: "2px dashed grey",
           }}
@@ -458,7 +459,6 @@ const Main = ({ page }) => {
                 alignItems: "center",
                 borderRadius: "20px",
                 backgroundColor: "#fff",
-                position: "relative",
                 minHeight: "200px",
               }}
             >
