@@ -57,6 +57,7 @@ const Donate = ({ counting }) => (
           height="50"
           width="210"
           alt="Donate us"
+          title="Donate us"
         />
       </a>
     </div>
