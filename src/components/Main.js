@@ -384,6 +384,7 @@ const Main = ({ page }) => {
                 src="add-document.gif"
                 alt="Add here"
                 style={{ width: "25%", marginBottom: "10px" }}
+                title="Click to upload PDFs here"
               />
               <h3>Click to upload PDFs here 👋🏻</h3>
               <span style={{ fontSize: "13px" }}>
@@ -454,6 +455,7 @@ const Main = ({ page }) => {
                   src="add-image.gif"
                   alt="Add here"
                   style={{ width: "25%", marginBottom: "10px" }}
+                  title="Drag & drop an image here"
                 />
                 <h3>Drag & drop an image here 👋🏻</h3>
                 <span style={{ fontSize: "13px" }}>
