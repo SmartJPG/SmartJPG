@@ -23,7 +23,20 @@ body {
   top: 10px;
   left: 10px;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 1s;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.theme-text {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.5s ease;
 }
 
 .original-theme {
@@ -32,7 +45,8 @@ body {
   background: linear-gradient(#e66465, #9198e5);
   border-radius: 10px;
   cursor: pointer;
-  margin: 10px;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 .night-theme {
@@ -57,7 +71,8 @@ body {
     var(--dot-color);
   border-radius: 10px;
   cursor: pointer;
-  margin: 10px;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 .pro-theme {
@@ -69,7 +84,7 @@ body {
   border-radius: 10px;
   background-color: rgb(47, 47, 47);
   cursor: pointer;
-  margin: 10px;
+  margin: auto;
 }
 
 .App.night {
@@ -331,6 +346,13 @@ footer {
   font-weight: 700;
   margin: 0px;
   margin-bottom: 5px;
+}
+
+@media screen and (min-width: 991px) {
+  .theme-container:hover > .theme-text {
+    max-height: 200px;
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 500px) {

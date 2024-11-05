@@ -308,8 +308,6 @@ const Main = ({ page }) => {
       <h1 className="SmartJPG">
         <span>Smart</span>
         <span>{page.toUpperCase()}</span>
-        <div className="underline"></div>
-        <div className="underline"></div>
       </h1>
 
       <Slogan />
