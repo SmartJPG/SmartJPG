@@ -159,6 +159,10 @@ h3 {
   transition: all 0.1s ease;
 }
 
+.swap-btns {
+  justify-content: space-between;
+}
+
 .swap {
   font-size: 0.9rem;
   padding: 10px 20px;
