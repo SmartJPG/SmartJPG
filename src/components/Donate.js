@@ -18,8 +18,8 @@ const Donate = ({ counting }) => (
       backgroundColor: "white",
       textAlign: "center",
       padding: "30px 40px",
-      zIndex: "2",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+      zIndex: "20",
     }}
   >
     <div
