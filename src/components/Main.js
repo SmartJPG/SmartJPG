@@ -478,8 +478,7 @@ const Main = ({ page }) => {
                   src={preview}
                   alt="Preview"
                   style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
+                    maxWidth: "350px",
                     objectFit: "contain",
                     display: "block",
                   }}
