@@ -305,12 +305,12 @@ const Main = ({ page }) => {
         height={6}
       />
       <Logo />
-      <h2 className="SmartJPG">
+      <h1 className="SmartJPG">
         <span>Smart</span>
         <span>{page.toUpperCase()}</span>
         <div className="underline"></div>
         <div className="underline"></div>
-      </h2>
+      </h1>
 
       <Slogan />
 
@@ -339,7 +339,7 @@ const Main = ({ page }) => {
           onClick={handlePdfContainerClick}
           style={{
             position: "relative",
-            maxWidth: "350px",
+            maxWidth: "100%",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "white",
@@ -365,14 +365,12 @@ const Main = ({ page }) => {
             <div>
               <img
                 src="add-document.gif"
-                alt="Add here"
+                alt="Upload PDF files for merging"
                 style={{ width: "25%", marginBottom: "10px" }}
                 title="Click to upload PDFs here"
               />
-              <h3>Click to upload PDFs here 👋🏻</h3>
-              <span style={{ fontSize: "13px" }}>
-                Files must be in PDF format
-              </span>
+              <p className="drag-and-drop-text">Click to upload PDFs here 👋🏻</p>
+              <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
             </div>
           )}
 
@@ -394,7 +392,7 @@ const Main = ({ page }) => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           style={{
-            maxWidth: "350px",
+            maxWidth: "100%",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "white",
@@ -440,10 +438,12 @@ const Main = ({ page }) => {
                   style={{ width: "25%", marginBottom: "10px" }}
                   title="Drag & drop an image here"
                 />
-                <h3>Drag & drop an image here 👋🏻</h3>
-                <span style={{ fontSize: "13px" }}>
-                  File must be HEIC, JPEG, PNG, WEBP, AVIF
-                </span>
+                <p className="drag-and-drop-text">
+                  Drag & drop an image here 👋🏻
+                </p>
+                <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
+                  Supported Formats: HEIC, JPEG, PNG, WEBP, AVIF
+                </h3>
               </div>
             )}
           </div>

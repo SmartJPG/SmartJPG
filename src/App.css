@@ -39,6 +39,10 @@ body {
   background-size: cover; */
 }
 
+.main {
+  padding: 10px;
+}
+
 .SmartJPG {
   margin: 0px;
   font-size: 3.5rem;
@@ -259,6 +263,13 @@ footer {
   transform: rotate(-5deg);
   transform-origin: left;
   margin-bottom: -7px;
+}
+
+.drag-and-drop-text {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0px;
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 500px) {
