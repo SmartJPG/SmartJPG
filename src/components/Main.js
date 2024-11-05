@@ -241,7 +241,7 @@ const Main = ({ page }) => {
         }
       );
 
-      saveAs(response.data, "merged.pdf");
+      saveAs(response.data, "smartpdf-merged.pdf");
       ref.current.complete();
 
       setCheck(true);
