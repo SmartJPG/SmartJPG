@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Pdf from "./components/Pdf";
 import About from "./components/About";
+import Theme from "./components/Theme";
 import "./App.css";
 
 const App = () => {
-  const [isNight, setIsNight] = useState(false);
-
-  useEffect(() => {
-    const hour = new Date().getHours();
-    if (hour >= 18 || hour < 6) {
-      setIsNight(true);
-    }
-  }, []);
+  const theme = localStorage.getItem("theme");
 
   return (
     <Router>
-      <div className={`App ${isNight ? "night" : ""}`}>
+      <Theme />
+      <div className={`App ${theme}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
