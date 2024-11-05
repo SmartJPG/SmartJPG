@@ -29,6 +29,8 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .theme-text {
