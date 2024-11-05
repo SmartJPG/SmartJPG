@@ -589,7 +589,7 @@ const Main = ({ page }) => {
             ) : (
               <div>
                 <img
-                  src="add-image.gif"
+                  src="add-png.gif"
                   alt="Add here"
                   style={{ width: "25%", marginBottom: "10px" }}
                   title="Drag & drop an image here"
