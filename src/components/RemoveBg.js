@@ -4,7 +4,7 @@ import Main from "./Main";
 const RemoveBg = () => {
   return (
     <div>
-      <Main page="remove-bg" />
+      <Main page="RM" />
     </div>
   );
 };

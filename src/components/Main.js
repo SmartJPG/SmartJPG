@@ -419,14 +419,14 @@ const Main = ({ page }) => {
               className="swap current"
               onClick={() => (window.location.href = "/")}
             >
-              To JPG 🎇
+              To JPG
             </button>
           ) : (
             <button
               className="swap"
               onClick={() => (window.location.href = "/")}
             >
-              To JPG 🎇
+              To JPG
             </button>
           )}
         </div>
@@ -437,43 +437,52 @@ const Main = ({ page }) => {
               className="swap current"
               onClick={() => (window.location.href = "/png")}
             >
-              To PNG 🪄
+              To PNG
             </button>
           ) : (
             <button
               className="swap"
               onClick={() => (window.location.href = "/png")}
             >
-              To PNG 🪄
+              To PNG
             </button>
           )}
         </div>
 
         <div>
-          {page === "remove-bg" ? (
+          {page === "RM" ? (
             <button
               className="swap current"
               onClick={() => (window.location.href = "/remove-bg")}
             >
-              Remove Bg (Limited)
+              Remove Bg
             </button>
           ) : (
             <button
               className="swap"
               onClick={() => (window.location.href = "/remove-bg")}
             >
-              Remove Bg (Limited)
+              Remove Bg
             </button>
           )}
         </div>
 
         <div>
-          <button
-            className="swap"
-            onClick={() => (window.location.href = "/pdf")}
-          >
-            Merge PDFs 📄
-          </button>
+          {page === "pdf" ? (
+            <button
+              className="swap current"
+              onClick={() => (window.location.href = "/pdf")}
+            >
+              Merge PDFs
+            </button>
+          ) : (
+            <button
+              className="swap"
+              onClick={() => (window.location.href = "/pdf")}
+            >
+              Merge PDFs
+            </button>
+          )}
         </div>
       </div>
 
@@ -735,7 +744,7 @@ const Main = ({ page }) => {
         </div>
       )}
 
-      {page === "remove-bg" && (
+      {page === "RM" && (
         <div
           className="input-container"
           onClick={handleContainerClick}
