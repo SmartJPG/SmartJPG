@@ -5,6 +5,7 @@ import Pdf from "./components/Pdf";
 import Png from "./components/Png";
 import About from "./components/About";
 import Theme from "./components/Theme";
+import RemoveBg from "./components/RemoveBg";
 import "./App.css";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/pdf" element={<Pdf />} />
           <Route path="/png" element={<Png />} />
+          <Route path="/remove-bg" element={<RemoveBg />} />
         </Routes>
       </div>
     </Router>
