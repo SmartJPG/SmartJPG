@@ -847,7 +847,7 @@ const Main = ({ page }) => {
           )}
         </div>
       )}
-      <Footer />
+
       {showDonate && <Donate counting={counting} />}
     </div>
   );

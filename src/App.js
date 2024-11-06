@@ -6,6 +6,7 @@ import Png from "./components/Png";
 import About from "./components/About";
 import Theme from "./components/Theme";
 import RemoveBg from "./components/RemoveBg";
+import Footer from "./components/Footer";
 import "./App.css";
 
 const App = () => {
@@ -40,6 +41,8 @@ const App = () => {
           <Route path="/png" element={<Png />} />
           <Route path="/remove-bg" element={<RemoveBg />} />
         </Routes>
+
+        <Footer />
       </div>
     </Router>
   );

@@ -41,6 +41,9 @@ const Footer = () => (
         </div>
       </div> */}
       <div style={{ marginTop: "10px" }}>
+        <a class="about-link" href="/about">
+          About Us
+        </a>
         <a
           className="github-icon"
           href="https://github.com/SmartJPG/SmartJPG"
