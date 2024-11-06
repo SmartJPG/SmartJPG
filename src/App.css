@@ -154,7 +154,8 @@ h3 {
 }
 
 .convert-btn,
-.swap {
+.swap,
+.back {
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -183,6 +184,10 @@ h3 {
 .swap.current {
   background-color: rgba(0, 113, 227, 1);
   color: white;
+}
+
+.back {
+  margin-top: 100px;
 }
 
 .icon-control {
@@ -297,6 +302,7 @@ footer {
   font-size: 20px;
   text-decoration: none !important;
   color: rgb(56, 56, 56);
+  margin: 10px;
 }
 
 .info-box {
@@ -310,15 +316,11 @@ footer {
 }
 
 .about-us {
-  display: flex;
-  flex-grow: 1;
-  background-color: white;
-  color: rgb(63, 63, 63);
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
-  margin-top: 20px;
+  color: white;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  height: 100%;
 }
 
 .about-smartjpg {
@@ -378,6 +380,24 @@ footer {
   top: 0;
   right: 0;
   z-index: 0;
+}
+
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.service-text {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.about-link {
+  text-decoration: none;
+  color: white !important;
+  margin: 10px;
 }
 
 @media screen and (min-width: 991px) {
