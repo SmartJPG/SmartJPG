@@ -3,6 +3,14 @@ body {
   font-family: "Ubuntu", sans-serif !important;
 }
 
+h1,
+h2,
+h3,
+p {
+  position: relative;
+  z-index: 4;
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -166,8 +174,10 @@ h3 {
 }
 
 .swap {
+  position: relative;
   font-size: 0.9rem;
-  padding: 10px 20px;
+  padding: 8px;
+  z-index: 5;
 }
 
 .swap.current {
@@ -357,6 +367,17 @@ footer {
   font-weight: 700;
   margin: 0px;
   margin-bottom: 5px;
+}
+
+.line-container {
+  position: relative;
+}
+
+.line-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
 }
 
 @media screen and (min-width: 991px) {
