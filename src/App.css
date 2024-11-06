@@ -170,6 +170,11 @@ h3 {
   padding: 10px 20px;
 }
 
+.swap.current {
+  background-color: rgba(0, 113, 227, 1);
+  color: white;
+}
+
 .icon-control {
   background-color: rgb(0, 113, 227);
   border-radius: 50%;

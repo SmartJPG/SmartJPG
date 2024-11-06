@@ -329,6 +329,57 @@ const Main = ({ page }) => {
     setPdfFiles(selectedFiles);
   };
 
+  const removeBg = async (e) => {
+    e.stopPropagation();
+
+    if (!file) {
+      alert("Please upload an image.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    setLoadingColor(getRandomColor());
+
+    try {
+      ref.current.continuousStart();
+
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/remove-bg`,
+        formData,
+        {
+          responseType: "blob",
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 50) / progressEvent.total
+            );
+            setProgress(percentCompleted);
+          },
+          onDownloadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              50 + (progressEvent.loaded * 50) / progressEvent.total
+            );
+            setProgress(percentCompleted);
+          },
+        }
+      );
+
+      saveAs(response.data, "background-removed-image.png");
+      ref.current.complete();
+
+      setCheck(true);
+
+      setTimeout(() => {
+        setCheck(false);
+      }, 3000);
+    } catch (error) {
+      console.error("Background removal failed:", error);
+      alert("Reached the limit of free requests. Please try again later.");
+      ref.current.complete();
+    }
+  };
+
   return (
     <div className="main">
       {check ? (
@@ -363,18 +414,57 @@ const Main = ({ page }) => {
 
       <div className="d-flex swap-btns">
         <div>
-          <button className="swap" onClick={() => (window.location.href = "/")}>
-            To JPG 🎇
-          </button>
+          {page === "jpg" ? (
+            <button
+              className="swap current"
+              onClick={() => (window.location.href = "/")}
+            >
+              To JPG 🎇
+            </button>
+          ) : (
+            <button
+              className="swap"
+              onClick={() => (window.location.href = "/")}
+            >
+              To JPG 🎇
+            </button>
+          )}
         </div>
 
         <div>
-          <button
-            className="swap"
-            onClick={() => (window.location.href = "/png")}
-          >
-            To PNG ⬚
-          </button>
+          {page === "png" ? (
+            <button
+              className="swap current"
+              onClick={() => (window.location.href = "/png")}
+            >
+              To PNG 🪄
+            </button>
+          ) : (
+            <button
+              className="swap"
+              onClick={() => (window.location.href = "/png")}
+            >
+              To PNG 🪄
+            </button>
+          )}
+        </div>
+
+        <div>
+          {page === "remove-bg" ? (
+            <button
+              className="swap current"
+              onClick={() => (window.location.href = "/remove-bg")}
+            >
+              Remove Bg (Limited)
+            </button>
+          ) : (
+            <button
+              className="swap"
+              onClick={() => (window.location.href = "/remove-bg")}
+            >
+              Remove Bg (Limited)
+            </button>
+          )}
         </div>
 
         <div>
@@ -599,6 +689,110 @@ const Main = ({ page }) => {
                 </p>
                 <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
                   Supported Formats: HEIC, JPEG, PNG, WEBP, AVIF
+                </h3>
+              </div>
+            )}
+          </div>
+
+          {preview && (
+            <div
+              style={{
+                marginTop: "20px",
+                width: "100%",
+                overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: "20px",
+                backgroundColor: "#fff",
+                minHeight: "200px",
+              }}
+            >
+              {previewLoading ? (
+                <div>
+                  <img
+                    src="loading.gif"
+                    alt="Loading"
+                    style={{
+                      marginBottom: "10px",
+                    }}
+                  />
+                  <p>Loading, please wait...</p>
+                </div>
+              ) : (
+                <img
+                  src={preview}
+                  alt="Preview"
+                  style={{
+                    maxWidth: "350px",
+                    objectFit: "contain",
+                    display: "block",
+                  }}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {page === "remove-bg" && (
+        <div
+          className="input-container"
+          onClick={handleContainerClick}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          style={{
+            maxWidth: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            padding: "20px",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+            zIndex: "5",
+            cursor: "pointer",
+            border: "2px dashed grey",
+          }}
+        >
+          <input
+            ref={fileInputRef}
+            id="fileInput"
+            className="input"
+            type="file"
+            accept="image/jpeg, image/png, image/webp, image/avif, image/heic"
+            onChange={handleFileChange}
+            style={{ margin: "10px 0", display: "none" }}
+          />
+
+          <div>
+            {fileLoaded ? (
+              <button className="convert-btn" onClick={removeBg}>
+                Remove Background
+                <span>
+                  <svg
+                    className="icon-control icon-control-chevronright"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 36 36"
+                    aria-hidden="true"
+                    role="img"
+                  >
+                    <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                  </svg>
+                </span>
+              </button>
+            ) : (
+              <div>
+                <img
+                  src="remove.gif"
+                  alt="Add here"
+                  style={{ width: "25%", marginBottom: "10px" }}
+                  title="Drag & drop an image here"
+                />
+                <p className="drag-and-drop-text">
+                  Drag & drop a PNG image here 👋🏻
+                </p>
+                <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
+                  Supported Formats: PNG
                 </h3>
               </div>
             )}
