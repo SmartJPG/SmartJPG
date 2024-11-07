@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Pdf from "./components/Pdf";
 import Png from "./components/Png";
 import About from "./components/About";
+import Privacy from "./components/Privacy";
 import Theme from "./components/Theme";
 import RemoveBg from "./components/RemoveBg";
 import Footer from "./components/Footer";
@@ -37,6 +38,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/pdf" element={<Pdf />} />
           <Route path="/png" element={<Png />} />
           <Route path="/remove-bg" element={<RemoveBg />} />

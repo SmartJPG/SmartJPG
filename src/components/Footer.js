@@ -44,6 +44,9 @@ const Footer = () => (
         <a class="about-link" href="/about">
           About Us
         </a>
+        <a class="about-link" href="/privacy">
+          Privacy Policy
+        </a>
         <a
           className="github-icon"
           href="https://github.com/SmartJPG/SmartJPG"
