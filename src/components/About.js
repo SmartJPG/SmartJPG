@@ -1,9 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const About = () => {
   const theme = localStorage.getItem("theme");
   return (
     <div className="about-us">
+      <Helmet>
+        <title>About SmartJPG - Your Image Optimization Experts</title>
+        <meta
+          name="description"
+          content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."
+        />
+      </Helmet>
       <h2>Simple. Secure. Smart.</h2>
 
       <div className="d-flex services-container">
