@@ -560,7 +560,7 @@ const Main = ({ page }) => {
             id="fileInput"
             className="input"
             type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif, image/heic"
+            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
             onChange={handleFileChange}
             style={{ margin: "10px 0", display: "none" }}
           />
@@ -593,7 +593,7 @@ const Main = ({ page }) => {
                   Drag & drop an image here 👋🏻
                 </p>
                 <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
-                  Supported Formats: HEIC, JPEG, WEBP, AVIF
+                  Supported Formats: HEIC, JPEG, WEBP, AVIF, SVG
                 </h3>
               </div>
             )}
@@ -663,7 +663,7 @@ const Main = ({ page }) => {
             id="fileInput"
             className="input"
             type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif, image/heic"
+            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
             onChange={handleFileChange}
             style={{ margin: "10px 0", display: "none" }}
           />
@@ -696,7 +696,7 @@ const Main = ({ page }) => {
                   Drag & drop an image here 👋🏻
                 </p>
                 <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
-                  Supported Formats: HEIC, JPEG, PNG, WEBP, AVIF
+                  Supported Formats: HEIC, JPEG, PNG, WEBP, AVIF, SVG
                 </h3>
               </div>
             )}
