@@ -3,7 +3,6 @@ import axios from "axios";
 import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoadingBar from "react-top-loading-bar";
-import Footer from "./Footer";
 import { saveAs } from "file-saver";
 import Donate from "./Donate";
 import Logo from "./Logo";

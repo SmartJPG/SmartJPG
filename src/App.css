@@ -47,21 +47,26 @@ p {
   opacity: 0;
   overflow: hidden;
   transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.5s ease;
+  margin: 0px;
+}
+
+.service-text.night {
+  color: white !important;
 }
 
 .original-theme {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background: linear-gradient(#e66465, #9198e5);
   border-radius: 10px;
   cursor: pointer;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .night-theme {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   --dot-bg: #161616;
   --dot-color: rgb(50, 199, 50);
   --dot-size: 1px;
@@ -82,12 +87,12 @@ p {
   border-radius: 10px;
   cursor: pointer;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .pro-theme {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background-image: url("../public/oooscillate.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -99,7 +104,6 @@ p {
 
 .App.night {
   --dot-bg: #161616;
-  /* --dot-color: #848282; */
   --dot-color: rgb(50, 199, 50);
   --dot-size: 2px;
   --dot-space: 70px;
@@ -168,6 +172,14 @@ h3 {
   font-weight: 600;
   box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.08);
   transition: all 0.1s ease;
+}
+
+.back {
+  width: 70%;
+}
+
+.back:hover {
+  transform: translateY(-3px);
 }
 
 .swap-btns {
@@ -398,6 +410,18 @@ footer {
   text-decoration: none;
   color: white !important;
   margin: 10px;
+}
+
+.Privacy {
+  max-width: 1000px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 30px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 @media screen and (min-width: 991px) {

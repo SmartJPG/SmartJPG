@@ -1,6 +1,7 @@
 import React from "react";
 
 const About = () => {
+  const theme = localStorage.getItem("theme");
   return (
     <div className="about-us">
       <h2>Simple. Secure. Smart.</h2>
@@ -15,7 +16,7 @@ const About = () => {
               title="Drag & drop an image here"
             />
           </div>
-          <h3 className="service-text">Covert to JPG</h3>
+          <h3 className={`service-text ${theme}`}>Covert to JPG</h3>
         </div>
         <div>
           <img
@@ -24,7 +25,7 @@ const About = () => {
             style={{ width: "100px", marginBottom: "10px" }}
             title="Drag & drop an image here"
           />
-          <h3 className="service-text">Covert to PNG</h3>
+          <h3 className={`service-text ${theme}`}>Covert to PNG</h3>
         </div>
         <div>
           <div style={{ height: "110px" }}>
@@ -34,7 +35,7 @@ const About = () => {
               style={{ width: "100px", marginBottom: "10px" }}
               title="Drag & drop an image here"
             />
-            <h3 className="service-text">Remove Bg</h3>
+            <h3 className={`service-text ${theme}`}>Remove Bg</h3>
           </div>
         </div>
         <div>
@@ -45,7 +46,7 @@ const About = () => {
               style={{ width: "100px", marginBottom: "10px" }}
               title="Click to upload PDFs here"
             />
-            <h3 className="service-text">Merge PDFs</h3>
+            <h3 className={`service-text ${theme}`}>Merge PDFs</h3>
           </div>
         </div>
       </div>
