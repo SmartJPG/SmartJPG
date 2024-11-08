@@ -39,7 +39,12 @@ const SortableItem = ({
     }}
   >
     <img src="pdf.png" alt="PDF" style={{ width: "60px" }} />
-    <p>{file.name}</p>
+
+    {file.name.length < 15 ? (
+      <p style={{ fontSize: "10px" }}>{file.name}</p>
+    ) : (
+      <p>{file.name.slice(0, 15) + "..."}</p>
+    )}
   </div>
 );
 
@@ -101,7 +106,6 @@ const Main = ({ page }) => {
   const [progress, setProgress] = useState(0);
   const [loadingColor, setLoadingColor] = useState("#f11946");
   const [check, setCheck] = useState(false);
-  const [isDragOver, setIsDragOver] = useState(false);
 
   useEffect(() => {
     if (counting > 0) {
@@ -174,7 +178,6 @@ const Main = ({ page }) => {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragOver(false);
 
     const droppedFile = e.dataTransfer.files[0];
 
@@ -223,13 +226,11 @@ const Main = ({ page }) => {
   const handleDragOver = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragOver(true);
   };
 
   const handleDragLeave = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDragOver(false);
   };
 
   const getRandomColor = () => {
@@ -604,28 +605,7 @@ const Main = ({ page }) => {
             onChange={handlePdfFilesChange}
             style={{ margin: "10px 0", display: "none" }}
           />
-          {/* 
-          {pdfFiles.length < 1 && (
-            <div>
-              <img
-                src="add-document.gif"
-                alt="Upload PDF files for merging"
-                style={{ width: "25%", marginBottom: "10px" }}
-                title="Click to upload PDFs here"
-              />
-              <p className="drag-and-drop-text">Click to upload PDFs here 👋🏻</p>
-              <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
-            </div>
-          )}
 
-          {pdfFiles.length > 1 && (
-            <div>
-              <h4>📄 {pdfFiles.length} PDF documents ready to merge!</h4>
-              <button className="swap" onClick={handlePdfMerge}>
-                Merge PDFs
-              </button>
-            </div>
-          )} */}
           {pdfFiles.length > 0 ? (
             <>
               <h4>Reorder PDFs</h4>
