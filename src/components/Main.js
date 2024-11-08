@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo, memo } from "react";
 import axios from "axios";
 import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +19,22 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const { REACT_APP_API_URL } = process.env;
 
+const PdfViewer = ({ pdfUrl }) => (
+  <div>
+    {pdfUrl ? (
+      <div style={{ width: "100%", height: "250px" }}>
+        <object data={pdfUrl} type="application/pdf" width="100%" height="100%">
+          <p>
+            PDF cannot be displayed. <a href={pdfUrl}>Download PDF</a>
+          </p>
+        </object>
+      </div>
+    ) : (
+      <img src="pdf.png" alt="pdf-logo" style={{ width: "100px" }} />
+    )}
+  </div>
+);
+
 const SortableItem = ({
   file,
   index,
@@ -38,7 +54,9 @@ const SortableItem = ({
       cursor: "move",
     }}
   >
-    <img src="pdf.png" alt="PDF" style={{ width: "60px" }} />
+    {/* <img src="pdf.png" alt="PDF" style={{ width: "60px" }} /> */}
+
+    <PdfViewer pdfUrl={URL.createObjectURL(file)} />
 
     {file.name.length < 15 ? (
       <p style={{ fontSize: "10px" }}>{file.name}</p>
