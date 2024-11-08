@@ -370,6 +370,8 @@ const Main = ({ page }) => {
       const resultUrl = URL.createObjectURL(response.data);
       setPreview(resultUrl);
 
+      saveAs(response.data, "background-removed-image.png");
+
       ref.current.complete();
       setCheck(true);
 
