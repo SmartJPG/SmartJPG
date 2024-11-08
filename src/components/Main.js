@@ -8,8 +8,6 @@ import Donate from "./Donate";
 import Logo from "./Logo";
 import Slogan from "./Slogan";
 import { motion } from "framer-motion";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
-import { arrayMoveImmutable } from "array-move";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
@@ -21,35 +19,52 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const { REACT_APP_API_URL } = process.env;
 
-const SortableItem = SortableElement(({ file, index }) => {
-  // const [numPages, setNumPages] = useState(null);
-  // const [pageNumber, setPageNumber] = useState(1);
+const SortableItem = ({
+  file,
+  index,
+  handleDragStart,
+  handleDragEnter,
+  handleDragEnd,
+}) => (
+  <div
+    className="pdf-file"
+    draggable
+    onDragStart={(e) => handleDragStart(e, index)}
+    onDragEnter={(e) => handleDragEnter(e, index)}
+    onDragEnd={handleDragEnd}
+    style={{
+      margin: "10px",
+      zIndex: "100",
+      cursor: "move",
+    }}
+  >
+    <img src="pdf.png" alt="PDF" style={{ width: "60px" }} />
+    <p>{file.name}</p>
+  </div>
+);
 
-  // function onDocumentLoadSuccess({ numPages }) {
-  //   setNumPages(numPages);
-  // }
+const SortableList = ({ items, setItems }) => {
+  const [draggingItemIndex, setDraggingItemIndex] = useState(null);
 
-  return (
-    <div
-      className="pdf-file"
-      style={{
-        margin: "10px",
-        zIndex: "100",
-      }}
-    >
-      {/* <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-        <Page pageNumber={pageNumber} width={200} height={200} />
-        <p>
-          Page {pageNumber} of {numPages}
-        </p>
-      </Document> */}
-      <img src="pdf.png" alt="PDF" style={{ width: "60px" }} />
-      <p>{file.name}</p>
-    </div>
-  );
-});
+  const handleDragStart = (e, index) => {
+    setDraggingItemIndex(index);
+  };
 
-const SortableList = SortableContainer(({ items }) => {
+  const handleDragEnter = (e, index) => {
+    if (draggingItemIndex === index) return;
+
+    const newList = [...items];
+    const [draggedItem] = newList.splice(draggingItemIndex, 1);
+    newList.splice(index, 0, draggedItem);
+
+    setDraggingItemIndex(index);
+    setItems(newList);
+  };
+
+  const handleDragEnd = () => {
+    setDraggingItemIndex(null);
+  };
+
   return (
     <div
       style={{
@@ -59,11 +74,18 @@ const SortableList = SortableContainer(({ items }) => {
       }}
     >
       {items.map((file, index) => (
-        <SortableItem key={`item-${index}`} index={index} file={file} />
+        <SortableItem
+          key={index}
+          file={file}
+          index={index}
+          handleDragStart={handleDragStart}
+          handleDragEnter={handleDragEnter}
+          handleDragEnd={handleDragEnd}
+        />
       ))}
     </div>
   );
-});
+};
 
 const Main = ({ page }) => {
   const ref = useRef(null);
@@ -266,12 +288,6 @@ const Main = ({ page }) => {
       alert("Failed to convert the image.");
       ref.current.complete();
     }
-  };
-
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    setPdfFiles((prevFiles) =>
-      arrayMoveImmutable(prevFiles, oldIndex, newIndex)
-    );
   };
 
   const handlePdfMerge = async () => {
@@ -611,7 +627,7 @@ const Main = ({ page }) => {
           {pdfFiles.length > 0 ? (
             <>
               <h4>Reorder PDFs</h4>
-              <SortableList items={pdfFiles} onSortEnd={onSortEnd} axis="xy" />
+              <SortableList items={pdfFiles} setItems={setPdfFiles} />
               <button className="swap" onClick={handlePdfMerge}>
                 Merge PDFs
               </button>
