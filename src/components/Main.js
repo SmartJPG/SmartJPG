@@ -22,21 +22,23 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const { REACT_APP_API_URL } = process.env;
 
 const SortableItem = SortableElement(({ file, index }) => {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  // const [numPages, setNumPages] = useState(null);
+  // const [pageNumber, setPageNumber] = useState(1);
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
+  // function onDocumentLoadSuccess({ numPages }) {
+  //   setNumPages(numPages);
+  // }
 
   return (
-    <div style={{ margin: "10px" }}>
-      <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+    <div style={{ margin: "10px", zIndex: "100" }}>
+      {/* <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
         <Page pageNumber={pageNumber} width={200} height={200} />
         <p>
           Page {pageNumber} of {numPages}
         </p>
-      </Document>
+      </Document> */}
+      <img src="pdf.png" alt="PDF" style={{ width: "60px" }} />
+      <p>{file.name}</p>
     </div>
   );
 });
