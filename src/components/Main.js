@@ -30,7 +30,13 @@ const SortableItem = SortableElement(({ file, index }) => {
   // }
 
   return (
-    <div style={{ margin: "10px", zIndex: "100" }}>
+    <div
+      className="pdf-file"
+      style={{
+        margin: "10px",
+        zIndex: "100",
+      }}
+    >
       {/* <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
         <Page pageNumber={pageNumber} width={200} height={200} />
         <p>
@@ -49,8 +55,6 @@ const SortableList = SortableContainer(({ items }) => {
       style={{
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "center",
-        alignItems: "center",
         gap: "10px",
       }}
     >
@@ -73,6 +77,7 @@ const Main = ({ page }) => {
   const [progress, setProgress] = useState(0);
   const [loadingColor, setLoadingColor] = useState("#f11946");
   const [check, setCheck] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   useEffect(() => {
     if (counting > 0) {
@@ -145,6 +150,8 @@ const Main = ({ page }) => {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsDragOver(false);
+
     const droppedFile = e.dataTransfer.files[0];
 
     if (droppedFile) {
@@ -192,6 +199,13 @@ const Main = ({ page }) => {
   const handleDragOver = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOver(false);
   };
 
   const getRandomColor = () => {
@@ -433,8 +447,6 @@ const Main = ({ page }) => {
     }
   };
 
-  const nodeRef = React.useRef(null);
-
   return (
     <div className="main">
       {check ? (
@@ -625,6 +637,7 @@ const Main = ({ page }) => {
           onClick={handleContainerClick}
           onDrop={handleDrop}
           onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
           style={{
             maxWidth: "100%",
             flexDirection: "column",
