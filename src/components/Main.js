@@ -364,9 +364,13 @@ const Main = ({ page }) => {
         }
       );
 
-      saveAs(response.data, "background-removed-image.png");
-      ref.current.complete();
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+      const resultUrl = URL.createObjectURL(response.data);
+      setPreview(resultUrl);
 
+      ref.current.complete();
       setCheck(true);
 
       setTimeout(() => {
