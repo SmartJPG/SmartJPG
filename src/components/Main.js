@@ -8,8 +8,56 @@ import Donate from "./Donate";
 import Logo from "./Logo";
 import Slogan from "./Slogan";
 import { motion } from "framer-motion";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { arrayMoveImmutable } from "array-move";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
 
 const { REACT_APP_API_URL } = process.env;
+
+const SortableItem = SortableElement(({ file, index }) => {
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
+  return (
+    <div style={{ margin: "10px" }}>
+      <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+        <Page pageNumber={pageNumber} width={200} height={200} />
+        <p>
+          Page {pageNumber} of {numPages}
+        </p>
+      </Document>
+    </div>
+  );
+});
+
+const SortableList = SortableContainer(({ items }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "10px",
+      }}
+    >
+      {items.map((file, index) => (
+        <SortableItem key={`item-${index}`} index={index} file={file} />
+      ))}
+    </div>
+  );
+});
 
 const Main = ({ page }) => {
   const ref = useRef(null);
@@ -204,22 +252,23 @@ const Main = ({ page }) => {
     }
   };
 
-  const handlePdfMerge = async (e) => {
-    e.stopPropagation();
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setPdfFiles((prevFiles) =>
+      arrayMoveImmutable(prevFiles, oldIndex, newIndex)
+    );
+  };
 
-    if (pdfFiles.length <= 1) {
-      alert("Please upload at least two PDFs to merge.");
+  const handlePdfMerge = async () => {
+    if (pdfFiles.length < 2) {
+      alert("Please select at least two PDFs to merge.");
       return;
     }
 
     const formData = new FormData();
     pdfFiles.forEach((file) => formData.append("pdfs", file));
 
-    setLoadingColor(getRandomColor());
-
     try {
       ref.current.continuousStart();
-
       const response = await axios.post(
         `${REACT_APP_API_URL}/merge-pdfs`,
         formData,
@@ -242,12 +291,6 @@ const Main = ({ page }) => {
 
       saveAs(response.data, "smartpdf-merged.pdf");
       ref.current.complete();
-
-      setCheck(true);
-
-      setTimeout(() => {
-        setCheck(false);
-      }, 3000);
     } catch (error) {
       console.error("PDF merging failed:", error);
       alert("Failed to merge PDFs.");
@@ -318,13 +361,16 @@ const Main = ({ page }) => {
   };
 
   const handlePdfFilesChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
+    const selectedFiles = Array.from(e.target.files).filter(
+      (file) => file.type === "application/pdf"
+    );
 
-    if (selectedFiles.length === 1) {
-      alert("Only one PDF selected. Please upload at least two PDFs to merge.");
+    if (selectedFiles.length < 2) {
+      alert("Please upload at least two PDFs to merge.");
       return;
     }
 
+    console.log("Selected PDF files:", selectedFiles);
     setPdfFiles(selectedFiles);
   };
 
@@ -385,6 +431,8 @@ const Main = ({ page }) => {
     }
   };
 
+  const nodeRef = React.useRef(null);
+
   return (
     <div className="main">
       {check ? (
@@ -410,12 +458,18 @@ const Main = ({ page }) => {
         onLoaderFinished={() => setProgress(0)}
         height={6}
       />
-      <Logo />
-      <h1 className="SmartJPG">
-        <span>Smart</span>
-        <span>{page.toUpperCase()}</span>
-      </h1>
-      <Slogan />
+
+      {pdfFiles.length < 1 ? (
+        <>
+          {" "}
+          <Logo />
+          <h1 className="SmartJPG">
+            <span>Smart</span>
+            <span>{page.toUpperCase()}</span>
+          </h1>
+          <Slogan />
+        </>
+      ) : null}
 
       <div className="d-flex swap-btns">
         <div>
@@ -494,7 +548,7 @@ const Main = ({ page }) => {
       {page === "pdf" && (
         <div
           className="input-container"
-          onClick={handlePdfContainerClick}
+          onClick={pdfFiles.length < 1 ? handlePdfContainerClick : null}
           style={{
             position: "relative",
             maxWidth: "100%",
@@ -518,7 +572,7 @@ const Main = ({ page }) => {
             onChange={handlePdfFilesChange}
             style={{ margin: "10px 0", display: "none" }}
           />
-
+          {/* 
           {pdfFiles.length < 1 && (
             <div>
               <img
@@ -539,9 +593,30 @@ const Main = ({ page }) => {
                 Merge PDFs
               </button>
             </div>
+          )} */}
+          {pdfFiles.length > 0 ? (
+            <>
+              <h4>Reorder PDFs</h4>
+              <SortableList items={pdfFiles} onSortEnd={onSortEnd} axis="xy" />
+              <button className="swap" onClick={handlePdfMerge}>
+                Merge PDFs
+              </button>
+            </>
+          ) : (
+            <div>
+              <img
+                src="add-document.gif"
+                alt="Upload PDF files for merging"
+                style={{ width: "25%", marginBottom: "10px" }}
+                title="Click to upload PDFs here"
+              />
+              <p className="drag-and-drop-text">Click to upload PDFs here 👋🏻</p>
+              <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
+            </div>
           )}
         </div>
       )}
+
       {page === "jpg" && (
         <div
           className="input-container"
