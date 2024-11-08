@@ -71,6 +71,8 @@ const SortableList = ({ items, setItems }) => {
         display: "flex",
         flexWrap: "wrap",
         gap: "10px",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {items.map((file, index) => (
