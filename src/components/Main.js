@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, memo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,27 +8,14 @@ import Donate from "./Donate";
 import Logo from "./Logo";
 import Slogan from "./Slogan";
 import { motion } from "framer-motion";
-import { pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+import PdfComp from "./PdfComp";
 
 const { REACT_APP_API_URL } = process.env;
 
 const PdfViewer = ({ pdfUrl }) => (
   <div>
     {pdfUrl ? (
-      <div style={{ width: "100%", height: "250px" }}>
-        <object data={pdfUrl} type="application/pdf" width="100%" height="100%">
-          <p>
-            PDF cannot be displayed. <a href={pdfUrl}>Download PDF</a>
-          </p>
-        </object>
-      </div>
+      <PdfComp pdfFile={pdfUrl} />
     ) : (
       <img src="pdf.png" alt="pdf-logo" style={{ width: "100px" }} />
     )}

@@ -13,7 +13,6 @@
     "bootstrap": "^5.3.3",
     "file-saver": "^2.0.5",
     "framer-motion": "^11.11.10",
-    "pdfjs-dist": "^4.8.69",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
@@ -49,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "ajv": "^7.2.4"
+    "ajv": "^7.2.4",
+    "npm-force-resolutions": "^0.0.10"
   }
 }
