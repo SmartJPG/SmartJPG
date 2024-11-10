@@ -20,6 +20,13 @@
       <priority>1.0</priority>
     </url>
     <url>
+    <url>
+      <loc>https://smartjpg.app/split</loc>
+      <lastmod>2024-11-08</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1.0</priority>
+    </url>
+    <url>
       <loc>https://smartjpg.app/png</loc>
       <lastmod>2024-11-07</lastmod>
       <changefreq>daily</changefreq>

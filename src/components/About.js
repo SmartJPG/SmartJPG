@@ -57,6 +57,18 @@ const About = () => {
             <h3 className={`service-text ${theme}`}>Merge PDFs</h3>
           </div>
         </div>
+
+        <div>
+          <div style={{ height: "110px" }}>
+            <img
+              src="split.gif"
+              alt="Upload PDF files for splitting"
+              style={{ width: "100px", marginBottom: "10px" }}
+              title="Click to upload PDF here"
+            />
+            <h3 className={`service-text ${theme}`}>Split PDF</h3>
+          </div>
+        </div>
       </div>
 
       <button className="back" onClick={() => (window.location.href = "/")}>
