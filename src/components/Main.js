@@ -728,7 +728,7 @@ const Main = ({ page }) => {
           ) : (
             <div>
               <img
-                src="add-document.gif"
+                src="split.gif"
                 alt="Upload PDF files for merging"
                 style={{ width: "25%", marginBottom: "10px" }}
                 title="Click to upload PDFs here"
