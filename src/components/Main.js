@@ -9,6 +9,7 @@ import Logo from "./Logo";
 import Slogan from "./Slogan";
 import { motion } from "framer-motion";
 import PdfComp from "./PdfComp";
+import SinglePdfComp from "./SinglePdfComp";
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -177,6 +178,16 @@ const Main = ({ page }) => {
       setTimeout(() => {
         setPreviewLoading(false);
       }, 1000);
+    }
+  };
+
+  const handlePfFileSplitChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile && selectedFile.type === "application/pdf") {
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+    } else {
+      alert("Please upload a valid PDF file.");
     }
   };
 
@@ -414,6 +425,12 @@ const Main = ({ page }) => {
     setPdfFiles(selectedFiles);
   };
 
+  const [splitPages, setSplitPages] = useState([]);
+
+  const handleDeletePage = (index) => {
+    setSplitPages((prevPages) => prevPages.filter((_, i) => i !== index));
+  };
+
   const removeBg = async (e) => {
     e.stopPropagation();
 
@@ -467,6 +484,31 @@ const Main = ({ page }) => {
     } catch (error) {
       console.error("Background removal failed:", error);
       alert("Reached the limit of free requests. Please try again later.");
+      ref.current.complete();
+    }
+  };
+
+  const handleMergePdf = async () => {
+    if (splitPages.length < 2) {
+      alert("Please select at least two pages to merge.");
+      return;
+    }
+
+    const formData = new FormData();
+    splitPages.forEach((page, index) => formData.append(`page-${index}`, page));
+
+    try {
+      ref.current.continuousStart();
+      const response = await axios.post(
+        `${REACT_APP_API_URL}/merge-pdfs`,
+        formData,
+        { responseType: "blob" }
+      );
+      saveAs(response.data, "merged.pdf");
+      ref.current.complete();
+    } catch (error) {
+      console.error("PDF merging failed:", error);
+      alert("Failed to merge PDFs.");
       ref.current.complete();
     }
   };
@@ -581,6 +623,24 @@ const Main = ({ page }) => {
             </button>
           )}
         </div>
+
+        <div>
+          {page === "split" ? (
+            <button
+              className="swap current"
+              onClick={() => (window.location.href = "/split")}
+            >
+              Split PDF
+            </button>
+          ) : (
+            <button
+              className="swap"
+              onClick={() => (window.location.href = "/split")}
+            >
+              Split PDF
+            </button>
+          )}
+        </div>
       </div>
 
       {page === "pdf" && (
@@ -629,6 +689,60 @@ const Main = ({ page }) => {
               />
               <p className="drag-and-drop-text">Click to upload PDFs here 👋🏻</p>
               <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
+            </div>
+          )}
+        </div>
+      )}
+
+      {page === "split" && (
+        <div
+          style={{
+            position: "relative",
+            maxWidth: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            padding: "20px",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+            zIndex: "5",
+            cursor: "pointer",
+            border: "2px dashed grey",
+          }}
+          onClick={!file ? handlePdfContainerClick : null}
+        >
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={handlePfFileSplitChange}
+            ref={pdfFileInputRef}
+            id="fileInput"
+            style={{ margin: "10px 0", display: "none" }}
+          />
+
+          {file ? (
+            <>
+              <h4>Reorder PDFs</h4>
+              <SortableList items={pdfFiles} setItems={setPdfFiles} />
+            </>
+          ) : (
+            <div>
+              <img
+                src="add-document.gif"
+                alt="Upload PDF files for merging"
+                style={{ width: "25%", marginBottom: "10px" }}
+                title="Click to upload PDFs here"
+              />
+              <p className="drag-and-drop-text">Click to upload PDF here 👋🏻</p>
+              <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
+            </div>
+          )}
+
+          {file && (
+            <div style={{ marginTop: "20px" }}>
+              <div>
+                <SinglePdfComp pdfFile={preview} />
+              </div>
             </div>
           )}
         </div>
