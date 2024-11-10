@@ -24,19 +24,21 @@ function SinglePdfComp({ pdfFile }) {
     setDeletedPages((prev) => new Set(prev).add(pageNumber));
   };
 
-  const handleDragStart = (e, index) => {
+  const handleDragStart = (index) => {
     setDraggingPageIndex(index);
   };
 
-  const handleDragEnter = (e, index) => {
-    if (draggingPageIndex === index) return;
+  const handleDragOver = (index) => {
+    if (draggingPageIndex === null || draggingPageIndex === index) return;
 
-    const newPages = [...pages];
-    const [draggedPage] = newPages.splice(draggingPageIndex, 1);
-    newPages.splice(index, 0, draggedPage);
+    const reorderedPages = [...pages];
+    [reorderedPages[draggingPageIndex], reorderedPages[index]] = [
+      reorderedPages[index],
+      reorderedPages[draggingPageIndex],
+    ];
+    setPages(reorderedPages);
 
     setDraggingPageIndex(index);
-    setPages(newPages);
   };
 
   const handleDragEnd = () => {
@@ -45,7 +47,6 @@ function SinglePdfComp({ pdfFile }) {
 
   const handleDownloadPdf = async () => {
     const scale = 3;
-
     const pdf = new jsPDF();
 
     for (let i = 0; i < pages.length; i++) {
@@ -68,20 +69,14 @@ function SinglePdfComp({ pdfFile }) {
           });
 
           const imgData = canvasData.toDataURL("image/png", 1.0);
-
-          // Convert dimensions to points (1 point = 1/72 inch)
-          const pageWidth = originalWidth * (72 / 96); // Adjusted from pixels to points
+          const pageWidth = originalWidth * (72 / 96);
           const pageHeight = originalHeight * (72 / 96);
 
-          // Set PDF page to match the rendered canvas size
           pdf.setPage(i + 1);
           pdf.internal.pageSize.width = pageWidth;
           pdf.internal.pageSize.height = pageHeight;
-
-          // Add the image to the PDF at full size
           pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pageHeight);
 
-          // Add a new page unless it’s the last page
           if (i < pages.length - 1) pdf.addPage();
         }
       }
@@ -110,14 +105,18 @@ function SinglePdfComp({ pdfFile }) {
               <div
                 key={pageNumber}
                 draggable
-                onDragStart={(e) => handleDragStart(e, index)}
-                onDragEnter={(e) => handleDragEnter(e, index)}
+                onDragStart={() => handleDragStart(index)}
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  handleDragOver(index);
+                }}
                 onDragEnd={handleDragEnd}
                 style={{
                   position: "relative",
                   marginBottom: "20px",
                   width: "250px",
                   cursor: "move",
+                  opacity: draggingPageIndex === index ? 0.5 : 1,
                 }}
               >
                 <Page
