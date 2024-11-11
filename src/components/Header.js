@@ -56,14 +56,14 @@ const Header = () => (
               Merge PDFs
             </button>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <button
               className="swap nav-link"
               onClick={() => (window.location.href = "/split")}
             >
               Split PDF
             </button>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
