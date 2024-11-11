@@ -541,8 +541,6 @@ const Main = ({ page }) => {
 
       {pdfFiles.length < 1 ? (
         <>
-          {" "}
-          <Logo />
           <h1 className="SmartJPG">
             <span>Smart</span>
             <span>{page.toUpperCase()}</span>
@@ -551,7 +549,7 @@ const Main = ({ page }) => {
         </>
       ) : null}
 
-      <div className="d-flex swap-btns">
+      {/* <div className="d-flex swap-btns">
         <div>
           {page === "jpg" ? (
             <button
@@ -641,7 +639,7 @@ const Main = ({ page }) => {
             </button>
           )}
         </div>
-      </div>
+      </div> */}
 
       {page === "pdf" && (
         <div

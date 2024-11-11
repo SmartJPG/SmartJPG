@@ -10,8 +10,8 @@ const Logo = () => (
     y="0px"
     viewBox="0 0 500 500"
     enableBackground="new 0 0 500 500"
-    width="75px"
-    height="75px"
+    width="40px"
+    height="40px"
     // xml:space="preserve"
   >
     <path

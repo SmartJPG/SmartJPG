@@ -8,6 +8,7 @@ import Privacy from "./components/Privacy";
 import Theme from "./components/Theme";
 import RemoveBg from "./components/RemoveBg";
 import Split from "./components/Split";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
 import { pdfjs } from "react-pdf";
@@ -22,8 +23,8 @@ const App = () => {
 
   return (
     <Router>
-      <Theme />
-
+      <Header />
+      {/* <Theme /> */}
       <div className={`App ${theme}`}>
         <Routes>
           <Route path="/" element={<Home />} />
