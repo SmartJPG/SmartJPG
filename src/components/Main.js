@@ -531,6 +531,7 @@ const Main = ({ page }) => {
           </motion.div>
         </div>
       ) : null}
+
       <LoadingBar
         ref={ref}
         color={loadingColor}
@@ -541,105 +542,11 @@ const Main = ({ page }) => {
 
       {pdfFiles.length < 1 ? (
         <>
-          <h1 className="SmartJPG">
-            <span>Smart</span>
-            <span>{page.toUpperCase()}</span>
-          </h1>
+          <Logo />
+
           <Slogan />
         </>
       ) : null}
-
-      {/* <div className="d-flex swap-btns">
-        <div>
-          {page === "jpg" ? (
-            <button
-              className="swap current"
-              onClick={() => (window.location.href = "/")}
-            >
-              To JPG
-            </button>
-          ) : (
-            <button
-              className="swap"
-              onClick={() => (window.location.href = "/")}
-            >
-              To JPG
-            </button>
-          )}
-        </div>
-
-        <div>
-          {page === "png" ? (
-            <button
-              className="swap current"
-              onClick={() => (window.location.href = "/png")}
-            >
-              To PNG
-            </button>
-          ) : (
-            <button
-              className="swap"
-              onClick={() => (window.location.href = "/png")}
-            >
-              To PNG
-            </button>
-          )}
-        </div>
-
-        <div>
-          {page === "RM" ? (
-            <button
-              className="swap current"
-              onClick={() => (window.location.href = "/remove-bg")}
-            >
-              Remove Bg
-            </button>
-          ) : (
-            <button
-              className="swap"
-              onClick={() => (window.location.href = "/remove-bg")}
-            >
-              Remove Bg
-            </button>
-          )}
-        </div>
-
-        <div>
-          {page === "pdf" ? (
-            <button
-              className="swap current"
-              onClick={() => (window.location.href = "/pdf")}
-            >
-              Merge PDFs
-            </button>
-          ) : (
-            <button
-              className="swap"
-              onClick={() => (window.location.href = "/pdf")}
-            >
-              Merge PDFs
-            </button>
-          )}
-        </div>
-
-        <div>
-          {page === "split" ? (
-            <button
-              className="swap current"
-              onClick={() => (window.location.href = "/split")}
-            >
-              Split PDF
-            </button>
-          ) : (
-            <button
-              className="swap"
-              onClick={() => (window.location.href = "/split")}
-            >
-              Split PDF
-            </button>
-          )}
-        </div>
-      </div> */}
 
       {page === "pdf" && (
         <div

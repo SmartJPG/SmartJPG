@@ -26,6 +26,12 @@ p {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.navbar {
+  margin: auto;
+  width: 90% !important;
+  border-radius: 20px;
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -255,8 +261,17 @@ h3 {
 }
 
 svg {
-  border-radius: 12px;
+  border-radius: 20px;
   transition: all 0.15s ease;
+}
+
+.navbar-brand {
+  font-size: 1.7rem !important;
+  font-weight: 800;
+  background-image: linear-gradient(to right, #e66465, #9198e5) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
 }
 
 svg:hover {
@@ -290,8 +305,10 @@ svg:hover {
 .slogan-item {
   display: inline-block;
   color: white;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .highlight-text-container {
@@ -464,6 +481,10 @@ footer {
 
   .theme-container {
     display: none;
+  }
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 }
 

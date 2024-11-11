@@ -40,6 +40,7 @@ const Footer = () => (
           </Link>
         </div>
       </div> */}
+
       <div style={{ marginTop: "10px" }}>
         <a className="about-link" href="/about">
           About Us
