@@ -59,7 +59,7 @@ const Header = () => {
                 className={`swap ${page === "RM" ? "current" : ""} nav-link`}
                 onClick={() => {
                   window.location.href = "/remove-bg";
-                  localStorage.setItem("page", "rm");
+                  localStorage.setItem("page", "RM");
                 }}
               >
                 Remove Bg
