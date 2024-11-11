@@ -678,7 +678,7 @@ const Main = ({ page }) => {
             id="fileInput"
             className="input"
             type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
+            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg, image/gif"
             onChange={handleFileChange}
             style={{ margin: "10px 0", display: "none" }}
           />
