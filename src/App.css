@@ -1,6 +1,11 @@
 html,
 body {
   font-family: "Ubuntu", sans-serif !important;
+  background: linear-gradient(#e66465, #9198e5);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 100%;
 }
 
 h1,
@@ -11,36 +16,25 @@ p {
   z-index: 4;
 }
 
-.Header {
-  z-index: 200;
-  position: fixed;
-  top: 10px;
-  background-color: white;
-  width: 90%;
-  margin: auto;
-  text-align: center;
-  left: 0;
-  right: 0;
-  border-radius: 15px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
 .navbar {
+  position: absolute;
+  top: 10px;
   margin: auto;
-  width: 90% !important;
-  border-radius: 20px;
+  width: 95% !important;
+  border-radius: 25px;
+  background-color: white;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .App {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  min-height: 100vh;
   font-family: "Ubuntu", sans-serif;
-  background: linear-gradient(#e66465, #9198e5);
 }
 
 .Theme {

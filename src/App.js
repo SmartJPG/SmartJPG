@@ -23,8 +23,8 @@ const App = () => {
 
   return (
     <Router>
-      <Header />
       {/* <Theme /> */}
+      <Header />
       <div className={`App ${theme}`}>
         <Routes>
           <Route path="/" element={<Home />} />
