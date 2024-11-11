@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pdf" element={<Pdf />} />
           <Route path="/png" element={<Png />} />
-          <Route path="/split" element={<Split />} />
+          {/* <Route path="/split" element={<Split />} /> */}
           <Route path="/remove-bg" element={<RemoveBg />} />
         </Routes>
 

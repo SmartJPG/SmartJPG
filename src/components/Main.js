@@ -599,7 +599,7 @@ const Main = ({ page }) => {
         </div>
       )}
 
-      {page === "split" && (
+      {/* {page === "split" && (
         <div
           style={{
             position: "relative",
@@ -651,7 +651,7 @@ const Main = ({ page }) => {
             </div>
           )}
         </div>
-      )}
+      )} */}
 
       {page === "jpg" && (
         <div
