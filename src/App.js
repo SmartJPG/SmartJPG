@@ -25,7 +25,7 @@ const App = () => {
     <Router>
       {/* <Theme /> */}
       <Header />
-      <div className={`App ${theme}`}>
+      <div className={"App"}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
