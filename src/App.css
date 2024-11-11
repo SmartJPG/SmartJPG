@@ -11,6 +11,21 @@ p {
   z-index: 4;
 }
 
+.Header {
+  z-index: 200;
+  position: fixed;
+  top: 10px;
+  background-color: white;
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  left: 0;
+  right: 0;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -189,8 +204,8 @@ h3 {
 .swap {
   position: relative;
   font-size: 0.9rem;
-  padding: 8px;
   z-index: 5;
+  margin: 0px;
 }
 
 .swap.current {
@@ -240,7 +255,7 @@ h3 {
 }
 
 svg {
-  border-radius: 26px;
+  border-radius: 12px;
   transition: all 0.15s ease;
 }
 
