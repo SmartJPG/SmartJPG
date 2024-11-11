@@ -15,6 +15,7 @@ const Footer = () => (
         width: "90%",
         color: "white",
         borderTop: "1px solid rgba(255, 255, 255, 0.2)",
+        maxWidth: "1400px",
       }}
     >
       {/* <div className="info-box row">

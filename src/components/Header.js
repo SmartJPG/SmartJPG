@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = () => {
   const page = localStorage.getItem("page");
+
+  useEffect(() => {
+    if (page === "") {
+      localStorage.setItem("page", "");
+    }
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -50,7 +56,7 @@ const Header = () => {
             </li>
             <li className="nav-item">
               <button
-                className={`swap ${page === "" ? "rm" : ""} nav-link`}
+                className={`swap ${page === "RM" ? "current" : ""} nav-link`}
                 onClick={() => {
                   window.location.href = "/remove-bg";
                   localStorage.setItem("page", "rm");
