@@ -22,7 +22,7 @@ const App = () => {
   const theme = localStorage.getItem("theme");
   const page = localStorage.getItem("page");
   useEffect(() => {
-    if (page !== "") {
+    if (!page) {
       localStorage.setItem("page", "");
     }
   }, [page]);
