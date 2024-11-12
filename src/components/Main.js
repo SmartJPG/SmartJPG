@@ -443,6 +443,7 @@ const Main = ({ page }) => {
     formData.append("image", file);
 
     setLoadingColor(getRandomColor());
+    setPreviewLoading(true);
 
     try {
       ref.current.continuousStart();
@@ -484,6 +485,9 @@ const Main = ({ page }) => {
     } catch (error) {
       console.error("Background removal failed:", error);
       alert("Reached the limit of free requests. Please try again later.");
+      ref.current.complete();
+    } finally {
+      setPreviewLoading(false);
       ref.current.complete();
     }
   };
