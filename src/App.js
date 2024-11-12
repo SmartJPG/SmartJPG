@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Pdf from "./components/Pdf";
@@ -20,6 +20,12 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const App = () => {
   const theme = localStorage.getItem("theme");
+  const page = localStorage.getItem("page");
+  useEffect(() => {
+    if (page !== "") {
+      localStorage.setItem("page", "");
+    }
+  }, [page]);
 
   return (
     <Router>
