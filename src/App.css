@@ -26,7 +26,7 @@ body.night {
 }
 
 body.pro {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 1422 800" opacity="0.63"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad"><stop stop-color="hsl(0, 0%, 90%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(0, 0%, 24%)" stop-opacity="1" offset="100%"></stop></linearGradient></defs><g stroke-width="2" stroke="url(%23oooscillate-grad)" fill="none" stroke-linecap="round"><path d="M 0 600 Q 355.5 180 711 400 Q 1066.5 620 1422 600" opacity="1.00"></path></g></svg>');
+  background-image: url("../public/oooscillate.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #b8b8b8;
