@@ -5,9 +5,7 @@ import Pdf from "./components/Pdf";
 import Png from "./components/Png";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
-import Theme from "./components/Theme";
 import RemoveBg from "./components/RemoveBg";
-import Split from "./components/Split";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
@@ -27,11 +25,22 @@ const App = () => {
     }
   }, [page]);
 
+  useEffect(() => {
+    if (theme) {
+      document.body.classList.add(theme);
+    } else {
+      document.body.classList.add("default");
+    }
+
+    return () => {
+      document.body.classList.remove("night", "pro", "default");
+    };
+  }, [theme]);
+
   return (
     <Router>
-      {/* <Theme /> */}
       <Header />
-      <div className={"App"}>
+      <div className={`App ${theme}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

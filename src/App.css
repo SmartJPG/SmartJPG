@@ -1,11 +1,35 @@
-html,
-body {
-  font-family: "Ubuntu", sans-serif !important;
+body.default {
   background: linear-gradient(#e66465, #9198e5);
   background-size: 100% 100%;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  height: 100%;
+}
+
+body.night {
+  --dot-bg: #161616;
+  --dot-color: rgb(50, 199, 50);
+  --dot-size: 2px;
+  --dot-space: 70px;
+
+  background: linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+}
+
+body.pro {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 1422 800" opacity="0.63"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad"><stop stop-color="hsl(0, 0%, 90%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(0, 0%, 24%)" stop-opacity="1" offset="100%"></stop></linearGradient></defs><g stroke-width="2" stroke="url(%23oooscillate-grad)" fill="none" stroke-linecap="round"><path d="M 0 600 Q 355.5 180 711 400 Q 1066.5 620 1422 600" opacity="1.00"></path></g></svg>');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #b8b8b8;
 }
 
 h1,
@@ -42,21 +66,6 @@ p {
   position: relative;
 }
 
-.theme-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: white;
-  border-radius: 10px;
-  text-align: center;
-  transition: 1s;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
 .theme-text {
   max-height: 0;
   padding: 0;
@@ -69,7 +78,13 @@ p {
 .service-text.night {
   color: white !important;
 }
-/* 
+
+.theme-container {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .original-theme {
   width: 35px;
   height: 35px;
@@ -77,9 +92,10 @@ p {
   border-radius: 10px;
   cursor: pointer;
   margin: auto;
-  margin-bottom: 5px;
-} */
-/* 
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .night-theme {
   width: 35px;
   height: 35px;
@@ -103,10 +119,11 @@ p {
   border-radius: 10px;
   cursor: pointer;
   margin: auto;
-  margin-bottom: 5px;
-} */
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
-/* .pro-theme {
+.pro-theme {
   width: 35px;
   height: 35px;
   background-image: url("../public/oooscillate.svg");
@@ -116,35 +133,9 @@ p {
   background-color: rgb(47, 47, 47);
   cursor: pointer;
   margin: auto;
-} */
-
-/* .App.night {
-  --dot-bg: #161616;
-  --dot-color: rgb(50, 199, 50);
-  --dot-size: 2px;
-  --dot-space: 70px;
-
-  background: linear-gradient(
-        90deg,
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    linear-gradient(
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    var(--dot-color);
-} */
-
-/* .App.pro { */
-/* background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 1422 800" opacity="0.63"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="oooscillate-grad"><stop stop-color="hsl(0, 0%, 90%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(0, 0%, 24%)" stop-opacity="1" offset="100%"></stop></linearGradient></defs><g stroke-width="2" stroke="url(%23oooscillate-grad)" fill="none" stroke-linecap="round"><path d="M 0 600 Q 355.5 180 711 400 Q 1066.5 620 1422 600" opacity="1.00"></path><path d="M 0 575 Q 355.5 180 711 400 Q 1066.5 620 1422 575" opacity="0.96"></path><path d="M 0 550 Q 355.5 180 711 400 Q 1066.5 620 1422 550" opacity="0.92"></path><path d="M 0 525 Q 355.5 180 711 400 Q 1066.5 620 1422 525" opacity="0.88"></path><path d="M 0 500 Q 355.5 180 711 400 Q 1066.5 620 1422 500" opacity="0.83"></path><path d="M 0 475 Q 355.5 180 711 400 Q 1066.5 620 1422 475" opacity="0.79"></path><path d="M 0 450 Q 355.5 180 711 400 Q 1066.5 620 1422 450" opacity="0.75"></path><path d="M 0 425 Q 355.5 180 711 400 Q 1066.5 620 1422 425" opacity="0.71"></path><path d="M 0 400 Q 355.5 180 711 400 Q 1066.5 620 1422 400" opacity="0.67"></path><path d="M 0 375 Q 355.5 180 711 400 Q 1066.5 620 1422 375" opacity="0.63"></path><path d="M 0 350 Q 355.5 180 711 400 Q 1066.5 620 1422 350" opacity="0.59"></path><path d="M 0 325 Q 355.5 180 711 400 Q 1066.5 620 1422 325" opacity="0.55"></path><path d="M 0 300 Q 355.5 180 711 400 Q 1066.5 620 1422 300" opacity="0.50"></path><path d="M 0 275 Q 355.5 180 711 400 Q 1066.5 620 1422 275" opacity="0.46"></path><path d="M 0 250 Q 355.5 180 711 400 Q 1066.5 620 1422 250" opacity="0.42"></path><path d="M 0 225 Q 355.5 180 711 400 Q 1066.5 620 1422 225" opacity="0.38"></path><path d="M 0 200 Q 355.5 180 711 400 Q 1066.5 620 1422 200" opacity="0.34"></path><path d="M 0 175 Q 355.5 180 711 400 Q 1066.5 620 1422 175" opacity="0.30"></path><path d="M 0 150 Q 355.5 180 711 400 Q 1066.5 620 1422 150" opacity="0.26"></path><path d="M 0 125 Q 355.5 180 711 400 Q 1066.5 620 1422 125" opacity="0.22"></path><path d="M 0 100 Q 355.5 180 711 400 Q 1066.5 620 1422 100" opacity="0.17"></path><path d="M 0 75 Q 355.5 180 711 400 Q 1066.5 620 1422 75" opacity="0.13"></path><path d="M 0 50 Q 355.5 180 711 400 Q 1066.5 620 1422 50" opacity="0.09"></path></g></svg>'); */
-/* background-image: url("../public/oooscillate.svg"); */
-/* background-repeat: no-repeat; */
-/* background-size: cover; */
-/* background-color: #b8b8b8; */
-/* } */
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 .main {
   padding: 10px;

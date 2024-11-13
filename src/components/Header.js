@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Theme from "./Theme";
 
 const Header = () => {
   const page = localStorage.getItem("page");
@@ -84,6 +85,7 @@ const Header = () => {
               Split PDF
             </button>
           </li> */}
+            <Theme />
           </ul>
         </div>
       </div>
