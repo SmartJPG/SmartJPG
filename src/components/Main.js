@@ -9,7 +9,6 @@ import Logo from "./Logo";
 import Slogan from "./Slogan";
 import { motion } from "framer-motion";
 import PdfComp from "./PdfComp";
-import { usePollinationsImage } from "@pollinations/react";
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -195,7 +194,7 @@ const Main = ({ page }) => {
       if (index >= text.length - 1) {
         clearInterval(interval);
       }
-    }, 90);
+    }, 50);
 
     return () => clearInterval(interval);
   }, []);
@@ -1009,20 +1008,27 @@ const Main = ({ page }) => {
             backgroundColor: "white",
             borderRadius: "20px",
             padding: "20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
             zIndex: "5",
-            cursor: "pointer",
-            border: "2px dashed grey",
           }}
         >
           <input
             className="input-ai"
             type="text"
-            placeholder="Enter a prompt to generate an image"
+            placeholder="Enter a prompt"
             value={inputPrompt}
             onChange={handlePromptChange}
             onKeyDown={handleKeyDown}
           />
+
+          {!imageUrl && !loadingImage && (
+            <div>
+              <img
+                src="ai.gif"
+                alt="Loading"
+                style={{ width: "80px", height: "80px" }}
+              />
+            </div>
+          )}
 
           {loadingImage ? (
             <div>
