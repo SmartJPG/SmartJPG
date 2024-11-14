@@ -10,6 +10,8 @@ import Slogan from "./Slogan";
 import { motion } from "framer-motion";
 import PdfComp from "./PdfComp";
 import SinglePdfComp from "./SinglePdfComp";
+import { usePollinationsImage, usePollinationsText } from "@pollinations/react";
+import ReactMarkdown from "react-markdown";
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -112,6 +114,14 @@ const Main = ({ page }) => {
   const [progress, setProgress] = useState(0);
   const [loadingColor, setLoadingColor] = useState("#f11946");
   const [check, setCheck] = useState(false);
+  const [inputPrompt, setInputPrompt] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [loadingImage, setLoadingImage] = useState(false);
+  const imageUrl = usePollinationsImage(prompt, {
+    width: 800,
+    height: 600,
+    seed: 42,
+  });
 
   useEffect(() => {
     if (counting > 0) {
@@ -132,6 +142,49 @@ const Main = ({ page }) => {
       setFileLoaded(false);
     }
   }, [file]);
+
+  useEffect(() => {
+    if (prompt) {
+      setLoadingImage(true);
+    }
+  }, [prompt]);
+
+  useEffect(() => {
+    if (imageUrl) {
+      setLoadingImage(false);
+    }
+  }, [imageUrl]);
+
+  const handlePromptChange = (e) => {
+    setInputPrompt(e.target.value);
+  };
+
+  const handleSearch = () => {
+    setPrompt(inputPrompt);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const [displayText, setDisplayText] = useState("");
+  const text = "AII Image Generator.";
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayText((prevText) => prevText + text[index]);
+
+      index++;
+      if (index >= text.length - 1) {
+        clearInterval(interval);
+      }
+    }, 90);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -548,7 +601,11 @@ const Main = ({ page }) => {
         <>
           <Logo />
 
-          <Slogan />
+          {page === "ai-image" ? (
+            <h2 className="ai-text">{displayText}</h2>
+          ) : (
+            <Slogan />
+          )}
         </>
       ) : null}
 
@@ -965,6 +1022,59 @@ const Main = ({ page }) => {
                 />
               )}
             </div>
+          )}
+        </div>
+      )}
+
+      {page === "ai-image" && (
+        <div
+          className="input-container"
+          style={{
+            maxWidth: "100%",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "white",
+            borderRadius: "20px",
+            padding: "20px",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+            zIndex: "5",
+            cursor: "pointer",
+            border: "2px dashed grey",
+          }}
+        >
+          <input
+            className="input-ai"
+            type="text"
+            placeholder="Enter a prompt to generate an image"
+            value={inputPrompt}
+            onChange={handlePromptChange}
+            onKeyDown={handleKeyDown}
+          />
+
+          {loadingImage ? (
+            <img
+              src="loading.gif"
+              alt="Loading"
+              style={{ marginTop: "20px", width: "100px", height: "100px" }}
+            />
+          ) : (
+            imageUrl && (
+              <img
+                src={imageUrl}
+                alt="AI Generated"
+                style={{
+                  marginTop: "20px",
+                  width: "100%",
+                  overflow: "hidden",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "20px",
+                  backgroundColor: "#fff",
+                  maxHeight: "300px",
+                }}
+              />
+            )
           )}
         </div>
       )}

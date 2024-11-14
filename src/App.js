@@ -6,6 +6,7 @@ import Png from "./components/Png";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
 import RemoveBg from "./components/RemoveBg";
+import ImageGenerator from "./components/ImageGenerator";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pdf" element={<Pdf />} />
           <Route path="/png" element={<Png />} />
+          <Route path="/ai-image" element={<ImageGenerator />} />
           {/* <Route path="/split" element={<Split />} /> */}
           <Route path="/remove-bg" element={<RemoveBg />} />
         </Routes>
