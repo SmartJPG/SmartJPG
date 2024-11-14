@@ -10,7 +10,7 @@ const Header = () => {
     if (page === "") {
       localStorage.setItem("page", "");
     }
-  }, []);
+  }, [page]);
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -75,6 +75,19 @@ const Header = () => {
                 }}
               >
                 Merge PDFs
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className={`swap ${
+                  page === "ai-image" ? "current" : ""
+                } nav-link`}
+                onClick={() => {
+                  window.location.href = "/ai-image";
+                  localStorage.setItem("page", "ai-image");
+                }}
+              >
+                AI Image Generator
               </button>
             </li>
             {/* <li className="nav-item">
