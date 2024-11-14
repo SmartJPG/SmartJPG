@@ -10,7 +10,7 @@ const Donate = ({ counting }) => (
     className="donate-container"
     style={{
       position: "absolute",
-      maxWidth: "400px",
+      maxWidth: "300px",
       width: "100%",
       bottom: "20px",
       right: "20px",
@@ -44,8 +44,10 @@ const Donate = ({ counting }) => (
         <span>{counting}</span>
       </div>
 
-      <h1>Support us! ☕️</h1>
-      <p>Your support can help us keep developing free resources.</p>
+      <h3>Support us! ☕️</h3>
+      <p className="donate-des">
+        Your support can help us keep developing free resources.
+      </p>
       <a
         target="_blank"
         rel="noopener noreferrer"

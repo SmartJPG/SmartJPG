@@ -1051,7 +1051,7 @@ const Main = ({ page }) => {
         </div>
       )}
 
-      {showDonate && <Donate counting={counting} />}
+      {!showDonate && <Donate counting={counting} />}
     </div>
   );
 };
