@@ -9,9 +9,7 @@ import Logo from "./Logo";
 import Slogan from "./Slogan";
 import { motion } from "framer-motion";
 import PdfComp from "./PdfComp";
-import SinglePdfComp from "./SinglePdfComp";
-import { usePollinationsImage, usePollinationsText } from "@pollinations/react";
-import ReactMarkdown from "react-markdown";
+import { usePollinationsImage } from "@pollinations/react";
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -44,8 +42,6 @@ const SortableItem = ({
       cursor: "move",
     }}
   >
-    {/* <img src="pdf.png" alt="PDF" style={{ width: "60px" }} /> */}
-
     <PdfViewer pdfUrl={URL.createObjectURL(file)} />
 
     {file.name.length < 15 ? (
@@ -117,11 +113,7 @@ const Main = ({ page }) => {
   const [inputPrompt, setInputPrompt] = useState("");
   const [prompt, setPrompt] = useState("");
   const [loadingImage, setLoadingImage] = useState(false);
-  const imageUrl = usePollinationsImage(prompt, {
-    width: 800,
-    height: 600,
-    seed: 42,
-  });
+  const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
     if (counting > 0) {
@@ -159,10 +151,32 @@ const Main = ({ page }) => {
     setInputPrompt(e.target.value);
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     setPrompt(inputPrompt);
-  };
+    setLoadingImage(true);
 
+    try {
+      const response = await axios.get(
+        `https://image.pollinations.ai/prompt/${inputPrompt}`,
+        {
+          responseType: "blob",
+        }
+      );
+
+      if (response.status === 200) {
+        const imageBlob = response.data;
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImageUrl(imageObjectURL);
+      } else {
+        console.error("Failed to fetch the image");
+      }
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      alert("Failed to generate image.");
+    } finally {
+      setLoadingImage(false);
+    }
+  };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
@@ -231,16 +245,6 @@ const Main = ({ page }) => {
       setTimeout(() => {
         setPreviewLoading(false);
       }, 1000);
-    }
-  };
-
-  const handlePfFileSplitChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile && selectedFile.type === "application/pdf") {
-      setFile(selectedFile);
-      setPreview(URL.createObjectURL(selectedFile));
-    } else {
-      alert("Please upload a valid PDF file.");
     }
   };
 
@@ -478,12 +482,6 @@ const Main = ({ page }) => {
     setPdfFiles(selectedFiles);
   };
 
-  const [splitPages, setSplitPages] = useState([]);
-
-  const handleDeletePage = (index) => {
-    setSplitPages((prevPages) => prevPages.filter((_, i) => i !== index));
-  };
-
   const removeBg = async (e) => {
     e.stopPropagation();
 
@@ -541,31 +539,6 @@ const Main = ({ page }) => {
       ref.current.complete();
     } finally {
       setPreviewLoading(false);
-      ref.current.complete();
-    }
-  };
-
-  const handleMergePdf = async () => {
-    if (splitPages.length < 2) {
-      alert("Please select at least two pages to merge.");
-      return;
-    }
-
-    const formData = new FormData();
-    splitPages.forEach((page, index) => formData.append(`page-${index}`, page));
-
-    try {
-      ref.current.continuousStart();
-      const response = await axios.post(
-        `${REACT_APP_API_URL}/merge-pdfs`,
-        formData,
-        { responseType: "blob" }
-      );
-      saveAs(response.data, "merged.pdf");
-      ref.current.complete();
-    } catch (error) {
-      console.error("PDF merging failed:", error);
-      alert("Failed to merge PDFs.");
       ref.current.complete();
     }
   };
@@ -1052,27 +1025,20 @@ const Main = ({ page }) => {
           />
 
           {loadingImage ? (
-            <img
-              src="loading.gif"
-              alt="Loading"
-              style={{ marginTop: "20px", width: "100px", height: "100px" }}
-            />
+            <div>
+              <img
+                src="ai-loading.gif"
+                alt="Loading"
+                style={{ width: "100px", height: "100px" }}
+              />
+              <p>Generating image...</p>
+            </div>
           ) : (
             imageUrl && (
               <img
                 src={imageUrl}
                 alt="AI Generated"
-                style={{
-                  marginTop: "20px",
-                  width: "100%",
-                  overflow: "hidden",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "20px",
-                  backgroundColor: "#fff",
-                  maxHeight: "300px",
-                }}
+                style={{ maxWidth: "300px", borderRadius: "20px" }}
               />
             )
           )}

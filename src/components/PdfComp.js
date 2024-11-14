@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Document, Page } from "react-pdf";
 
 function PdfComp({ pdfFile }) {
