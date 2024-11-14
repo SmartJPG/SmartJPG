@@ -475,6 +475,14 @@ footer {
     bottom: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
+    padding: 10px !important;
+  }
+  .gradient-border {
+    right: 0px !important;
+    top: 0px !important;
+  }
+  .donate-des {
+    display: none;
   }
   .check-here-div {
     display: none;
