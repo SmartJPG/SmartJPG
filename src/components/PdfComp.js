@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { memo, useState } from "react";
 import { Document, Page } from "react-pdf";
 
-function PdfComp({ pdfFile }) {
+const PdfComp = memo(({ pdfFile }) => {
   const [numPages, setNumPages] = useState(null);
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -13,7 +13,7 @@ function PdfComp({ pdfFile }) {
       className="pdf-div"
       style={{
         width: "250px",
-        height: "350px",
+        height: "100%",
         justifyContent: "center",
         alignItems: "center",
         display: "flex",
@@ -24,12 +24,11 @@ function PdfComp({ pdfFile }) {
           pageNumber={1}
           renderTextLayer={false}
           renderAnnotationLayer={false}
-          width={250}
           height={300}
         />
       </Document>
     </div>
   );
-}
+});
 
 export default PdfComp;
