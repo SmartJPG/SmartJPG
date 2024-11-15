@@ -12,7 +12,7 @@ const PdfComp = memo(({ pdfFile }) => {
     <div
       className="pdf-div"
       style={{
-        width: "250px",
+        // width: "250px",
         height: "100%",
         justifyContent: "center",
         alignItems: "center",
