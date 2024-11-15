@@ -309,11 +309,27 @@ svg:hover {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
   height: 1.6rem;
   background-color: rgba(189, 186, 20, 0.4);
   border-top-left-radius: 10px;
   border-bottom-right-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.highlight.one {
+  width: 25%;
+}
+
+.highlight.two {
+  width: 50%;
+}
+
+.highlight.three {
+  width: 75%;
+}
+
+.highlight.four {
+  width: 100%;
 }
 
 .highlight-text-container {
