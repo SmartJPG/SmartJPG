@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import axios from "axios";
 import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -41,7 +41,7 @@ const SortableItem = ({
       cursor: "move",
     }}
   >
-    <PdfViewer pdfUrl={URL.createObjectURL(file)} />
+    <PdfViewer pdfUrl={useMemo(() => URL.createObjectURL(file), [file])} />
 
     {file.name.length < 15 ? (
       <p style={{ fontSize: "10px" }}>{file.name}</p>
@@ -365,6 +365,8 @@ const Main = ({ page }) => {
     }
   };
 
+  const [fileName, setFileName] = useState("SmartJPG-merged");
+
   const handlePdfMerge = async () => {
     if (pdfFiles.length < 2) {
       alert("Please select at least two PDFs to merge.");
@@ -396,7 +398,7 @@ const Main = ({ page }) => {
         }
       );
 
-      saveAs(response.data, "smartpdf-merged.pdf");
+      saveAs(response.data, fileName + ".pdf");
       ref.current.complete();
     } catch (error) {
       console.error("PDF merging failed:", error);
@@ -477,7 +479,6 @@ const Main = ({ page }) => {
       return;
     }
 
-    console.log("Selected PDF files:", selectedFiles);
     setPdfFiles(selectedFiles);
   };
 
@@ -613,6 +614,12 @@ const Main = ({ page }) => {
             <>
               <h4>Reorder PDFs</h4>
               <SortableList items={pdfFiles} setItems={setPdfFiles} />
+              <input
+                className="file-name-input"
+                type="text"
+                placeholder="File name: SmartJPG-merged.pdf"
+                onChange={(e) => setFileName(e.target.value)}
+              />
               <button className="swap" onClick={handlePdfMerge}>
                 Merge PDFs
               </button>
