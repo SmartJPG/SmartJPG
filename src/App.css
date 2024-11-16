@@ -203,6 +203,11 @@ h3 {
   font-size: 0.9rem;
   z-index: 5;
   margin: 0px;
+  text-align: center;
+}
+
+.nav-item {
+  border: none !important;
 }
 
 .swap.current {
@@ -525,6 +530,8 @@ footer {
 
   .theme-container {
     display: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   .container {
     padding-left: 10px !important;
