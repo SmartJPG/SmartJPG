@@ -50,10 +50,11 @@ p {
   top: 10px;
   margin: auto;
   width: 95% !important;
-  border-radius: 25px;
+  border-radius: 40px;
   background-color: white;
   padding-left: 20px !important;
   padding-right: 20px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .App {
@@ -206,7 +207,7 @@ h3 {
 
 .swap.current {
   background-color: rgba(0, 113, 227, 1);
-  color: white;
+  color: white !important;
 }
 
 .back {
