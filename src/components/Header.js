@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Theme from "./Theme";
 
 const Header = () => {
-  const page = localStorage.getItem("page");
+  const location = useLocation();
+  const page = location.pathname;
 
   useEffect(() => {
-    if (page === "") {
-      localStorage.setItem("page", "");
-    }
+    localStorage.setItem("page", page);
   }, [page]);
 
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           SmartJPG
-        </a>
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -34,70 +34,49 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <button
-                className={`swap ${page === "" ? "current" : ""} nav-link`}
-                onClick={() => {
-                  window.location.href = "/";
-                  localStorage.setItem("page", "");
-                }}
+              <Link
+                to="/"
+                className={`swap ${page === "/" ? "current" : ""} nav-link`}
               >
                 To JPG
-              </button>
+              </Link>
             </li>
             <li className="nav-item">
-              <button
-                className={`swap ${page === "png" ? "current" : ""} nav-link`}
-                onClick={() => {
-                  window.location.href = "/png";
-                  localStorage.setItem("page", "png");
-                }}
+              <Link
+                to="/png"
+                className={`swap ${page === "/png" ? "current" : ""} nav-link`}
               >
                 To PNG
-              </button>
+              </Link>
             </li>
             <li className="nav-item">
-              <button
-                className={`swap ${page === "RM" ? "current" : ""} nav-link`}
-                onClick={() => {
-                  window.location.href = "/remove-bg";
-                  localStorage.setItem("page", "RM");
-                }}
+              <Link
+                to="/remove-bg"
+                className={`swap ${
+                  page === "/remove-bg" ? "current" : ""
+                } nav-link`}
               >
                 Remove Bg
-              </button>
+              </Link>
             </li>
             <li className="nav-item">
-              <button
-                className={`swap ${page === "pdf" ? "current" : ""} nav-link`}
-                onClick={() => {
-                  window.location.href = "/pdf";
-                  localStorage.setItem("page", "pdf");
-                }}
+              <Link
+                to="/pdf"
+                className={`swap ${page === "/pdf" ? "current" : ""} nav-link`}
               >
                 Merge PDFs
-              </button>
+              </Link>
             </li>
             <li className="nav-item">
-              <button
+              <Link
+                to="/ai-image"
                 className={`swap ${
-                  page === "ai-image" ? "current" : ""
+                  page === "/ai-image" ? "current" : ""
                 } nav-link`}
-                onClick={() => {
-                  window.location.href = "/ai-image";
-                  localStorage.setItem("page", "ai-image");
-                }}
               >
                 AI Image Generator
-              </button>
+              </Link>
             </li>
-            {/* <li className="nav-item">
-            <button
-              className="swap nav-link"
-              onClick={() => (window.location.href = "/split")}
-            >
-              Split PDF
-            </button>
-          </li> */}
             <Theme />
           </ul>
         </div>
