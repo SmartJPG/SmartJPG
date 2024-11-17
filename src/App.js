@@ -7,6 +7,7 @@ import About from "./components/About";
 import Privacy from "./components/Privacy";
 import RemoveBg from "./components/RemoveBg";
 import ImageGenerator from "./components/ImageGenerator";
+import Chat from "./components/Chat";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
@@ -49,8 +50,8 @@ const App = () => {
           <Route path="/pdf" element={<Pdf />} />
           <Route path="/png" element={<Png />} />
           <Route path="/ai-image" element={<ImageGenerator />} />
-          {/* <Route path="/split" element={<Split />} /> */}
           <Route path="/remove-bg" element={<RemoveBg />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
 
         <Footer />
