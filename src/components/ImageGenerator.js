@@ -4,7 +4,7 @@ import Main from "./Main";
 import { Helmet } from "react-helmet";
 
 const ImageGenerator = (page) => (
-  <div>
+  <div className="Image">
     <Helmet>
       <title>AI Image Generator | SmartJPG</title>
       <meta

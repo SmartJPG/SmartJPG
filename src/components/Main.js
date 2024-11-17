@@ -183,21 +183,35 @@ const Main = ({ page }) => {
   };
 
   const [displayText, setDisplayText] = useState("");
-  const text = "AII Image Generator.";
+
+  const [text, setText] = useState("");
 
   useEffect(() => {
+    let interval;
     let index = 0;
-    const interval = setInterval(() => {
-      setDisplayText((prevText) => prevText + text[index]);
 
-      index++;
-      if (index >= text.length - 1) {
-        clearInterval(interval);
-      }
-    }, 50);
+    let targetText = "";
+    if (page === "ai-image") {
+      targetText = "AAI Image Generator";
+    } else if (page === "chat") {
+      targetText = "CChat with AI";
+    }
+
+    if (targetText) {
+      setText(targetText);
+      setDisplayText("");
+      interval = setInterval(() => {
+        setDisplayText((prevText) => prevText + targetText[index]);
+        index++;
+
+        if (index >= targetText.length - 1) {
+          clearInterval(interval);
+        }
+      }, 50);
+    }
 
     return () => clearInterval(interval);
-  }, []);
+  }, [page]);
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -545,23 +559,6 @@ const Main = ({ page }) => {
 
   return (
     <div className="main">
-      {check ? (
-        <div className="check-here-div">
-          <img src="arrow.gif" alt="here!" className="arrow" />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="donate-container"
-          >
-            {page === "jpg" && <h4 className="check-here">☝🏻 🎇</h4>}
-
-            {page === "pdf" && <h4 className="check-here">☝🏻 📄📄</h4>}
-          </motion.div>
-        </div>
-      ) : null}
-
       <LoadingBar
         ref={ref}
         color={loadingColor}
@@ -574,7 +571,7 @@ const Main = ({ page }) => {
         <>
           <Logo />
 
-          {page === "ai-image" ? (
+          {page === "ai-image" || page === "chat" ? (
             <h2 className="ai-text">{displayText}</h2>
           ) : (
             <Slogan />
@@ -1007,15 +1004,16 @@ const Main = ({ page }) => {
 
       {page === "ai-image" && (
         <div
-          className="input-container"
+          className="input-container ai-image"
           style={{
-            maxWidth: "100%",
+            maxWidth: "60%",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "white",
             borderRadius: "20px",
             padding: "20px",
             zIndex: "5",
+            margin: "auto",
           }}
         >
           <input
@@ -1055,6 +1053,17 @@ const Main = ({ page }) => {
               />
             )
           )}
+        </div>
+      )}
+
+      {page === "chat" && (
+        <div>
+          <input
+            className="input-ai"
+            type="text"
+            placeholder="Enter your message"
+            style={{ width: "70%" }}
+          />
         </div>
       )}
 
