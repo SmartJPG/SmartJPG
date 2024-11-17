@@ -208,6 +208,14 @@ h3 {
 
 .nav-item {
   border: none !important;
+  margin: 5px;
+}
+
+.download {
+  background: linear-gradient(#e66465, #9198e5) !important;
+  color: white !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
 }
 
 .swap.current {
@@ -503,12 +511,6 @@ footer {
 
 @media screen and (max-width: 500px) {
   .donate-container {
-    /* max-width: 100% !important;
-    right: 0px !important;
-    bottom: 0px !important;
-    border-bottom-left-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
-    padding: 10px !important; */
     max-width: 100% !important;
     right: 0px !important;
     top: 0px !important;
@@ -536,6 +538,9 @@ footer {
   .container {
     padding-left: 10px !important;
     padding-right: 10px !important;
+  }
+  .nav-item.download {
+    display: none;
   }
 }
 
