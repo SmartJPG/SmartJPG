@@ -33,6 +33,23 @@ const Header = () => {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
+            <li className="nav-item download">
+              <a
+                href="https://github.com/SmartJPG/SmartJPG-Desktop/releases/download/Pre-production/SmartJPG-1.0.0-arm64.dmg"
+                download
+                className="swap download nav-link"
+              >
+                Download
+              </a>
+            </li>
+            {/* <li className="nav-item">
+              <Link
+                to="/chat"
+                className={`swap ${page === "/chat" ? "current" : ""} nav-link`}
+              >
+                AI Chatbot
+              </Link>
+            </li> */}
             <li className="nav-item">
               <Link
                 to="/"
