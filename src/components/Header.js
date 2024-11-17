@@ -33,7 +33,7 @@ const Header = () => {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item download">
+            {/* <li className="nav-item download">
               <a
                 href="https://github.com/SmartJPG/SmartJPG-Desktop/releases/download/Pre-production/SmartJPG-1.0.0-arm64.dmg"
                 download
@@ -41,7 +41,7 @@ const Header = () => {
               >
                 Download
               </a>
-            </li>
+            </li> */}
             {/* <li className="nav-item">
               <Link
                 to="/chat"
