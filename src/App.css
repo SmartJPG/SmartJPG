@@ -144,6 +144,7 @@ p {
 
 .main {
   padding: 10px;
+  height: 100%;
 }
 
 .SmartJPG {
@@ -354,6 +355,7 @@ svg:hover {
 footer {
   position: relative;
   font-size: 0.875rem;
+  outline: none !important;
 }
 
 .copyright {
@@ -502,6 +504,13 @@ footer {
   border: 1px solid grey;
 }
 
+.Chat,
+.Image {
+  width: 95%;
+  height: 40vh;
+  transition: all 0.5s ease;
+}
+
 @media screen and (min-width: 991px) {
   .theme-container:hover > .theme-text {
     max-height: 200px;
@@ -541,6 +550,9 @@ footer {
   }
   .nav-item.download {
     display: none;
+  }
+  .input-container.ai-image {
+    max-width: 100% !important;
   }
 }
 
