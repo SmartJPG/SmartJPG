@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (
-    <div>
+    <div className="JPG">
       <Helmet>
         <title>
           SmartJPG - Free Image Converter, Background Remover, & PNG Converter

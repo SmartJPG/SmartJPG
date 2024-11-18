@@ -7,10 +7,16 @@ import Theme from "./Theme";
 const Header = () => {
   const location = useLocation();
   const page = location.pathname;
+  const theme = localStorage.getItem("theme");
 
   useEffect(() => {
     localStorage.setItem("page", page);
-  }, [page]);
+    if (!theme) {
+      localStorage.setItem("theme", "pro");
+    } else {
+      localStorage.setItem("theme", "pro");
+    }
+  }, [page, theme]);
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -128,7 +134,7 @@ const Header = () => {
                 AI Image Generator
               </Link>
             </li>
-            <Theme />
+            {/* <Theme /> */}
           </ul>
         </div>
       </div>

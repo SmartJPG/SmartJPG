@@ -1,11 +1,18 @@
-body.default {
-  background: linear-gradient(#e66465, #9198e5);
-  background-size: 100% 100%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+html,
+body {
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
 }
 
-body.night {
+body.pro {
+  background-image: url("../public/oooscillate.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #f6f6f6;
+}
+
+/* body.night {
   --dot-bg: #161616;
   --dot-color: rgb(50, 199, 50);
   --dot-size: 2px;
@@ -23,21 +30,30 @@ body.night {
       )
       center / var(--dot-space) var(--dot-space),
     var(--dot-color);
-}
+} */
 
-body.pro {
+/* body.pro {
   background-image: url("../public/oooscillate.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #b8b8b8;
-}
+  background-color: #f6f6f6;
+} */
 
 h1,
 h2,
 h3,
-p {
+h4,
+p,
+span,
+a {
   position: relative;
   z-index: 4;
+  color: rgb(34, 34, 34);
+}
+
+a {
+  text-decoration: none !important;
+  color: rgb(34, 34, 34) !important;
 }
 
 p {
@@ -64,9 +80,19 @@ p {
   align-items: center;
   text-align: center;
   font-family: "Ubuntu", sans-serif;
-  width: 95%;
   margin: auto;
-  margin-top: 50px;
+  height: 100%;
+  width: 95%;
+}
+
+.JPG,
+.PNG,
+.PDF,
+.RM,
+.Image {
+  width: 100%;
+  margin: 50px 0px;
+  transition: all 0.5s ease;
 }
 
 .nav-link {
@@ -166,6 +192,7 @@ p {
 
 .main {
   padding: 10px;
+  width: 100%;
 }
 
 .SmartJPG {
@@ -354,7 +381,6 @@ svg:hover {
 
 .slogan-item {
   display: inline-block;
-  color: white;
   font-size: 30px;
   font-weight: 700;
   margin-top: 10px;
@@ -398,9 +424,8 @@ svg:hover {
 }
 
 footer {
-  position: relative;
+  width: 100%;
   font-size: 0.875rem;
-  outline: none !important;
 }
 
 .copyright {
@@ -426,7 +451,6 @@ footer {
 }
 
 .about-us {
-  color: white;
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -506,7 +530,6 @@ footer {
 
 .about-link {
   text-decoration: none;
-  color: white !important;
   margin: 10px;
 }
 
@@ -538,7 +561,7 @@ footer {
   font-size: 40px;
   font-weight: 800;
   margin-bottom: 10px;
-  color: white;
+  display: block;
 }
 
 .file-name-input {
@@ -547,13 +570,6 @@ footer {
   padding: 5px 15px;
   border-radius: 40px;
   border: 1px solid grey;
-}
-
-.Chat,
-.Image {
-  width: 95%;
-  height: 40vh;
-  transition: all 0.5s ease;
 }
 
 .SignPdf {
@@ -607,6 +623,10 @@ footer {
   background-color: white;
 }
 
+.ai-image {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 @media screen and (min-width: 991px) {
   .theme-container:hover > .theme-text {
     max-height: 200px;
@@ -652,6 +672,9 @@ footer {
   }
   .dropdown-item.sign {
     display: none;
+  }
+  .input-container {
+    width: 100% !important;
   }
 }
 

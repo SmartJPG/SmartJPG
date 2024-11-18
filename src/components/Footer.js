@@ -7,41 +7,13 @@ const Footer = () => (
   <footer>
     <div
       style={{
-        position: "fixed",
-        bottom: "0px",
-        left: "50%",
-        transform: "translateX(-50%)",
         fontWeight: "600",
-        width: "90%",
+        width: "100%",
         color: "white",
         borderTop: "1px solid rgba(255, 255, 255, 0.2)",
         maxWidth: "1400px",
       }}
     >
-      {/* <div className="info-box row">
-        <div className="col-4">
-          <Link to="/about" style={{ color: "white", textDecoration: "none" }}>
-            About
-          </Link>
-        </div>
-        <div className="col-4">
-          <Link
-            to="/privacy-policy"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Privacy Policy
-          </Link>
-        </div>
-        <div className="col-4">
-          <Link
-            to="/terms-of-service"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Terms of Service
-          </Link>
-        </div>
-      </div> */}
-
       <div style={{ marginTop: "10px" }}>
         <a className="about-link" href="/about">
           About Us

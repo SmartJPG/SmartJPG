@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 const RemoveBg = () => {
   return (
-    <div>
+    <div className="RM">
       <Helmet>
         <title>
           Remove Background from Images - Quick and Easy Tool | SmartJPG
