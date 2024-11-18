@@ -8,6 +8,7 @@ import html2canvas from "html2canvas";
 // import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 // import { GlobalWorkerOptions } from "pdfjs-dist";
 import { pdfjs } from "react-pdf";
+import { Helmet } from "react-helmet";
 
 // GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 // import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -146,6 +147,13 @@ const SignPdf = () => {
 
   return (
     <div className="SignPdf">
+      <Helmet>
+        <title>Easy Sign PDF | SmartJPG</title>
+        <meta
+          name="description"
+          content="Sign PDF online for free. Upload a PDF file, sign it, and download the signed PDF. No registration required."
+        />
+      </Helmet>
       <div className="row col-12">
         <h2 style={{ marginBottom: "20px" }}>Sign PDF</h2>
 
