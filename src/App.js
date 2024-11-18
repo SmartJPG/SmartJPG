@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Pdf from "./components/Pdf";
+import SignPdf from "./components/SignPdf";
 import Png from "./components/Png";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/pdf" element={<Pdf />} />
+          <Route path="/sign-pdf" element={<SignPdf />} />
           <Route path="/png" element={<Png />} />
           <Route path="/ai-image" element={<ImageGenerator />} />
           <Route path="/remove-bg" element={<RemoveBg />} />
