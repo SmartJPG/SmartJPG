@@ -10,7 +10,7 @@ import html2canvas from "html2canvas";
 import { pdfjs } from "react-pdf";
 
 // GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
-import "@react-pdf-viewer/core/lib/styles/index.css";
+// import "@react-pdf-viewer/core/lib/styles/index.css";
 // pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.worker.min.js`;
 
