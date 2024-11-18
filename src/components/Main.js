@@ -572,7 +572,7 @@ const Main = ({ page }) => {
           <Logo />
 
           {page === "ai-image" || page === "chat" ? (
-            <h2 className="ai-text">{displayText}</h2>
+            <h2 className="ai-text slogan-item">{displayText}</h2>
           ) : (
             <Slogan />
           )}
@@ -585,7 +585,6 @@ const Main = ({ page }) => {
           onClick={pdfFiles.length < 1 ? handlePdfContainerClick : null}
           style={{
             position: "relative",
-            maxWidth: "100%",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "white",
@@ -595,6 +594,7 @@ const Main = ({ page }) => {
             zIndex: "5",
             cursor: "pointer",
             border: "2px dashed grey",
+            margin: "auto",
           }}
         >
           <input
@@ -698,7 +698,7 @@ const Main = ({ page }) => {
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           style={{
-            maxWidth: "100%",
+            width: "50%",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "white",
@@ -708,6 +708,7 @@ const Main = ({ page }) => {
             zIndex: "5",
             cursor: "pointer",
             border: "2px dashed grey",
+            margin: "auto",
           }}
         >
           <input
@@ -801,7 +802,7 @@ const Main = ({ page }) => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           style={{
-            maxWidth: "100%",
+            width: "50%",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "white",
@@ -811,6 +812,7 @@ const Main = ({ page }) => {
             zIndex: "5",
             cursor: "pointer",
             border: "2px dashed grey",
+            margin: "auto",
           }}
         >
           <input
@@ -905,7 +907,7 @@ const Main = ({ page }) => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           style={{
-            maxWidth: "100%",
+            width: "50%",
             flexDirection: "column",
             alignItems: "center",
             backgroundColor: "white",
@@ -915,6 +917,7 @@ const Main = ({ page }) => {
             zIndex: "5",
             cursor: "pointer",
             border: "2px dashed grey",
+            margin: "auto",
           }}
         >
           <input
@@ -1006,8 +1009,9 @@ const Main = ({ page }) => {
         <div
           className="input-container ai-image"
           style={{
-            maxWidth: "60%",
+            width: "50%",
             flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
             backgroundColor: "white",
             borderRadius: "20px",

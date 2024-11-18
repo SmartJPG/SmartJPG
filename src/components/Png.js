@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 const Png = () => {
   return (
-    <div>
+    <div className="PNG">
       <Helmet>
         <title>
           Convert images to PNG - High-Quality Image Conversion | SmartJPG

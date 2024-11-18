@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 const Pdf = () => {
   return (
-    <div>
+    <div className="PDF">
       <Helmet>
         <title>Merge PDFs - Fast and Easy PDF Creation | SmartJPG</title>
         <meta
