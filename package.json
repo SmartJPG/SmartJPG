@@ -62,7 +62,7 @@
     "npm-force-resolutions": "^0.0.10"
   },
   "resolutions": {
-    "pdfjs-dist": "^2.16.105"
+    "pdfjs-dist": "^2.12.313"
   },
   "browser": {
     "fs": false,
