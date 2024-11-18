@@ -33,23 +33,6 @@ const Header = () => {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-             {/* <li className="nav-item download">
-              <a
-                href="https://github.com/SmartJPG/SmartJPG-Desktop/releases/download/Pre-production/SmartJPG-1.0.0-arm64.dmg"
-                download
-                className="swap download nav-link"
-              >
-                Download
-              </a>
-            </li>  */}
-            {/* <li className="nav-item">
-              <Link
-                to="/chat"
-                className={`swap ${page === "/chat" ? "current" : ""} nav-link`}
-              >
-                AI Chatbot
-              </Link>
-            </li> */}
             <li className="nav-item">
               <Link
                 to="/"
@@ -58,32 +41,83 @@ const Header = () => {
                 To JPG
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/png"
-                className={`swap ${page === "/png" ? "current" : ""} nav-link`}
+
+            {/* Dropdown for PNG tasks */}
+            <li className="nav-item dropdown">
+              <a
+                className={`nav-link dropdown-toggle ${
+                  ["/png", "/remove-bg"].includes(page) ? "current" : ""
+                }`}
+                href="#"
+                id="pngDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                To PNG
-              </Link>
+                PNG Tasks
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="pngDropdown">
+                <li>
+                  <Link
+                    to="/png"
+                    className={`dropdown-item ${
+                      page === "/png" ? "current" : ""
+                    }`}
+                  >
+                    To PNG
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/remove-bg"
+                    className={`dropdown-item ${
+                      page === "/remove-bg" ? "current" : ""
+                    }`}
+                  >
+                    Remove Bg
+                  </Link>
+                </li>
+              </ul>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/remove-bg"
-                className={`swap ${
-                  page === "/remove-bg" ? "current" : ""
-                } nav-link`}
+
+            {/* Dropdown for PDF tasks */}
+            <li className="nav-item dropdown">
+              <a
+                className={`nav-link dropdown-toggle ${
+                  ["/pdf", "/sign-pdf"].includes(page) ? "current" : ""
+                }`}
+                href="#"
+                id="pdfDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                Remove Bg
-              </Link>
+                PDF Tasks
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="pdfDropdown">
+                <li>
+                  <Link
+                    to="/pdf"
+                    className={`dropdown-item ${
+                      page === "/pdf" ? "current" : ""
+                    }`}
+                  >
+                    Merge PDFs
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/sign-pdf"
+                    className={`dropdown-item sign ${
+                      page === "/sign-pdf" ? "current" : ""
+                    }`}
+                  >
+                    Sign PDF
+                  </Link>
+                </li>
+              </ul>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/pdf"
-                className={`swap ${page === "/pdf" ? "current" : ""} nav-link`}
-              >
-                Merge PDFs
-              </Link>
-            </li>
+
             <li className="nav-item">
               <Link
                 to="/ai-image"

@@ -63,8 +63,23 @@ p {
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
   font-family: "Ubuntu", sans-serif;
+  width: 95%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.nav-link {
+  text-align: center !important;
+}
+
+.dropdown-menu {
+  z-index: 4000 !important;
+  text-align: center !important;
+}
+
+.dropdown-item {
+  text-align: center !important;
 }
 
 .Theme {
@@ -86,6 +101,13 @@ p {
 
 .theme-container {
   height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container {
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -144,7 +166,6 @@ p {
 
 .main {
   padding: 10px;
-  height: 100%;
 }
 
 .SmartJPG {
@@ -153,6 +174,7 @@ p {
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 800;
+  transition: all 0.3s ease;
 }
 
 h3 {
@@ -205,6 +227,29 @@ h3 {
   z-index: 5;
   margin: 0px;
   text-align: center;
+}
+
+.swap.save,
+.swap.clear {
+  margin: 5px;
+  margin-top: 20px;
+}
+
+.swap.download-pdf {
+  background-color: rgb(28, 160, 28);
+  color: white;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+  width: 80%;
+}
+
+.resize {
+  width: 100%;
+  height: 100%;
+}
+
+.resize-container {
+  margin-top: 20px;
 }
 
 .nav-item {
@@ -511,6 +556,44 @@ footer {
   transition: all 0.5s ease;
 }
 
+.SignPdf {
+  margin-top: 20px;
+  z-index: 2000;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  transition: all 0.5s ease;
+}
+
+.react-pdf__Page__canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.react-pdf__Page {
+  background-color: transparent !important;
+}
+
+.row {
+  width: 100% !important;
+  margin: 0px !important;
+}
+
+.col-12,
+.col-6 {
+  padding: 0px !important;
+  width: 100%;
+}
+
+.signature-container {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  padding: 15px;
+  background-color: white;
+}
+
 @media screen and (min-width: 991px) {
   .theme-container:hover > .theme-text {
     max-height: 200px;
@@ -553,6 +636,9 @@ footer {
   }
   .input-container.ai-image {
     max-width: 100% !important;
+  }
+  .dropdown-item.sign {
+    display: none;
   }
 }
 
