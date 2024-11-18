@@ -4,18 +4,23 @@ import SignaturePad from "react-signature-canvas";
 import Draggable from "react-draggable";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import "react-pdf/dist/esm/Page/TextLayer.css";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+// import "react-pdf/dist/esm/Page/TextLayer.css";
+// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+// import { GlobalWorkerOptions } from "pdfjs-dist";
+import { pdfjs } from "react-pdf";
 
-//123
+// GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+// pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.worker.min.js`;
 
 const SignPdf = () => {
   const [file, setFile] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [signature, setSignature] = useState(null);
   const [signatureSize, setSignatureSize] = useState({
-    width: 150,
-    height: 80,
+    width: 120,
+    height: 50,
   });
   const [pdfWidth, setPdfWidth] = useState(0);
   const sigPadRef = useRef(null);
@@ -36,7 +41,13 @@ const SignPdf = () => {
   }, []);
 
   const onFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const uploadedFile = e.target.files[0];
+    if (uploadedFile && uploadedFile.type === "application/pdf") {
+      setFile(uploadedFile);
+    } else {
+      alert("Please upload a valid PDF file.");
+      setFile(null);
+    }
   };
 
   const onDocumentLoadSuccess = ({ numPages }) => {
@@ -67,6 +78,35 @@ const SignPdf = () => {
     }));
   };
 
+  // const downloadSignedPdf = async () => {
+  //   if (!pdfContainerRef.current) {
+  //     alert("No signed PDF to download.");
+  //     return;
+  //   }
+
+  //   const container = pdfContainerRef.current;
+
+  //   const canvas = await html2canvas(container, {
+  //     backgroundColor: null,
+  //     scale: 2,
+  //     useCORS: true,
+  //   });
+
+  //   const imgData = canvas.toDataURL("image/png");
+
+  //   const pdfWidth = 210;
+  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  //   const pdf = new jsPDF({
+  //     orientation: "portrait",
+  //     unit: "mm",
+  //     format: [pdfWidth, pdfHeight],
+  //   });
+
+  //   pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+  //   pdf.save("signed.pdf");
+  // };
+
   const downloadSignedPdf = async () => {
     if (!pdfContainerRef.current) {
       alert("No signed PDF to download.");
@@ -74,25 +114,33 @@ const SignPdf = () => {
     }
 
     const container = pdfContainerRef.current;
+    const rect = container.getBoundingClientRect();
 
     const canvas = await html2canvas(container, {
       backgroundColor: null,
-      scale: 2,
+      scale: 3,
       useCORS: true,
+      width: rect.width,
+      height: rect.height,
     });
 
-    const imgData = canvas.toDataURL("image/png");
+    const imgData = canvas.toDataURL("image/png", 1.0);
 
+    const contentWidth = canvas.width;
+    const contentHeight = canvas.height;
     const pdfWidth = 210;
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const pdfHeight = (contentHeight * pdfWidth) / contentWidth;
+
+    const orientation = contentWidth > contentHeight ? "landscape" : "portrait";
 
     const pdf = new jsPDF({
-      orientation: "portrait",
+      orientation,
       unit: "mm",
       format: [pdfWidth, pdfHeight],
     });
 
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    // pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight, undefined, "FAST");
     pdf.save("signed.pdf");
   };
 
@@ -144,16 +192,34 @@ const SignPdf = () => {
               ref={pdfContainerRef}
               style={{ position: "relative", width: "100%" }}
             >
-              <Document
-                file={file}
+              {/* <Document
+                file={file ? URL.createObjectURL(file) : null}
                 onLoadSuccess={onDocumentLoadSuccess}
-                style={{ position: "relative", width: "100%" }}
+                onLoadError={(error) =>
+                  console.error("Error loading PDF:", error)
+                }
               >
                 {Array.from(new Array(numPages), (el, index) => (
                   <Page key={index} pageNumber={index + 1} width={pdfWidth} />
                 ))}
+              </Document> */}
+              <Document
+                file={file ? URL.createObjectURL(file) : null}
+                onLoadSuccess={onDocumentLoadSuccess}
+                onLoadError={(error) =>
+                  console.error("Error loading PDF:", error)
+                }
+                options={{ cMapUrl: "cmaps/", cMapPacked: true }}
+              >
+                {Array.from(new Array(numPages), (el, index) => (
+                  <Page
+                    key={index}
+                    pageNumber={index + 1}
+                    width={pdfWidth}
+                    scale={1.0}
+                  />
+                ))}
               </Document>
-
               {signature && (
                 <Draggable>
                   <div
