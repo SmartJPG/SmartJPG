@@ -12,6 +12,7 @@ const Footer = () => (
         color: "white",
         borderTop: "1px solid rgba(255, 255, 255, 0.2)",
         maxWidth: "1400px",
+        margin: "0 auto",
       }}
     >
       <div style={{ marginTop: "10px" }}>
