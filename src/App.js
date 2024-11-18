@@ -12,12 +12,16 @@ import Chat from "./components/Chat";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
-import { pdfjs } from "react-pdf";
+// import { pdfjs } from "react-pdf";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//   "pdfjs-dist/build/pdf.worker.min.mjs",
+//   import.meta.url
+// ).toString();
+
+import { GlobalWorkerOptions } from "pdfjs-dist";
+
+GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const App = () => {
   const theme = localStorage.getItem("theme");
