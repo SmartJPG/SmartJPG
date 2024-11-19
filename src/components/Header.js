@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Header = () => {
   const location = useLocation();
   const page = location.pathname;
-  const theme = localStorage.getItem("theme");
 
   useEffect(() => {
     localStorage.setItem("page", page);
