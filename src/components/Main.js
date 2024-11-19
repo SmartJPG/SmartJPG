@@ -4,7 +4,6 @@ import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoadingBar from "react-top-loading-bar";
 import { saveAs } from "file-saver";
-import Logo from "./Logo";
 import Slogan from "./Slogan";
 import PdfComp from "./PdfComp";
 

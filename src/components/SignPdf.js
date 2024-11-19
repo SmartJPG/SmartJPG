@@ -10,6 +10,7 @@ import html2canvas from "html2canvas";
 import { pdfjs } from "react-pdf";
 import { Helmet } from "react-helmet";
 import Description from "./Description";
+import LoadingBar from "react-top-loading-bar"; // Import the loading bar
 // GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 // import "@react-pdf-viewer/core/lib/styles/index.css";
 // pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
@@ -28,6 +29,8 @@ const SignPdf = () => {
   const col6Ref = useRef(null);
 
   const pdfContainerRef = useRef(null);
+  const loadingBarRef = useRef(null);
+  const [loadingColor, setLoadingColor] = useState("#f11946");
 
   useEffect(() => {
     const updatePdfWidth = () => {
@@ -114,39 +117,68 @@ const SignPdf = () => {
       return;
     }
 
+    setLoadingColor(getRandomColor());
+    loadingBarRef.current.continuousStart();
+
     const container = pdfContainerRef.current;
     const rect = container.getBoundingClientRect();
 
-    const canvas = await html2canvas(container, {
-      backgroundColor: null,
-      scale: 3,
-      useCORS: true,
-      width: rect.width,
-      height: rect.height,
-    });
+    try {
+      const canvas = await html2canvas(container, {
+        backgroundColor: null,
+        scale: 4,
+        useCORS: true,
+        width: rect.width,
+        height: rect.height,
+      });
 
-    const imgData = canvas.toDataURL("image/png", 1.0);
+      const imgData = canvas.toDataURL("image/png", 1.0);
 
-    const contentWidth = canvas.width;
-    const contentHeight = canvas.height;
-    const pdfWidth = 210;
-    const pdfHeight = (contentHeight * pdfWidth) / contentWidth;
+      const contentWidth = canvas.width;
+      const contentHeight = canvas.height;
+      const pdfWidth = 210;
+      const pdfHeight = (contentHeight * pdfWidth) / contentWidth;
 
-    const orientation = contentWidth > contentHeight ? "landscape" : "portrait";
+      const orientation =
+        contentWidth > contentHeight ? "landscape" : "portrait";
 
-    const pdf = new jsPDF({
-      orientation,
-      unit: "mm",
-      format: [pdfWidth, pdfHeight],
-    });
+      const pdf = new jsPDF({
+        orientation,
+        unit: "mm",
+        format: [pdfWidth, pdfHeight],
+      });
 
-    // pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight, undefined, "FAST");
-    pdf.save("signed.pdf");
+      pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        pdfWidth,
+        pdfHeight,
+        undefined,
+        "SLOW"
+      );
+      pdf.save("signed.pdf");
+
+      loadingBarRef.current.complete();
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      loadingBarRef.current.complete();
+    }
+  };
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   };
 
   return (
     <div style={{ marginBottom: "50px" }}>
+      <LoadingBar color={loadingColor} ref={loadingBarRef} height={6} />
       <div className="SignPdf">
         <Helmet>
           <title>Easy Sign PDF | SmartJPG</title>
