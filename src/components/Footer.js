@@ -15,7 +15,13 @@ const Footer = () => (
         margin: "0 auto",
       }}
     >
-      <div style={{ marginTop: "10px" }}>
+      <img
+        src="SmartJPG.png"
+        alt="SmartJPG"
+        className="logo"
+        style={{ width: "80px", height: "80px", margin: "2s0px" }}
+      />
+      <div>
         <a className="about-link" href="/about">
           About Us
         </a>

@@ -567,7 +567,14 @@ const Main = ({ page }) => {
 
       {pdfFiles.length < 1 ? (
         <>
-          <Logo />
+          {/* <Logo /> */}
+
+          <img
+            src="SmartJPG.png"
+            alt="SmartJPG"
+            className="logo"
+            style={{ width: "80px", height: "80px" }}
+          />
 
           {page === "ai-image" || page === "chat" ? (
             <h2 className="ai-text slogan-item">{displayText}</h2>
