@@ -19,7 +19,7 @@ const Footer = () => (
         src="SmartJPG.png"
         alt="SmartJPG"
         className="logo"
-        style={{ width: "80px", height: "80px", margin: "2s0px" }}
+        style={{ width: "80px", height: "80px", margin: "20px" }}
       />
       <div>
         <a className="about-link" href="/about">
