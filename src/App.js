@@ -59,7 +59,6 @@ const App = () => {
           <Route path="/remove-bg" element={<RemoveBg />} />
           <Route path="/chat" element={<Chat />} />
         </Routes>
-
         <Footer />
       </div>
     </Router>

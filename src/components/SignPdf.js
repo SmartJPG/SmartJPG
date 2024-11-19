@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, memo } from "react";
 import { Document, Page } from "react-pdf";
 import SignaturePad from "react-signature-canvas";
 import Draggable from "react-draggable";
@@ -9,7 +9,7 @@ import html2canvas from "html2canvas";
 // import { GlobalWorkerOptions } from "pdfjs-dist";
 import { pdfjs } from "react-pdf";
 import { Helmet } from "react-helmet";
-
+import Description from "./Description";
 // GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 // import "@react-pdf-viewer/core/lib/styles/index.css";
 // pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
@@ -146,61 +146,62 @@ const SignPdf = () => {
   };
 
   return (
-    <div className="SignPdf">
-      <Helmet>
-        <title>Easy Sign PDF | SmartJPG</title>
-        <meta
-          name="description"
-          content="Sign PDF online for free. Upload a PDF file, sign it, and download the signed PDF. No registration required."
-        />
-      </Helmet>
-      <div className="row col-12">
-        <h2 style={{ marginBottom: "20px" }}>Sign PDF</h2>
+    <div style={{ marginBottom: "50px" }}>
+      <div className="SignPdf">
+        <Helmet>
+          <title>Easy Sign PDF | SmartJPG</title>
+          <meta
+            name="description"
+            content="Sign PDF online for free. Upload a PDF file, sign it, and download the signed PDF. No registration required."
+          />
+        </Helmet>
+        <div className="row col-12">
+          <h2 style={{ marginBottom: "20px" }}>Sign PDF</h2>
 
-        <div className="col-6" ref={col6Ref}>
-          {!file && (
-            <div
-              className="input-container"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "2px dashed #ccc",
-                padding: "20px",
-                cursor: "pointer",
-                borderRadius: "20px",
-              }}
-              onClick={() => document.getElementById("fileUpload").click()}
-            >
-              <div>
-                <img
-                  src="sign.gif"
-                  alt="Loading"
-                  style={{ width: "100px", height: "80px" }}
+          <div className="col-6" ref={col6Ref}>
+            {!file && (
+              <div
+                className="input-container"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: "2px dashed #ccc",
+                  padding: "20px",
+                  cursor: "pointer",
+                  borderRadius: "20px",
+                }}
+                onClick={() => document.getElementById("fileUpload").click()}
+              >
+                <div>
+                  <img
+                    src="sign.gif"
+                    alt="Loading"
+                    style={{ width: "100px", height: "80px" }}
+                  />
+                  <p className="drag-and-drop-text">
+                    Click to upload a PDF here 👋🏻
+                  </p>
+                  <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
+                    Supported Format: PDF
+                  </h3>
+                </div>
+                <input
+                  id="fileUpload"
+                  type="file"
+                  accept="application/pdf"
+                  onChange={onFileChange}
+                  style={{ display: "none" }}
                 />
-                <p className="drag-and-drop-text">
-                  Click to upload a PDF here 👋🏻
-                </p>
-                <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
-                  Supported Format: PDF
-                </h3>
               </div>
-              <input
-                id="fileUpload"
-                type="file"
-                accept="application/pdf"
-                onChange={onFileChange}
-                style={{ display: "none" }}
-              />
-            </div>
-          )}
+            )}
 
-          {file && (
-            <div
-              ref={pdfContainerRef}
-              style={{ position: "relative", width: "100%" }}
-            >
-              {/* <Document
+            {file && (
+              <div
+                ref={pdfContainerRef}
+                style={{ position: "relative", width: "100%" }}
+              >
+                {/* <Document
                 file={file ? URL.createObjectURL(file) : null}
                 onLoadSuccess={onDocumentLoadSuccess}
                 onLoadError={(error) =>
@@ -211,117 +212,119 @@ const SignPdf = () => {
                   <Page key={index} pageNumber={index + 1} width={pdfWidth} />
                 ))}
               </Document> */}
-              <Document
-                file={file ? URL.createObjectURL(file) : null}
-                onLoadSuccess={onDocumentLoadSuccess}
-                onLoadError={(error) =>
-                  console.error("Error loading PDF:", error)
-                }
-                options={{ cMapUrl: "cmaps/", cMapPacked: true }}
-              >
-                {Array.from(new Array(numPages), (el, index) => (
-                  <Page
-                    key={index}
-                    pageNumber={index + 1}
-                    width={pdfWidth}
-                    scale={1.0}
-                  />
-                ))}
-              </Document>
-              {signature && (
-                <Draggable>
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      zIndex: 1000,
-                      width: signatureSize.width,
-                      height: signatureSize.height,
-                      cursor: "move",
-                    }}
-                  >
-                    <img
-                      src={signature}
-                      alt="Signature"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                      }}
+                <Document
+                  file={file ? URL.createObjectURL(file) : null}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                  onLoadError={(error) =>
+                    console.error("Error loading PDF:", error)
+                  }
+                  options={{ cMapUrl: "cmaps/", cMapPacked: true }}
+                >
+                  {Array.from(new Array(numPages), (el, index) => (
+                    <Page
+                      pageNumber={index + 1}
+                      width={pdfWidth}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
                     />
-                  </div>
-                </Draggable>
+                  ))}
+                </Document>
+                {signature && (
+                  <Draggable>
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        zIndex: 1000,
+                        width: signatureSize.width,
+                        height: signatureSize.height,
+                        cursor: "move",
+                      }}
+                    >
+                      <img
+                        src={signature}
+                        alt="Signature"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      />
+                    </div>
+                  </Draggable>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="col-6">
+            <div className="signature-container">
+              <p style={{ textAlign: "left" }}>Your Signature:</p>
+              <SignaturePad
+                ref={sigPadRef}
+                canvasProps={{
+                  width: 300,
+                  height: 100,
+                  style: {
+                    borderBottom: "1px solid #000",
+                  },
+                }}
+              />
+
+              <br />
+
+              <div className="d-flex">
+                <button className="swap save" onClick={saveSignature}>
+                  Save Signature
+                </button>
+                <button className="swap clear" onClick={clearSignature}>
+                  Clear Signature
+                </button>
+              </div>
+
+              <div className="resize-container">
+                <label>
+                  Width:
+                  <input
+                    className="resize"
+                    type="range"
+                    min="50"
+                    max="300"
+                    step="10"
+                    value={signatureSize.width}
+                    onChange={handleWidthResize}
+                  />
+                </label>
+                <br />
+                <label>
+                  Height:
+                  <input
+                    className="resize"
+                    type="range"
+                    min="50"
+                    max="300"
+                    step="10"
+                    value={signatureSize.height}
+                    onChange={handleHeightResize}
+                  />
+                </label>
+              </div>
+              {file && (
+                <>
+                  <br />
+                  <button
+                    className="swap download-pdf"
+                    onClick={downloadSignedPdf}
+                  >
+                    Download Signed PDF
+                  </button>
+                </>
               )}
             </div>
-          )}
-        </div>
-
-        <div className="col-6">
-          <div className="signature-container">
-            <p style={{ textAlign: "left" }}>Your Signature:</p>
-            <SignaturePad
-              ref={sigPadRef}
-              canvasProps={{
-                width: 300,
-                height: 100,
-                style: {
-                  borderBottom: "1px solid #000",
-                },
-              }}
-            />
-
-            <br />
-
-            <div className="d-flex">
-              <button className="swap save" onClick={saveSignature}>
-                Save Signature
-              </button>
-              <button className="swap clear" onClick={clearSignature}>
-                Clear Signature
-              </button>
-            </div>
-
-            <div className="resize-container">
-              <label>
-                Width:
-                <input
-                  className="resize"
-                  type="range"
-                  min="50"
-                  max="300"
-                  step="10"
-                  value={signatureSize.width}
-                  onChange={handleWidthResize}
-                />
-              </label>
-              <br />
-              <label>
-                Height:
-                <input
-                  className="resize"
-                  type="range"
-                  min="50"
-                  max="300"
-                  step="10"
-                  value={signatureSize.height}
-                  onChange={handleHeightResize}
-                />
-              </label>
-            </div>
-            {file && (
-              <>
-                <br />
-                <button
-                  className="swap download-pdf"
-                  onClick={downloadSignedPdf}
-                >
-                  Download Signed PDF
-                </button>
-              </>
-            )}
           </div>
         </div>
       </div>
+      <Description />
     </div>
   );
 };

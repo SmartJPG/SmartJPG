@@ -10,7 +10,7 @@ const Footer = () => (
         fontWeight: "600",
         width: "100%",
         color: "white",
-        borderTop: "1px solid rgba(255, 255, 255, 0.2)",
+        borderTop: "1px solid grey",
         maxWidth: "1400px",
         margin: "0 auto",
       }}
