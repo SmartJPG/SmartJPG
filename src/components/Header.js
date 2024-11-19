@@ -12,6 +12,19 @@ const Header = () => {
     localStorage.setItem("theme", "pro");
   }, [page]);
 
+  const handleDropdownClose = (e) => {
+    // Close the dropdown manually
+    const dropdown = e.target.closest(".dropdown");
+    if (dropdown) {
+      const toggle = dropdown.querySelector(".dropdown-toggle");
+      const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+      if (toggle && dropdownMenu) {
+        dropdownMenu.classList.remove("show");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
@@ -61,6 +74,7 @@ const Header = () => {
                     className={`dropdown-item ${
                       page === "/png" ? "current" : ""
                     }`}
+                    onClick={handleDropdownClose}
                   >
                     To PNG
                   </Link>
@@ -71,6 +85,7 @@ const Header = () => {
                     className={`dropdown-item ${
                       page === "/remove-bg" ? "current" : ""
                     }`}
+                    onClick={handleDropdownClose}
                   >
                     Remove Bg
                   </Link>
@@ -83,7 +98,7 @@ const Header = () => {
                 className={`nav-link dropdown-toggle ${
                   ["/png", "/remove-bg"].includes(page) ? "current" : ""
                 }`}
-                id="pngDropdown"
+                id="pdfDropdown"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -96,6 +111,7 @@ const Header = () => {
                     className={`dropdown-item ${
                       page === "/pdf" ? "current" : ""
                     }`}
+                    onClick={handleDropdownClose}
                   >
                     Merge PDFs
                   </Link>
@@ -106,6 +122,7 @@ const Header = () => {
                     className={`dropdown-item sign ${
                       page === "/sign-pdf" ? "current" : ""
                     }`}
+                    onClick={handleDropdownClose}
                   >
                     Sign PDF
                   </Link>
@@ -123,7 +140,7 @@ const Header = () => {
                 AI Image Generator
               </Link>
             </li>
-            <li style={{ margin: "auto", textAlign: "center" }}>
+            <li className="nav-item coffee">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -132,8 +149,8 @@ const Header = () => {
                 <img
                   align="center"
                   src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                  height="50"
-                  width="200"
+                  height="40"
+                  width="170"
                   alt="Donate us"
                   title="Donate us"
                 />
