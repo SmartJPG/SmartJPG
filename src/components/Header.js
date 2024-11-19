@@ -2,21 +2,15 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Theme from "./Theme";
 
 const Header = () => {
   const location = useLocation();
   const page = location.pathname;
-  const theme = localStorage.getItem("theme");
 
   useEffect(() => {
     localStorage.setItem("page", page);
-    if (!theme) {
-      localStorage.setItem("theme", "pro");
-    } else {
-      localStorage.setItem("theme", "pro");
-    }
-  }, [page, theme]);
+    localStorage.setItem("theme", "pro");
+  }, [page]);
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -48,20 +42,18 @@ const Header = () => {
               </Link>
             </li>
 
-            {/* Dropdown for PNG tasks */}
             <li className="nav-item dropdown">
-              <a
+              <button
                 className={`nav-link dropdown-toggle ${
                   ["/png", "/remove-bg"].includes(page) ? "current" : ""
                 }`}
-                href="#"
                 id="pngDropdown"
-                role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                PNG Tasks
-              </a>
+                To PNG
+              </button>
+
               <ul className="dropdown-menu" aria-labelledby="pngDropdown">
                 <li>
                   <Link
@@ -86,20 +78,17 @@ const Header = () => {
               </ul>
             </li>
 
-            {/* Dropdown for PDF tasks */}
             <li className="nav-item dropdown">
-              <a
+              <button
                 className={`nav-link dropdown-toggle ${
-                  ["/pdf", "/sign-pdf"].includes(page) ? "current" : ""
+                  ["/png", "/remove-bg"].includes(page) ? "current" : ""
                 }`}
-                href="#"
-                id="pdfDropdown"
-                role="button"
+                id="pngDropdown"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                PDF Tasks
-              </a>
+                PDF Tools
+              </button>
               <ul className="dropdown-menu" aria-labelledby="pdfDropdown">
                 <li>
                   <Link
@@ -134,9 +123,7 @@ const Header = () => {
                 AI Image Generator
               </Link>
             </li>
-            {/* <Theme /> */}
-            <li
-            style={{ margin: "auto", textAlign: "center" }}>
+            <li style={{ margin: "auto", textAlign: "center" }}>
               <a
                 target="_blank"
                 rel="noopener noreferrer"

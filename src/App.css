@@ -95,6 +95,7 @@ p {
 
 .nav-link {
   text-align: center !important;
+  margin: auto;
 }
 
 .dropdown-menu {

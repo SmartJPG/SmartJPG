@@ -58,7 +58,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
     "ajv": "^7.2.4",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
     "npm-force-resolutions": "^0.0.10"
   },
   "resolutions": {
@@ -70,5 +75,10 @@
     "http": false,
     "https": false,
     "url": false
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^axios$": "axios/dist/node/axios.cjs"
+    }
   }
 }
