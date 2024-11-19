@@ -135,6 +135,23 @@ const Header = () => {
               </Link>
             </li>
             {/* <Theme /> */}
+            <li
+            style={{ margin: "auto", textAlign: "center" }}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://buymeacoffee.com/leohoncana1"
+              >
+                <img
+                  align="center"
+                  src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                  height="50"
+                  width="200"
+                  alt="Donate us"
+                  title="Donate us"
+                />
+              </a>
+            </li>
           </ul>
         </div>
       </div>

@@ -43,12 +43,12 @@ h1,
 h2,
 h3,
 h4,
-p,
 span,
 a {
   position: relative;
   z-index: 4;
   color: rgb(34, 34, 34);
+  font-weight: bold !important;
 }
 
 a {
@@ -58,6 +58,7 @@ a {
 
 p {
   margin: 0px !important;
+  color: rgb(77, 77, 77) !important;
 }
 
 .navbar {
