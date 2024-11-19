@@ -1,6 +1,7 @@
 import React from "react";
 import Main from "./Main";
 import { Helmet } from "react-helmet";
+import Description from "./Description";
 
 const Home = () => {
   return (
@@ -15,6 +16,8 @@ const Home = () => {
         />
       </Helmet>
       <Main page="jpg" />
+
+      <Description />
     </div>
   );
 };

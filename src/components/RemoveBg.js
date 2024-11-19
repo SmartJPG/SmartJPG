@@ -1,6 +1,7 @@
 import React from "react";
 import Main from "./Main";
 import { Helmet } from "react-helmet";
+import Description from "./Description";
 
 const RemoveBg = () => {
   return (
@@ -15,6 +16,8 @@ const RemoveBg = () => {
         />
       </Helmet>
       <Main page="RM" />
+
+      <Description />
     </div>
   );
 };

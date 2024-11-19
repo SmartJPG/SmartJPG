@@ -1,6 +1,7 @@
 import React from "react";
 import Main from "./Main";
 import { Helmet } from "react-helmet";
+import Description from "./Description";
 
 const Pdf = () => {
   return (
@@ -13,6 +14,8 @@ const Pdf = () => {
         />
       </Helmet>
       <Main page="pdf" />
+
+      <Description />
     </div>
   );
 };
