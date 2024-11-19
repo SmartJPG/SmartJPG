@@ -4,7 +4,6 @@ import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoadingBar from "react-top-loading-bar";
 import { saveAs } from "file-saver";
-import Donate from "./Donate";
 import Logo from "./Logo";
 import Slogan from "./Slogan";
 import { motion } from "framer-motion";
@@ -1070,8 +1069,6 @@ const Main = ({ page }) => {
           />
         </div>
       )}
-
-      {showDonate && <Donate counting={counting} />}
     </div>
   );
 };
