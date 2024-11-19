@@ -6,7 +6,6 @@ import LoadingBar from "react-top-loading-bar";
 import { saveAs } from "file-saver";
 import Logo from "./Logo";
 import Slogan from "./Slogan";
-import { motion } from "framer-motion";
 import PdfComp from "./PdfComp";
 
 const { REACT_APP_API_URL } = process.env;
@@ -616,7 +615,7 @@ const Main = ({ page }) => {
                 placeholder="File name: SmartJPG-merged.pdf"
                 onChange={(e) => setFileName(e.target.value)}
               />
-              <button className="swap" onClick={handlePdfMerge}>
+              <button className="swap download-pdf" onClick={handlePdfMerge}>
                 Merge PDFs
               </button>
             </>
