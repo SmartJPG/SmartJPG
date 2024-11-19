@@ -69,15 +69,15 @@ const contentMapping = {
     ],
     description: {
       title: "Why convert PNG images?",
-      content: `PNG is a widely used image format that supports lossless compression. Converting it to other formats can reduce size or improve compatibility.`,
+      content: `PNG images are widely known for their lossless compression and ability to maintain transparency, making them ideal for web graphics and logos. However, PNG files can be larger in size, which can slow down web pages and limit compatibility with certain platforms. Converting PNG to other formats like JPG helps reduce file size significantly, making images faster to load and more shareable. It's a practical solution for creating lightweight assets for websites, emails, and social media.`,
     },
     process: {
       title: "How we process PNG images?",
-      content: `Our tool uses efficient algorithms to convert PNG images while maintaining transparency and quality.`,
+      content: `We employ advanced conversion methods to transform PNG files into formats like JPG or WebP while preserving their essential qualities, including transparency. Our algorithms ensure minimal loss of detail while achieving a much smaller file size, making the converted images ideal for faster performance and improved accessibility across devices.`,
     },
     whyChooseUs: {
       title: "Why choose us?",
-      content: `High-quality conversions, fast processing, and no hidden fees.`,
+      content: `With our service, you get premium-quality conversions without the premium price tag. Our tools work fast, efficiently, and securely, ensuring that your files are processed without compromise. Best of all, there are no watermarks, no sign-ups, and no delays. Just high-quality output in seconds.`,
     },
   },
   "/pdf": {
@@ -103,15 +103,15 @@ const contentMapping = {
     ],
     description: {
       title: "Why merge PDF files?",
-      content: `Merging PDFs helps in organizing and consolidating related information into a single document.`,
+      content: `DF merging allows you to combine multiple documents into one for improved organization and ease of sharing. Whether you’re compiling receipts, contracts, or multi-page reports, merging PDFs creates a single cohesive document that's easier to store and review. It's a practical solution for professionals and students who need to present their data efficiently.`,
     },
     process: {
       title: "How we merge PDFs?",
-      content: `Our tool uses a fast and secure process to merge PDF files without compromising quality.`,
+      content: `Our PDF merging tool uses a secure and efficient process to combine multiple PDFs while maintaining the quality of each page. Simply upload your files, rearrange them if needed, and let our system handle the rest. Within seconds, your files are combined into a single, professional-looking PDF.`,
     },
     whyChooseUs: {
       title: "Why choose us for PDF merging?",
-      content: `Our tool is free, fast, and secure. No sign-up required!`,
+      content: `We value your time and security. Our tool is designed to be fast, intuitive, and free from unnecessary steps. Unlike other services, we don't require sign-ups or extra installations. Whether it's for work, school, or personal use, you can trust us to handle your PDFs with care and deliver excellent results.`,
     },
   },
   "/remove-bg": {
@@ -137,15 +137,15 @@ const contentMapping = {
     ],
     description: {
       title: "Why remove background?",
-      content: `Removing backgrounds makes images clean, professional, and versatile for use in presentations, marketing, or social media.`,
+      content: `Removing image backgrounds is essential for creating polished, professional visuals. Clean images without backgrounds can be used in marketing materials, e-commerce listings, presentations, and social media content. It’s especially useful for showcasing products or subjects without distractions, ensuring your focus remains on what truly matters.`,
     },
     process: {
       title: "How we remove backgrounds?",
-      content: `Our AI-powered tool detects the subject and removes the background with precision.`,
+      content: `We used AI-powered background removal tool identifies the subject of your image and separates it with remarkable precision. Whether it's a person, product, or object, our algorithm ensures crisp edges and smooth transitions, making the final image ready for use. The entire process is automated, fast, and accurate.`,
     },
     whyChooseUs: {
       title: "Why choose us?",
-      content: `Accurate results, free of charge, and fast processing.`,
+      content: `This background removal tool offers industry-grade precision at no cost. It's quick, simple, and effective for professionals and casual users alike. Forget expensive software or complicated tools—just upload your image, let our AI do the work, and download a stunning result.`,
     },
   },
   "/sign-pdf": {
@@ -171,15 +171,15 @@ const contentMapping = {
     ],
     description: {
       title: "Why sign PDFs digitally?",
-      content: `Digital signatures are fast, secure, and convenient, making them perfect for contracts, agreements, and official documents.`,
+      content: `In today’s fast-paced world, digital signatures are becoming the standard for signing contracts, agreements, and other important documents. Signing PDFs digitally eliminates the need for printing and scanning, saving you time and resources. It’s a secure, legally recognized method to finalize documents with ease, whether you're working from home, in the office, or on the go.`,
     },
     process: {
       title: "How we enable signing?",
-      content: `Our tool lets you upload a PDF, place your signature, and download it securely.`,
+      content: `Our tool simplifies the process of signing PDFs. Upload your document, place your signature using our drag-and-drop feature, and download the signed PDF instantly. All signatures are encrypted and embedded securely into the document to ensure their authenticity.`,
     },
     whyChooseUs: {
       title: "Why choose us?",
-      content: `Secure, user-friendly, and no need for extra software.`,
+      content: `Our PDF signing tool combines simplicity and security. With no software downloads or sign-ups required, you can sign your documents quickly and confidently. Whether it's for personal or professional use, our service guarantees a smooth and secure signing experience.`,
     },
   },
 };
