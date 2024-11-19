@@ -615,7 +615,8 @@ footer {
 }
 
 .signature-container {
-  width: 100%;
+  margin: auto;
+  width: 95%;
   max-width: 100%;
   position: relative;
   padding: 15px;
@@ -670,6 +671,10 @@ footer {
 .step p {
   font-size: 1rem;
   line-height: 1.5;
+}
+
+.react-pdf__Page {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 @media screen and (min-width: 991px) {
