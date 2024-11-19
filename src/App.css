@@ -40,7 +40,8 @@ h2,
 h3,
 h4,
 span,
-a {
+a,
+button {
   position: relative;
   z-index: 4;
   color: rgb(34, 34, 34);
@@ -57,6 +58,10 @@ p {
   color: rgb(77, 77, 77) !important;
 }
 
+.container {
+  max-width: 1400px !important;
+}
+
 .navbar {
   position: absolute;
   top: 10px;
@@ -68,6 +73,11 @@ p {
   padding-right: 20px !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   max-width: 1500px !important;
+  transition: all 0.5s ease;
+}
+
+.navbar:hover {
+  transform: translateY(3px);
 }
 
 .App {
@@ -281,6 +291,11 @@ h3 {
 .nav-item {
   border: none !important;
   margin: 5px;
+}
+
+.coffee {
+  margin: auto;
+  text-align: center;
 }
 
 .download {
