@@ -101,27 +101,12 @@ const Main = ({ page }) => {
   const [fileLoaded, setFileLoaded] = useState(false);
   const [preview, setPreview] = useState(null);
   const [previewLoading, setPreviewLoading] = useState(false);
-  const [showDonate, setShowDonate] = useState(true);
-  const [counting, setCounting] = useState(4);
   const [progress, setProgress] = useState(0);
   const [loadingColor, setLoadingColor] = useState("#f11946");
-  const [check, setCheck] = useState(false);
   const [inputPrompt, setInputPrompt] = useState("");
   const [prompt, setPrompt] = useState("");
   const [loadingImage, setLoadingImage] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
-
-  useEffect(() => {
-    if (counting > 0) {
-      const timer = setTimeout(() => {
-        setCounting((prevCount) => prevCount - 1);
-      }, 1000);
-
-      return () => clearTimeout(timer);
-    } else {
-      setShowDonate(false);
-    }
-  }, [counting]);
 
   useEffect(() => {
     if (file) {
@@ -181,8 +166,6 @@ const Main = ({ page }) => {
 
   const [displayText, setDisplayText] = useState("");
 
-  const [text, setText] = useState("");
-
   useEffect(() => {
     let interval;
     let index = 0;
@@ -195,7 +178,6 @@ const Main = ({ page }) => {
     }
 
     if (targetText) {
-      setText(targetText);
       setDisplayText("");
       interval = setInterval(() => {
         setDisplayText((prevText) => prevText + targetText[index]);
@@ -363,12 +345,6 @@ const Main = ({ page }) => {
 
       saveAs(response.data, "smartjpg-converted-image.jpg");
       ref.current.complete();
-
-      setCheck(true);
-
-      setTimeout(() => {
-        setCheck(false);
-      }, 3000);
     } catch (error) {
       console.error("Image conversion failed:", error);
       alert("Failed to convert the image.");
@@ -456,12 +432,6 @@ const Main = ({ page }) => {
 
       saveAs(response.data, "smartpng-converted-image.png");
       ref.current.complete();
-
-      setCheck(true);
-
-      setTimeout(() => {
-        setCheck(false);
-      }, 3000);
     } catch (error) {
       console.error("PNG conversion failed:", error);
       alert("Failed to convert the image.");
@@ -539,11 +509,6 @@ const Main = ({ page }) => {
       saveAs(response.data, "background-removed-image.png");
 
       ref.current.complete();
-      setCheck(true);
-
-      setTimeout(() => {
-        setCheck(false);
-      }, 3000);
     } catch (error) {
       console.error("Background removal failed:", error);
       alert("Reached the limit of free requests. Please try again later.");

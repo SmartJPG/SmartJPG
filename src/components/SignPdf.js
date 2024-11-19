@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, memo } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Document, Page } from "react-pdf";
 import SignaturePad from "react-signature-canvas";
 import Draggable from "react-draggable";

@@ -4,6 +4,8 @@ import { Document, Page } from "react-pdf";
 const PdfComp = memo(({ pdfFile }) => {
   const [numPages, setNumPages] = useState(null);
 
+  console.log(numPages);
+
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
