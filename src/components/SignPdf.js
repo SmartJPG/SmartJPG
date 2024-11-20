@@ -177,7 +177,7 @@ const SignPdf = () => {
   };
 
   return (
-    <div style={{ marginBottom: "50px" }}>
+    <div style={{ marginBottom: "100px" }}>
       <LoadingBar color={loadingColor} ref={loadingBarRef} height={6} />
       <div className="SignPdf">
         <Helmet>
