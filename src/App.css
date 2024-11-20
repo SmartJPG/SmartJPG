@@ -475,7 +475,7 @@ footer {
   align-items: center;
   padding: 10px;
   height: 100%;
-  margin: 40px auto;
+  margin: 100px auto 40px auto;
 }
 
 .about-smartjpg {
@@ -563,7 +563,7 @@ footer {
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
-  margin: 40px auto;
+  margin: 100px auto 40px auto;
 }
 
 .pdf-file {
