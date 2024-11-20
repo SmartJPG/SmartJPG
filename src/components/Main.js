@@ -60,6 +60,7 @@ const PDF = () => {
       src="https://lottie.host/b5126674-204a-452f-aa5c-8464d75b0d10/p89IHgP2z9.lottie"
       loop
       autoplay
+      style={{ width: "230px", margin: "auto" }}
     />
   );
 };
