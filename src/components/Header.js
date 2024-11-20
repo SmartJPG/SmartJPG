@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,13 +7,30 @@ const Header = () => {
   const location = useLocation();
   const page = location.pathname;
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
     localStorage.setItem("page", page);
     localStorage.setItem("theme", "pro");
   }, [page]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true); // User has scrolled down from the top
+      } else {
+        setIsScrolled(false); // User is at the top of the page
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const handleDropdownClose = (e) => {
-    // Close the dropdown manually
     const dropdown = e.target.closest(".dropdown");
     if (dropdown) {
       const toggle = dropdown.querySelector(".dropdown-toggle");
@@ -26,11 +43,19 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg">
+    <nav className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}>
       <div className="container">
-        <Link className="navbar-brand" to="/">
-          SmartJPG
-        </Link>
+        {!isScrolled ? (
+          <Link className="navbar-brand" to="/">
+            SmartJPG
+          </Link>
+        ) : (
+          <img
+            src="SmartJPG.png"
+            alt="Icon"
+            style={{ width: "50px", height: "50px" }}
+          />
+        )}
 
         <button
           className="navbar-toggler"

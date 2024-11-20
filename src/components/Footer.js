@@ -4,41 +4,161 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => (
-  <footer>
-    <div
-      style={{
-        fontWeight: "600",
-        width: "100%",
-        color: "white",
-        borderTop: "1px solid grey",
-        maxWidth: "1400px",
-        margin: "0 auto",
-      }}
-    >
-      <img
-        src="SmartJPG.png"
-        alt="SmartJPG"
-        className="logo"
-        style={{ width: "80px", height: "80px", margin: "20px" }}
-      />
+  // <footer>
+  //   <div
+  //     style={{
+  //       fontWeight: "600",
+  //       width: "100%",
+  //       color: "white",
+  //       borderTop: "1px solid grey",
+  //       maxWidth: "1400px",
+  //       margin: "0 auto",
+  //     }}
+  //   >
+  //     <img
+  //       src="SmartJPG.png"
+  //       alt="SmartJPG"
+  //       className="logo"
+  //       style={{ width: "80px", height: "80px", margin: "20px" }}
+  //     />
+  //     <div>
+  //       <a className="about-link" href="/about">
+  //         About Us
+  //       </a>
+  //       <a className="about-link" href="/privacy">
+  //         Privacy Policy
+  //       </a>
+  //       <a
+  //         className="github-icon"
+  //         href="https://github.com/SmartJPG/SmartJPG"
+  //         target="_blank"
+  //         rel="noreferrer"
+  //         style={{ color: "white" }}
+  //       >
+  //         <FontAwesomeIcon icon={faGithub} size="2xl" />
+  //       </a>
+  //     </div>
+  //     <p className="copyright">© 2024 SmartJPG - All rights reserved.</p>
+  //   </div>
+  // </footer>
+
+  <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+
       <div>
-        <a className="about-link" href="/about">
-          About Us
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-facebook-f"></i>
         </a>
-        <a className="about-link" href="/privacy">
-          Privacy Policy
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-twitter"></i>
         </a>
-        <a
-          className="github-icon"
-          href="https://github.com/SmartJPG/SmartJPG"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "white" }}
-        >
-          <FontAwesomeIcon icon={faGithub} size="2xl" />
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-github"></i>
         </a>
       </div>
-      <p className="copyright">© 2024 SmartJPG - All rights reserved.</p>
+    </section>
+
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>Company name
+            </h6>
+            <p>
+              Here you can use rows and columns to organize your footer content.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </p>
+          </div>
+
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+            <p>
+              <a href="#!" class="text-reset">
+                Angular
+              </a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">
+                React
+              </a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">
+                Vue
+              </a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">
+                Laravel
+              </a>
+            </p>
+          </div>
+
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+            <p>
+              <a href="#!" class="text-reset">
+                Pricing
+              </a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">
+                Settings
+              </a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">
+                Orders
+              </a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">
+                Help
+              </a>
+            </p>
+          </div>
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p>
+              <i class="fas fa-home me-3"></i> New York, NY 10012, US
+            </p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              info@example.com
+            </p>
+            <p>
+              <i class="fas fa-phone me-3"></i> + 01 234 567 88
+            </p>
+            <p>
+              <i class="fas fa-print me-3"></i> + 01 234 567 89
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div
+      class="text-center p-4"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
+    >
+      © 2021 Copyright:
+      <a class="text-reset fw-bold" href="https://mdbootstrap.com/">
+        MDBootstrap.com
+      </a>
     </div>
   </footer>
 );
