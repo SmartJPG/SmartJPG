@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => (
-  <footer class="text-center text-lg-start text-muted">
+  <footer
+    class="text-center text-lg-start text-muted"
+    style={{ maxWidth: "1500px" }}
+  >
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
       <div class="me-5 d-none d-lg-block">
         <span>Connect with us and contribute to our open-source repo:</span>
@@ -24,6 +27,9 @@ const Footer = () => (
     </section>
 
     <section class="">
+      <div className="square-container">
+        <img src="square.png" alt="square background" />
+      </div>
       <div class="container text-center text-md-start mt-5">
         <div class="row mt-3">
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">

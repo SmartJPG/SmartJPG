@@ -697,10 +697,40 @@ footer {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.line-background-des {
+  background-image: url("../public/ssscribble.svg");
+  /* background-image: url("../public/square.png"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20%;
+  text-align: center;
+  margin: auto;
+}
+
+.footer {
+  position: relative;
+}
+
+.square-container {
+  position: absolute;
+  right: 0px;
+}
+
+.square-container > img {
+  width: 280px;
+}
+
 @media screen and (min-width: 991px) {
   .theme-container:hover > .theme-text {
     max-height: 200px;
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .square-container {
+    display: none;
   }
 }
 
