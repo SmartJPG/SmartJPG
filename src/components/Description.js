@@ -1,7 +1,17 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-// Step and description mapping for each route
+const Box = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/82af52a1-4ed3-4024-8549-59b00caaac48/Oknd6yAYfZ.lottie"
+      loop
+      autoplay
+    />
+  );
+};
+
 const contentMapping = {
   "/": {
     steps: [
@@ -226,6 +236,14 @@ const Description = () => {
               <p>{content.whyChooseUs.content}</p>
             </>
           )}
+
+          <br />
+          <br />
+          <div>
+            <h2>Build, Merge, Create.</h2>
+            <br />
+            <Box />
+          </div>
         </div>
       )}
     </div>
