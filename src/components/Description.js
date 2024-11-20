@@ -204,7 +204,7 @@ const Description = () => {
       <div className="seperate"></div>
 
       {content.description && (
-        <div style={{ width: "60%", textAlign: "center", margin: "auto" }}>
+        <div className="line-background-des">
           <h2>{content.description.title}</h2>
           <br />
           <p>{content.description.content}</p>
