@@ -80,7 +80,7 @@ p {
 }
 
 .navbar.scrolled {
-  width: 65% !important;
+  width: 60% !important;
 }
 
 .App {
@@ -745,6 +745,9 @@ footer {
   }
   .input-container {
     width: 100% !important;
+  }
+  .navbar.scrolled {
+    width: 75% !important;
   }
 }
 
