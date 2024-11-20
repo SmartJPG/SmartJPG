@@ -10,6 +10,17 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const { REACT_APP_API_URL } = process.env;
 
+const JPG = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/edadbe4e-d2c4-4a9d-8a8c-e51c9ec7841d/87sdIWA1Ji.lottie"
+      loop
+      autoplay
+      style={{ width: "230px", margin: "auto" }}
+    />
+  );
+};
+
 const AI = () => {
   return (
     <DotLottieReact
@@ -46,10 +57,9 @@ const PNG = () => {
 const PDF = () => {
   return (
     <DotLottieReact
-      src="https://lottie.host/3ac8e640-8d98-4952-aa02-986d313c3153/bujvPudYkL.lottie"
+      src="https://lottie.host/b5126674-204a-452f-aa5c-8464d75b0d10/p89IHgP2z9.lottie"
       loop
       autoplay
-      style={{ width: "300px", margin: "auto" }}
     />
   );
 };
@@ -74,6 +84,17 @@ const PdfViewer = ({ pdfUrl }) => (
     )}
   </div>
 );
+
+const Loading = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/3cee3565-689b-44df-a329-d04cb0da4f8c/M39SVlV3es.lottie"
+      loop
+      autoplay
+      style={{ width: "300px", margin: "auto" }}
+    />
+  );
+};
 
 const SortableItem = ({
   file,
@@ -759,12 +780,7 @@ const Main = ({ page }) => {
               </button>
             ) : (
               <div>
-                <img
-                  src="add-image.gif"
-                  alt="Add here"
-                  style={{ width: "25%", marginBottom: "10px" }}
-                  title="Drag & drop an image here"
-                />
+                <JPG />
                 <p className="drag-and-drop-text">
                   Drag & drop an image here 👋🏻
                 </p>
@@ -791,13 +807,7 @@ const Main = ({ page }) => {
             >
               {previewLoading ? (
                 <div>
-                  <img
-                    src="loading.gif"
-                    alt="Loading"
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  />
+                  <Loading />
                   <p>Loading, please wait...</p>
                 </div>
               ) : (
@@ -890,13 +900,7 @@ const Main = ({ page }) => {
             >
               {previewLoading ? (
                 <div>
-                  <img
-                    src="loading.gif"
-                    alt="Loading"
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  />
+                  <Loading />
                   <p>Loading, please wait...</p>
                 </div>
               ) : (
@@ -990,13 +994,7 @@ const Main = ({ page }) => {
             >
               {previewLoading ? (
                 <div>
-                  <img
-                    src="loading.gif"
-                    alt="Loading"
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  />
+                  <Loading />
                   <p>Loading, please wait...</p>
                 </div>
               ) : (
