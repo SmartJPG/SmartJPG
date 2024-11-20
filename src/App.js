@@ -6,6 +6,7 @@ import SignPdf from "./components/SignPdf";
 import Png from "./components/Png";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
+import Terms from "./components/Terms";
 import RemoveBg from "./components/RemoveBg";
 import ImageGenerator from "./components/ImageGenerator";
 import Chat from "./components/Chat";
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/pdf" element={<Pdf />} />
           <Route path="/sign-pdf" element={<SignPdf />} />
           <Route path="/png" element={<Png />} />
