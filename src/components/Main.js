@@ -6,8 +6,64 @@ import LoadingBar from "react-top-loading-bar";
 import { saveAs } from "file-saver";
 import Slogan from "./Slogan";
 import PdfComp from "./PdfComp";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const { REACT_APP_API_URL } = process.env;
+
+const AI = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/41025657-829d-4653-9b43-d2d976a17236/8S7xCManYf.lottie"
+      loop
+      autoplay
+      style={{ width: "250px" }}
+    />
+  );
+};
+
+const Generating = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/de57f3f0-0321-4c9c-b763-53b4dcf260f3/cylbDB6Jt5.lottie"
+      loop
+      autoplay
+      style={{ width: "300px" }}
+    />
+  );
+};
+
+const PNG = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/50fb4c47-15cb-4534-a2da-94f1285f6681/ruH4Ynpa82.lottie"
+      loop
+      autoplay
+      style={{ width: "300px", margin: "auto" }}
+    />
+  );
+};
+
+const PDF = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/3ac8e640-8d98-4952-aa02-986d313c3153/bujvPudYkL.lottie"
+      loop
+      autoplay
+      style={{ width: "300px", margin: "auto" }}
+    />
+  );
+};
+
+const Remove = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/8ca58875-60bc-4f55-943f-8ec0af3cffdf/4yleSubbm8.lottie"
+      loop
+      autoplay
+      style={{ width: "300px", margin: "auto" }}
+    />
+  );
+};
 
 const PdfViewer = ({ pdfUrl }) => (
   <div>
@@ -541,7 +597,7 @@ const Main = ({ page }) => {
           />
 
           {page === "ai-image" || page === "chat" ? (
-            <h2 className="ai-text slogan-item">{displayText}</h2>
+            <h2 className="slogan ai-text slogan-item">{displayText}</h2>
           ) : (
             <Slogan />
           )}
@@ -592,12 +648,7 @@ const Main = ({ page }) => {
             </>
           ) : (
             <div>
-              <img
-                src="add-document.gif"
-                alt="Upload PDF files for merging"
-                style={{ width: "25%", marginBottom: "10px" }}
-                title="Click to upload PDFs here"
-              />
+              <PDF />
               <p className="drag-and-drop-text">Click to upload PDFs here 👋🏻</p>
               <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
             </div>
@@ -812,12 +863,7 @@ const Main = ({ page }) => {
               </button>
             ) : (
               <div>
-                <img
-                  src="add-png.gif"
-                  alt="Add here"
-                  style={{ width: "25%", marginBottom: "10px" }}
-                  title="Drag & drop an image here"
-                />
+                <PNG />
                 <p className="drag-and-drop-text">
                   Drag & drop an image here 👋🏻
                 </p>
@@ -917,12 +963,7 @@ const Main = ({ page }) => {
               </button>
             ) : (
               <div>
-                <img
-                  src="remove.gif"
-                  alt="Add here"
-                  style={{ width: "25%", marginBottom: "10px" }}
-                  title="Drag & drop an image here"
-                />
+                <Remove />
                 <p className="drag-and-drop-text">
                   Drag & drop a PNG image here 👋🏻
                 </p>
@@ -1000,21 +1041,13 @@ const Main = ({ page }) => {
 
           {!imageUrl && !loadingImage && (
             <div>
-              <img
-                src="ai.gif"
-                alt="Loading"
-                style={{ width: "80px", height: "80px" }}
-              />
+              <AI />
             </div>
           )}
 
           {loadingImage ? (
             <div>
-              <img
-                src="ai-loading.gif"
-                alt="Loading"
-                style={{ width: "100px", height: "100px" }}
-              />
+              <Generating />
               <p>Generating image...</p>
             </div>
           ) : (

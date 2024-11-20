@@ -10,11 +10,23 @@ import html2canvas from "html2canvas";
 import { pdfjs } from "react-pdf";
 import { Helmet } from "react-helmet";
 import Description from "./Description";
-import LoadingBar from "react-top-loading-bar"; // Import the loading bar
+import LoadingBar from "react-top-loading-bar";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 // GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 // import "@react-pdf-viewer/core/lib/styles/index.css";
 // pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.worker.min.js`;
+
+const Sign = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/d998a890-8cc5-4654-95b5-180a91823250/9B7AS2nPMF.lottie"
+      loop
+      autoplay
+      style={{ width: "300px", margin: "auto" }}
+    />
+  );
+};
 
 const SignPdf = () => {
   const [file, setFile] = useState(null);
@@ -158,7 +170,7 @@ const SignPdf = () => {
         undefined,
         "SLOW"
       );
-      pdf.save("signed.pdf");
+      pdf.save("SmartJPG-signed.pdf");
 
       loadingBarRef.current.complete();
     } catch (error) {
@@ -206,11 +218,7 @@ const SignPdf = () => {
                 onClick={() => document.getElementById("fileUpload").click()}
               >
                 <div>
-                  <img
-                    src="sign.gif"
-                    alt="Loading"
-                    style={{ width: "100px", height: "80px" }}
-                  />
+                  <Sign />
                   <p className="drag-and-drop-text">
                     Click to upload a PDF here 👋🏻
                   </p>
