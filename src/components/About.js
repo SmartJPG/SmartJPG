@@ -12,7 +12,7 @@ const About = () => {
           content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."
         />
       </Helmet>
-      <h2>Simple. Secure. Smart.</h2>
+      <h1>Simple. Secure. Smart.</h1>
 
       <div className="d-flex services-container">
         <div>

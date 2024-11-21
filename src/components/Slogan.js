@@ -19,13 +19,13 @@ const Slogan = () => {
   }, []);
   return (
     <div className="slogan">
-      <h2 className="slogan-item">
+      <h1 className="slogan-item">
         <div className="slogan-item highlight-text-container">
           FREE
           <span className={`highlight ${step}`}></span>
         </div>{" "}
         Image & PDF Converter
-      </h2>
+      </h1>
     </div>
   );
 };

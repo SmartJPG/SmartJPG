@@ -619,7 +619,7 @@ const Main = ({ page }) => {
           />
 
           {page === "ai-image" || page === "chat" ? (
-            <h2 className="slogan ai-text slogan-item">{displayText}</h2>
+            <h1 className="slogan ai-text slogan-item">{displayText}</h1>
           ) : (
             <Slogan />
           )}
