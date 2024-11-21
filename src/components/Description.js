@@ -12,6 +12,16 @@ const Box = () => {
   );
 };
 
+const Connect = () => {
+  return (
+    <DotLottieReact
+      src="https://lottie.host/b0f4f643-601a-42d4-9a4e-fd7e3ea9dda2/wKQB4jRk6H.lottie"
+      loop
+      autoplay
+    />
+  );
+};
+
 const contentMapping = {
   "/": {
     steps: [
@@ -240,9 +250,39 @@ const Description = () => {
           <br />
           <br />
           <div>
-            <h2>Build, Merge, Create.</h2>
-            <br />
-            <Box />
+            <div className="row">
+              <div class="col-12 col-md-6">
+                <h2 style={{ textAlign: "left" }}>
+                  Connect and Deliver Image Tools.
+                </h2>
+                <br />
+                <p style={{ textAlign: "left" }}>
+                  SmartJPG centralize image tools and make it simple,
+                  user-friendly. So you can find your wants and needs here.
+                </p>
+              </div>
+              <div class="col-12 col-md-6">
+                <Connect />
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+
+          <div className="row">
+            <div class="col-12 col-md-6">
+              <h2 style={{ textAlign: "left" }}>Build,</h2>
+              <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
+              <br />
+              <p style={{ textAlign: "left" }}>
+                SmartJPG is a free online image tool that allows you to convert
+                images to JPG format, merge PDF files, remove image backgrounds,
+                and sign PDF documents digitally.
+              </p>
+            </div>
+            <div class="col-12 col-md-6">
+              <Box />
+            </div>
           </div>
         </div>
       )}
