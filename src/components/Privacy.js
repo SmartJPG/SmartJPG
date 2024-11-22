@@ -1,8 +1,14 @@
 import React from "react";
+import Helmet from "react-helmet";
 
 const Privacy = () => {
   return (
     <div style={{ padding: "10px" }}>
+      <Helmet>
+        <title>Privacy Policy - SmartJPG</title>
+        <link rel="canonical" href="https://www.smartjpg.com/privacy" />
+        <meta name="description" content="SmartJPG Privacy Policy" />
+      </Helmet>
       <div className="Privacy">
         <h1>Privacy Policy</h1>
         <br />

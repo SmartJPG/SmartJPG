@@ -194,6 +194,7 @@ const SignPdf = () => {
       <div className="SignPdf">
         <Helmet>
           <title>Easy Sign PDF | SmartJPG</title>
+          <link rel="canonical" href="https://www.smartjpg.com/sign-pdf" />
           <meta
             name="description"
             content="Sign PDF online for free. Upload a PDF file, sign it, and download the signed PDF. No registration required."

@@ -10,6 +10,7 @@ const RemoveBg = () => {
         <title>
           Remove Background from Images - Quick and Easy Tool | SmartJPG
         </title>
+        <link rel="canonical" href="https://www.smartjpg.com/remove-bg" />
         <meta
           name="description"
           content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."

@@ -1,8 +1,15 @@
 import React from "react";
+import Helmet from "react-helmet";
 
 const Terms = () => {
   return (
     <div style={{ padding: "10px" }}>
+      <Helmet>
+        <title>Terms of Service - SmartJPG</title>
+        <link rel="canonical" href="https://www.smartjpg.com/terms" />
+        <meta name="description" content="SmartJPG Terms of Service" />
+      </Helmet>
+
       <div className="Terms">
         <h1>Terms of Service for SmartJPG</h1>
         <p>Effective Date: November 19, 2024</p>
