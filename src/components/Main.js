@@ -7,6 +7,8 @@ import { saveAs } from "file-saver";
 import Slogan from "./Slogan";
 import PdfComp from "./PdfComp";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import JSZip from "jszip";
+import heic2any from "heic2any";
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -270,51 +272,186 @@ const Main = ({ page }) => {
     return () => clearInterval(interval);
   }, [page]);
 
+  // const handleFileChange = async (e) => {
+  //   const selectedFile = e.target.files[0];
+  //   setFile(selectedFile);
+
+  //   if (selectedFile) {
+  //     setPreviewLoading(true);
+
+  //     if (selectedFile.type === "image/heic") {
+  //       try {
+  //         const formData = new FormData();
+  //         formData.append("image", selectedFile);
+
+  //         const response = await axios.post(
+  //           `${REACT_APP_API_URL}/convert`,
+  //           formData,
+  //           { responseType: "blob" }
+  //         );
+
+  //         if (preview) {
+  //           URL.revokeObjectURL(preview);
+  //         }
+
+  //         const convertedBlob = new Blob([response.data], {
+  //           type: "image/jpeg",
+  //         });
+  //         const previewUrl = URL.createObjectURL(convertedBlob);
+  //         setPreview(previewUrl);
+  //       } catch (error) {
+  //         console.error("HEIC conversion failed:", error);
+  //         alert("Failed to preview HEIC image.");
+  //       }
+  //     } else {
+  //       const reader = new FileReader();
+  //       reader.onloadend = () => {
+  //         if (preview) {
+  //           URL.revokeObjectURL(preview);
+  //         }
+  //         setPreview(reader.result);
+  //       };
+  //       reader.readAsDataURL(selectedFile);
+  //     }
+
+  //     setTimeout(() => {
+  //       setPreviewLoading(false);
+  //     }, 1000);
+  //   }
+  // };
+
+  const [files, setFiles] = useState([]);
+  const [previews, setPreviews] = useState([]);
+
   const handleFileChange = async (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+    const selectedFiles = Array.from(e.target.files);
+    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
 
-    if (selectedFile) {
-      setPreviewLoading(true);
+    setPreviewLoading(true);
 
-      if (selectedFile.type === "image/heic") {
-        try {
+    const newPreviews = await Promise.all(
+      selectedFiles.map((file) => {
+        return new Promise((resolve, reject) => {
+          if (file.type === "image/heic") {
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+              try {
+                const heicArrayBuffer = event.target.result; // This is the correct ArrayBuffer
+                const heicBlob = new Blob([heicArrayBuffer]); // Convert ArrayBuffer to Blob
+                const convertedBlob = await heic2any({
+                  blob: heicBlob,
+                  toType: "image/jpeg",
+                });
+                const previewUrl = URL.createObjectURL(convertedBlob);
+                resolve(previewUrl);
+              } catch (error) {
+                console.error("Error converting HEIC file:", error);
+                reject(error);
+              }
+            };
+            reader.readAsArrayBuffer(file);
+          } else {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              resolve(reader.result);
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      })
+    );
+
+    setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
+    setPreviewLoading(false);
+  };
+
+  const handleConvert = async (e) => {
+    e.stopPropagation();
+
+    if (files.length === 0) {
+      alert("Please upload at least one image.");
+      return;
+    }
+
+    setLoadingColor(getRandomColor());
+
+    try {
+      ref.current.continuousStart();
+
+      if (files.length === 1) {
+        const formData = new FormData();
+        formData.append("image", files[0]);
+
+        const response = await axios.post(
+          `${REACT_APP_API_URL}/convert`,
+          formData,
+          {
+            responseType: "blob",
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                (progressEvent.loaded * 50) / progressEvent.total
+              );
+              setProgress(percentCompleted);
+            },
+            onDownloadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                50 + (progressEvent.loaded * 50) / progressEvent.total
+              );
+              setProgress(percentCompleted);
+            },
+          }
+        );
+
+        const convertedBlob = response.data;
+        const fileName = `SmartJPG-converted-${files[0].name.replace(
+          /\.[^/.]+$/,
+          ""
+        )}.jpg`;
+        saveAs(convertedBlob, fileName);
+      } else {
+        const zip = new JSZip();
+
+        for (const file of files) {
           const formData = new FormData();
-          formData.append("image", selectedFile);
+          formData.append("image", file);
 
           const response = await axios.post(
             `${REACT_APP_API_URL}/convert`,
             formData,
-            { responseType: "blob" }
+            {
+              responseType: "blob",
+              onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                  (progressEvent.loaded * 50) / progressEvent.total
+                );
+                setProgress(percentCompleted);
+              },
+              onDownloadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                  50 + (progressEvent.loaded * 50) / progressEvent.total
+                );
+                setProgress(percentCompleted);
+              },
+            }
           );
 
-          if (preview) {
-            URL.revokeObjectURL(preview);
-          }
-
-          const convertedBlob = new Blob([response.data], {
-            type: "image/jpeg",
-          });
-          const previewUrl = URL.createObjectURL(convertedBlob);
-          setPreview(previewUrl);
-        } catch (error) {
-          console.error("HEIC conversion failed:", error);
-          alert("Failed to preview HEIC image.");
+          const convertedBlob = response.data;
+          const fileName = `SmartJPG-converted-${file.name.replace(
+            /\.[^/.]+$/,
+            ""
+          )}.jpg`;
+          zip.file(fileName, convertedBlob);
         }
-      } else {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (preview) {
-            URL.revokeObjectURL(preview);
-          }
-          setPreview(reader.result);
-        };
-        reader.readAsDataURL(selectedFile);
+
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        saveAs(zipBlob, "SmartJPG-converted-images.zip");
       }
 
-      setTimeout(() => {
-        setPreviewLoading(false);
-      }, 1000);
+      ref.current.complete();
+    } catch (error) {
+      console.error("Image conversion failed:", error);
+      alert("Failed to convert the images.");
+      ref.current.complete();
     }
   };
 
@@ -385,50 +522,50 @@ const Main = ({ page }) => {
     return color;
   };
 
-  const handleConvert = async (e) => {
-    e.stopPropagation();
+  // const handleConvert = async (e) => {
+  //   e.stopPropagation();
 
-    if (!file) {
-      alert("Please upload an image.");
-      return;
-    }
+  //   if (!file) {
+  //     alert("Please upload an image.");
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    formData.append("image", file);
+  //   const formData = new FormData();
+  //   formData.append("image", file);
 
-    setLoadingColor(getRandomColor());
+  //   setLoadingColor(getRandomColor());
 
-    try {
-      ref.current.continuousStart();
+  //   try {
+  //     ref.current.continuousStart();
 
-      const response = await axios.post(
-        `${REACT_APP_API_URL}/convert`,
-        formData,
-        {
-          responseType: "blob",
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              (progressEvent.loaded * 50) / progressEvent.total
-            );
-            setProgress(percentCompleted);
-          },
-          onDownloadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              50 + (progressEvent.loaded * 50) / progressEvent.total
-            );
-            setProgress(percentCompleted);
-          },
-        }
-      );
+  //     const response = await axios.post(
+  //       `${REACT_APP_API_URL}/convert`,
+  //       formData,
+  //       {
+  //         responseType: "blob",
+  //         onUploadProgress: (progressEvent) => {
+  //           const percentCompleted = Math.round(
+  //             (progressEvent.loaded * 50) / progressEvent.total
+  //           );
+  //           setProgress(percentCompleted);
+  //         },
+  //         onDownloadProgress: (progressEvent) => {
+  //           const percentCompleted = Math.round(
+  //             50 + (progressEvent.loaded * 50) / progressEvent.total
+  //           );
+  //           setProgress(percentCompleted);
+  //         },
+  //       }
+  //     );
 
-      saveAs(response.data, "smartjpg-converted-image.jpg");
-      ref.current.complete();
-    } catch (error) {
-      console.error("Image conversion failed:", error);
-      alert("Failed to convert the image.");
-      ref.current.complete();
-    }
-  };
+  //     saveAs(response.data, "smartjpg-converted-image.jpg");
+  //     ref.current.complete();
+  //   } catch (error) {
+  //     console.error("Image conversion failed:", error);
+  //     alert("Failed to convert the image.");
+  //     ref.current.complete();
+  //   }
+  // };
 
   const [fileName, setFileName] = useState("SmartJPG-merged");
 
@@ -472,47 +609,137 @@ const Main = ({ page }) => {
     }
   };
 
+  // const handleConvertToPng = async (e) => {
+  //   e.stopPropagation();
+
+  //   if (!file) {
+  //     alert("Please upload an image.");
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append("image", file);
+
+  //   setLoadingColor(getRandomColor());
+
+  //   try {
+  //     ref.current.continuousStart();
+
+  //     const response = await axios.post(
+  //       `${REACT_APP_API_URL}/convert-to-png`,
+  //       formData,
+  //       {
+  //         responseType: "blob",
+  //         onUploadProgress: (progressEvent) => {
+  //           const percentCompleted = Math.round(
+  //             (progressEvent.loaded * 50) / progressEvent.total
+  //           );
+  //           setProgress(percentCompleted);
+  //         },
+  //         onDownloadProgress: (progressEvent) => {
+  //           const percentCompleted = Math.round(
+  //             50 + (progressEvent.loaded * 50) / progressEvent.total
+  //           );
+  //           setProgress(percentCompleted);
+  //         },
+  //       }
+  //     );
+
+  //     saveAs(response.data, "smartpng-converted-image.png");
+  //     ref.current.complete();
+  //   } catch (error) {
+  //     console.error("PNG conversion failed:", error);
+  //     alert("Failed to convert the image.");
+  //     ref.current.complete();
+  //   }
+  // };
+
   const handleConvertToPng = async (e) => {
     e.stopPropagation();
 
-    if (!file) {
-      alert("Please upload an image.");
+    if (files.length === 0) {
+      alert("Please upload at least one image.");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("image", file);
 
     setLoadingColor(getRandomColor());
 
     try {
       ref.current.continuousStart();
 
-      const response = await axios.post(
-        `${REACT_APP_API_URL}/convert-to-png`,
-        formData,
-        {
-          responseType: "blob",
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              (progressEvent.loaded * 50) / progressEvent.total
-            );
-            setProgress(percentCompleted);
-          },
-          onDownloadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              50 + (progressEvent.loaded * 50) / progressEvent.total
-            );
-            setProgress(percentCompleted);
-          },
-        }
-      );
+      if (files.length === 1) {
+        const formData = new FormData();
+        formData.append("image", files[0]);
 
-      saveAs(response.data, "smartpng-converted-image.png");
+        const response = await axios.post(
+          `${REACT_APP_API_URL}/convert-to-png`,
+          formData,
+          {
+            responseType: "blob",
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                (progressEvent.loaded * 50) / progressEvent.total
+              );
+              setProgress(percentCompleted);
+            },
+            onDownloadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                50 + (progressEvent.loaded * 50) / progressEvent.total
+              );
+              setProgress(percentCompleted);
+            },
+          }
+        );
+
+        const convertedBlob = response.data;
+        const fileName = `SmartPNG-converted-${files[0].name.replace(
+          /\.[^/.]+$/,
+          ""
+        )}.png`;
+        saveAs(convertedBlob, fileName);
+      } else {
+        const zip = new JSZip();
+
+        for (const file of files) {
+          const formData = new FormData();
+          formData.append("image", file);
+
+          const response = await axios.post(
+            `${REACT_APP_API_URL}/convert-to-png`,
+            formData,
+            {
+              responseType: "blob",
+              onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                  (progressEvent.loaded * 50) / progressEvent.total
+                );
+                setProgress(percentCompleted);
+              },
+              onDownloadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                  50 + (progressEvent.loaded * 50) / progressEvent.total
+                );
+                setProgress(percentCompleted);
+              },
+            }
+          );
+
+          const convertedBlob = response.data;
+          const fileName = `SmartPNG-converted-${file.name.replace(
+            /\.[^/.]+$/,
+            ""
+          )}.png`;
+          zip.file(fileName, convertedBlob);
+        }
+
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        saveAs(zipBlob, "SmartPNG-converted-images.zip");
+      }
+
       ref.current.complete();
     } catch (error) {
       console.error("PNG conversion failed:", error);
-      alert("Failed to convert the image.");
+      alert("Failed to convert the images.");
       ref.current.complete();
     }
   };
@@ -758,13 +985,14 @@ const Main = ({ page }) => {
             id="fileInput"
             className="input"
             type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg, image/gif"
+            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
+            multiple
             onChange={handleFileChange}
             style={{ margin: "10px 0", display: "none" }}
           />
 
           <div>
-            {fileLoaded ? (
+            {files.length > 0 ? (
               <button className="convert-btn" onClick={handleConvert}>
                 Convert to JPG
                 <span>
@@ -782,9 +1010,7 @@ const Main = ({ page }) => {
             ) : (
               <div>
                 <JPG />
-                <p className="drag-and-drop-text">
-                  Drag & drop an image here 👋🏻
-                </p>
+                <p className="drag-and-drop-text">Drag & drop images here 👋🏻</p>
                 <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
                   Supported Formats: HEIC, JPEG, WEBP, AVIF, SVG
                 </h3>
@@ -792,36 +1018,28 @@ const Main = ({ page }) => {
             )}
           </div>
 
-          {preview && (
+          {previews.length > 0 && (
             <div
               style={{
                 marginTop: "20px",
-                width: "100%",
-                overflow: "hidden",
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "20px",
-                backgroundColor: "#fff",
-                minHeight: "200px",
+                flexWrap: "wrap",
+                gap: "10px",
               }}
             >
-              {previewLoading ? (
-                <div>
-                  <Loading />
-                  <p>Loading, please wait...</p>
-                </div>
-              ) : (
+              {previews.map((preview, index) => (
                 <img
+                  key={index}
                   src={preview}
-                  alt="Preview"
+                  alt={`Preview ${index + 1}`}
                   style={{
-                    maxWidth: "350px",
-                    objectFit: "contain",
-                    display: "block",
+                    maxWidth: "250px",
+                    maxHeight: "150px",
+                    objectFit: "cover",
+                    borderRadius: "10px",
                   }}
                 />
-              )}
+              ))}
             </div>
           )}
         </div>
@@ -852,12 +1070,13 @@ const Main = ({ page }) => {
             className="input"
             type="file"
             accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
+            multiple
             onChange={handleFileChange}
             style={{ margin: "10px 0", display: "none" }}
           />
 
           <div>
-            {fileLoaded ? (
+            {files.length > 0 ? (
               <button className="convert-btn" onClick={handleConvertToPng}>
                 Convert to PNG
                 <span>
@@ -885,36 +1104,27 @@ const Main = ({ page }) => {
             )}
           </div>
 
-          {preview && (
+          {previews.length > 0 && (
             <div
               style={{
                 marginTop: "20px",
-                width: "100%",
-                overflow: "hidden",
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "20px",
-                backgroundColor: "#fff",
-                minHeight: "200px",
+                flexWrap: "wrap",
+                gap: "10px",
               }}
             >
-              {previewLoading ? (
-                <div>
-                  <Loading />
-                  <p>Loading, please wait...</p>
-                </div>
-              ) : (
+              {previews.map((preview, index) => (
                 <img
+                  key={index}
                   src={preview}
-                  alt="Preview"
+                  alt={`Preview ${index + 1}`}
                   style={{
-                    maxWidth: "350px",
-                    objectFit: "contain",
-                    display: "block",
+                    maxWidth: "250px",
+                    objectFit: "cover",
+                    borderRadius: "10px",
                   }}
                 />
-              )}
+              ))}
             </div>
           )}
         </div>
