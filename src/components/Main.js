@@ -459,48 +459,45 @@ const Main = ({ page }) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const droppedFile = e.dataTransfer.files[0];
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    setFiles((prevFiles) => [...prevFiles, ...droppedFiles]);
 
-    if (droppedFile) {
-      setFile(droppedFile);
-      setPreviewLoading(true);
+    setPreviewLoading(true);
 
-      if (droppedFile.type === "image/heic") {
-        const formData = new FormData();
-        formData.append("image", droppedFile);
-
-        axios
-          .post(`${REACT_APP_API_URL}/convert`, formData, {
-            responseType: "blob",
-          })
-          .then((response) => {
-            if (preview) {
-              URL.revokeObjectURL(preview);
+    const newPreviews = droppedFiles.map((file) => {
+      return new Promise((resolve, reject) => {
+        if (file.type === "image/heic") {
+          const reader = new FileReader();
+          reader.onload = async (event) => {
+            try {
+              const heicArrayBuffer = event.target.result;
+              const heicBlob = new Blob([heicArrayBuffer]);
+              const convertedBlob = await heic2any({
+                blob: heicBlob,
+                toType: "image/jpeg",
+              });
+              const previewUrl = URL.createObjectURL(convertedBlob);
+              resolve(previewUrl);
+            } catch (error) {
+              console.error("Error converting HEIC file:", error);
+              reject(error);
             }
-            const convertedBlob = new Blob([response.data], {
-              type: "image/jpeg",
-            });
-            const previewUrl = URL.createObjectURL(convertedBlob);
-            setPreview(previewUrl);
-          })
-          .catch((error) => {
-            console.error("HEIC conversion failed:", error);
-            alert("Failed to preview HEIC image.");
-          })
-          .finally(() => setPreviewLoading(false));
-      } else {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (preview) {
-            URL.revokeObjectURL(preview);
-          }
-          setPreview(reader.result);
-        };
-        reader.readAsDataURL(droppedFile);
+          };
+          reader.readAsArrayBuffer(file);
+        } else {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
 
-        setTimeout(() => setPreviewLoading(false), 1000);
-      }
-    }
+    Promise.all(newPreviews).then((previewUrls) => {
+      setPreviews((prevPreviews) => [...prevPreviews, ...previewUrls]);
+      setPreviewLoading(false);
+    });
   };
 
   const handleDragOver = (e) => {
