@@ -8,6 +8,7 @@ const Pdf = () => {
     <div className="PDF">
       <Helmet>
         <title>Merge PDFs - Fast and Easy PDF Creation | SmartJPG</title>
+        <link rel="canonical" href="https://www.smartjpg.com/pdf" />
         <meta
           name="description"
           content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."

@@ -10,6 +10,7 @@ const Png = () => {
         <title>
           Convert images to PNG - High-Quality Image Conversion | SmartJPG
         </title>
+        <link rel="canonical" href="https://www.smartjpg.com/png" />
         <meta
           name="description"
           content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."

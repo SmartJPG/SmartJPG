@@ -7,6 +7,7 @@ const About = () => {
     <div className="about-us">
       <Helmet>
         <title>About SmartJPG - Your Image Optimization Experts</title>
+        <link rel="canonical" href="https://www.smartjpg.com/about" />
         <meta
           name="description"
           content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."
