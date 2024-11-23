@@ -5,9 +5,6 @@ body {
   padding: 0;
   margin: auto;
   transition: all 0.5s ease !important;
-}
-
-body.pro {
   background-image: url("../public/oooscillate.svg");
   background-repeat: no-repeat;
   background-size: cover;

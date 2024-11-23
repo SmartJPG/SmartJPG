@@ -20,29 +20,17 @@ import "./App.css";
 // ).toString();
 
 import { GlobalWorkerOptions } from "pdfjs-dist";
-
 GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const App = () => {
   const theme = localStorage.getItem("theme");
   const page = localStorage.getItem("page");
+
   useEffect(() => {
     if (!page) {
       localStorage.setItem("page", "");
     }
   }, [page]);
-
-  useEffect(() => {
-    if (theme) {
-      document.body.classList.add(theme);
-    } else {
-      document.body.classList.add("default");
-    }
-
-    return () => {
-      document.body.classList.remove("night", "pro", "default");
-    };
-  }, [theme]);
 
   return (
     <Router>

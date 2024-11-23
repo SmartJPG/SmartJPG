@@ -1091,9 +1091,7 @@ const Main = ({ page }) => {
             ) : (
               <div>
                 <PNG />
-                <p className="drag-and-drop-text">
-                  Drag & drop an image here 👋🏻
-                </p>
+                <p className="drag-and-drop-text">Drag & drop images here 👋🏻</p>
                 <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
                   Supported Formats: HEIC, JPEG, PNG, WEBP, AVIF, SVG
                 </h3>
