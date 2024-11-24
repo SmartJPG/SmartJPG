@@ -17,9 +17,9 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setIsScrolled(true); // User has scrolled down from the top
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false); // User is at the top of the page
+        setIsScrolled(false);
       }
     };
 
@@ -89,7 +89,7 @@ const Header = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                To PNG
+                PNG Tools
               </button>
 
               <ul className="dropdown-menu" aria-labelledby="pngDropdown">
@@ -162,7 +162,7 @@ const Header = () => {
                   page === "/ai-image" ? "current" : ""
                 } nav-link`}
               >
-                AI Image Generator
+                Image Generator
               </Link>
             </li>
             <li className="nav-item coffee">
@@ -171,14 +171,25 @@ const Header = () => {
                 rel="noopener noreferrer"
                 href="https://buymeacoffee.com/leohoncana1"
               >
-                <img
-                  align="center"
-                  src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                  height="40"
-                  width="170"
-                  alt="Donate us"
-                  title="Donate us"
-                />
+                {isScrolled ? (
+                  <img
+                    align="center"
+                    src="coffee.png"
+                    height="40"
+                    alt="Donate us"
+                    title="Donate us"
+                    style={{ borderRadius: "10px" }}
+                  />
+                ) : (
+                  <img
+                    align="center"
+                    src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                    height="40"
+                    width="170"
+                    alt="Donate us"
+                    title="Donate us"
+                  />
+                )}
               </a>
             </li>
           </ul>
