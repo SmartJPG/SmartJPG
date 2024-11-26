@@ -12,13 +12,24 @@ import heic2any from "heic2any";
 
 const { REACT_APP_API_URL } = process.env;
 
+// const JPG = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/edadbe4e-d2c4-4a9d-8a8c-e51c9ec7841d/87sdIWA1Ji.lottie"
+//       loop
+//       autoplay
+//       style={{ width: "230px", margin: "auto" }}
+//     />
+//   );
+// };
+
 const JPG = () => {
   return (
     <DotLottieReact
-      src="https://lottie.host/edadbe4e-d2c4-4a9d-8a8c-e51c9ec7841d/87sdIWA1Ji.lottie"
+      src="https://lottie.host/0769f4e1-df15-498a-99af-00fb60a60c39/qt9XGtqX0e.lottie"
       loop
       autoplay
-      style={{ width: "230px", margin: "auto" }}
+      style={{ margin: "auto" }}
     />
   );
 };
