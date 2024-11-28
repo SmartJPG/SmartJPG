@@ -473,7 +473,7 @@ footer {
   align-items: center;
   padding: 10px;
   height: 100%;
-  margin: 100px auto 40px auto;
+  margin: 150px auto 40px auto;
 }
 
 .about-smartjpg {
@@ -540,6 +540,7 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  margin-top: 40px;
 }
 
 .service-text {
