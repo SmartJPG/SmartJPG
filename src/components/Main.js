@@ -912,6 +912,21 @@ const Main = ({ page }) => {
     }
   };
 
+  const resetFiles = (e) => {
+    e.stopPropagation();
+
+    setFiles([]);
+    setFile(null);
+    setPreview(null);
+    setPreviews([]);
+    setPdfFiles([]);
+    setProgress(0);
+
+    if (preview) {
+      URL.revokeObjectURL(preview);
+    }
+  };
+
   return (
     <div className="main">
       <LoadingBar
@@ -1107,27 +1122,32 @@ const Main = ({ page }) => {
           </div>
 
           {previews.length > 0 && (
-            <div
-              style={{
-                marginTop: "20px",
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "10px",
-              }}
-            >
-              {previews.map((preview, index) => (
-                <img
-                  key={index}
-                  src={preview}
-                  alt={`Preview ${index + 1}`}
-                  style={{
-                    maxWidth: "250px",
-                    maxHeight: "150px",
-                    objectFit: "cover",
-                    borderRadius: "10px",
-                  }}
-                />
-              ))}
+            <div>
+              <div
+                style={{
+                  marginTop: "20px",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                }}
+              >
+                {previews.map((preview, index) => (
+                  <img
+                    key={index}
+                    src={preview}
+                    alt={`Preview ${index + 1}`}
+                    style={{
+                      maxWidth: "250px",
+                      maxHeight: "150px",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                    }}
+                  />
+                ))}
+              </div>
+              <button className="convert-btn" onClick={resetFiles}>
+                Reset
+              </button>
             </div>
           )}
         </div>
@@ -1191,26 +1211,31 @@ const Main = ({ page }) => {
           </div>
 
           {previews.length > 0 && (
-            <div
-              style={{
-                marginTop: "20px",
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "10px",
-              }}
-            >
-              {previews.map((preview, index) => (
-                <img
-                  key={index}
-                  src={preview}
-                  alt={`Preview ${index + 1}`}
-                  style={{
-                    maxWidth: "250px",
-                    objectFit: "cover",
-                    borderRadius: "10px",
-                  }}
-                />
-              ))}
+            <div>
+              <div
+                style={{
+                  marginTop: "20px",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                }}
+              >
+                {previews.map((preview, index) => (
+                  <img
+                    key={index}
+                    src={preview}
+                    alt={`Preview ${index + 1}`}
+                    style={{
+                      maxWidth: "250px",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                    }}
+                  />
+                ))}
+              </div>
+              <button className="convert-btn" onClick={resetFiles}>
+                Reset
+              </button>
             </div>
           )}
         </div>
@@ -1289,22 +1314,27 @@ const Main = ({ page }) => {
                 minHeight: "200px",
               }}
             >
-              {previewLoading ? (
-                <div>
-                  <Loading />
-                  <p>Loading, please wait...</p>
-                </div>
-              ) : (
-                <img
-                  src={preview}
-                  alt="Preview"
-                  style={{
-                    maxWidth: "350px",
-                    objectFit: "contain",
-                    display: "block",
-                  }}
-                />
-              )}
+              <div>
+                {previewLoading ? (
+                  <div>
+                    <Loading />
+                    <p>Loading, please wait...</p>
+                  </div>
+                ) : (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    style={{
+                      maxWidth: "350px",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
+                )}
+                <button className="convert-btn" onClick={resetFiles}>
+                  Reset
+                </button>
+              </div>
             </div>
           )}
         </div>
