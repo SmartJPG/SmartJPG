@@ -334,46 +334,126 @@ const Main = ({ page }) => {
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
 
+  // const handleFileChange = async (e) => {
+  //   const selectedFiles = Array.from(e.target.files);
+  //   setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+
+  //   setPreviewLoading(true);
+
+  //   const newPreviews = await Promise.all(
+  //     selectedFiles.map((file) => {
+  //       return new Promise((resolve, reject) => {
+  //         if (file.type === "image/heic") {
+  //           const reader = new FileReader();
+  //           reader.onload = async (event) => {
+  //             try {
+  //               const heicArrayBuffer = event.target.result;
+  //               const heicBlob = new Blob([heicArrayBuffer]);
+  //               const convertedBlob = await heic2any({
+  //                 blob: heicBlob,
+  //                 toType: "image/jpeg",
+  //               });
+  //               const previewUrl = URL.createObjectURL(convertedBlob);
+  //               resolve(previewUrl);
+  //             } catch (error) {
+  //               console.error("Error converting HEIC file:", error);
+  //               reject(error);
+  //             }
+  //           };
+  //           reader.readAsArrayBuffer(file);
+  //         } else {
+  //           const reader = new FileReader();
+  //           reader.onloadend = () => {
+  //             resolve(reader.result);
+  //           };
+  //           reader.readAsDataURL(file);
+  //         }
+  //       });
+  //     })
+  //   );
+
+  //   setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
+  //   setPreviewLoading(false);
+  // };
+
   const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
-    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
 
-    setPreviewLoading(true);
+    // If single file mode (e.g., removeBg)
+    if (page === "RM") {
+      const singleFile = selectedFiles[0];
+      setFile(singleFile);
 
-    const newPreviews = await Promise.all(
-      selectedFiles.map((file) => {
-        return new Promise((resolve, reject) => {
-          if (file.type === "image/heic") {
-            const reader = new FileReader();
-            reader.onload = async (event) => {
-              try {
-                const heicArrayBuffer = event.target.result; // This is the correct ArrayBuffer
-                const heicBlob = new Blob([heicArrayBuffer]); // Convert ArrayBuffer to Blob
-                const convertedBlob = await heic2any({
-                  blob: heicBlob,
-                  toType: "image/jpeg",
-                });
-                const previewUrl = URL.createObjectURL(convertedBlob);
-                resolve(previewUrl);
-              } catch (error) {
-                console.error("Error converting HEIC file:", error);
-                reject(error);
-              }
-            };
-            reader.readAsArrayBuffer(file);
-          } else {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              resolve(reader.result);
-            };
-            reader.readAsDataURL(file);
+      setPreviewLoading(true);
+
+      if (singleFile.type === "image/heic") {
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+          try {
+            const heicArrayBuffer = event.target.result;
+            const heicBlob = new Blob([heicArrayBuffer]);
+            const convertedBlob = await heic2any({
+              blob: heicBlob,
+              toType: "image/png", // Assuming PNG format for background removal
+            });
+            const previewUrl = URL.createObjectURL(convertedBlob);
+            setPreview(previewUrl);
+          } catch (error) {
+            console.error("Error converting HEIC file:", error);
+            alert("Failed to process HEIC file.");
+          } finally {
+            setPreviewLoading(false);
           }
-        });
-      })
-    );
+        };
+        reader.readAsArrayBuffer(singleFile);
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(singleFile);
+        setPreviewLoading(false);
+      }
+    } else {
+      // For multiple file modes (e.g., JPG/PNG conversion)
+      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+      setPreviewLoading(true);
 
-    setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
-    setPreviewLoading(false);
+      const newPreviews = await Promise.all(
+        selectedFiles.map((file) => {
+          return new Promise((resolve, reject) => {
+            if (file.type === "image/heic") {
+              const reader = new FileReader();
+              reader.onload = async (event) => {
+                try {
+                  const heicArrayBuffer = event.target.result;
+                  const heicBlob = new Blob([heicArrayBuffer]);
+                  const convertedBlob = await heic2any({
+                    blob: heicBlob,
+                    toType: "image/jpeg",
+                  });
+                  const previewUrl = URL.createObjectURL(convertedBlob);
+                  resolve(previewUrl);
+                } catch (error) {
+                  console.error("Error converting HEIC file:", error);
+                  reject(error);
+                }
+              };
+              reader.readAsArrayBuffer(file);
+            } else {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                resolve(reader.result);
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+        })
+      );
+
+      setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
+      setPreviewLoading(false);
+    }
   };
 
   const handleConvert = async (e) => {

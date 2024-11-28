@@ -251,7 +251,7 @@ const Description = () => {
           <br />
           <div>
             <div className="row">
-              <div class="col-12 col-md-6">
+              <div className="col-12 col-md-6">
                 <h2 style={{ textAlign: "left" }}>
                   Connect and Deliver Image Tools.
                 </h2>
@@ -261,7 +261,7 @@ const Description = () => {
                   user-friendly. So you can find your wants and needs here.
                 </p>
               </div>
-              <div class="col-12 col-md-6">
+              <div className="col-12 col-md-6">
                 <Connect />
               </div>
             </div>
@@ -270,7 +270,7 @@ const Description = () => {
           <br />
 
           <div className="row">
-            <div class="col-12 col-md-6">
+            <div className="col-12 col-md-6">
               <h2 style={{ textAlign: "left" }}>Build,</h2>
               <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
               <br />
@@ -280,7 +280,7 @@ const Description = () => {
                 and sign PDF documents digitally.
               </p>
             </div>
-            <div class="col-12 col-md-6">
+            <div className="col-12 col-md-6">
               <Box />
             </div>
           </div>

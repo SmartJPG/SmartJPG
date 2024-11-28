@@ -5,11 +5,11 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => (
   <footer
-    class="text-center text-lg-start text-muted"
+    className="text-center text-lg-start text-muted"
     style={{ maxWidth: "1500px" }}
   >
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-      <div class="me-5 d-none d-lg-block">
+    <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <div className="me-5 d-none d-lg-block">
         <span>Connect with us and contribute to our open-source repo:</span>
       </div>
 
@@ -26,13 +26,13 @@ const Footer = () => (
       </div>
     </section>
 
-    <section class="">
+    <section className="">
       <div className="square-container">
         <img src="square.png" alt="square background" />
       </div>
-      <div class="container text-center text-md-start mt-5">
-        <div class="row mt-3">
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+      <div className="container text-center text-md-start mt-5">
+        <div className="row mt-3">
+          <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <img
               src="SmartJPG.png"
               alt="SmartJPG"
@@ -50,62 +50,62 @@ const Footer = () => (
             </p>
           </div>
 
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 class="text-uppercase fw-bold mb-4">Tools</h6>
+          <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 className="text-uppercase fw-bold mb-4">Tools</h6>
             <p>
-              <a href="/" class="text-reset">
+              <a href="/" className="text-reset">
                 JPG
               </a>
             </p>
             <p>
-              <a href="/png" class="text-reset">
+              <a href="/png" className="text-reset">
                 PNG
               </a>
             </p>
             <p>
-              <a href="/remove-bg" class="text-reset">
+              <a href="/remove-bg" className="text-reset">
                 Remove Background
               </a>
             </p>
             <p>
-              <a href="/pdf" class="text-reset">
+              <a href="/pdf" className="text-reset">
                 PDF
               </a>
             </p>
             <p>
-              <a href="/sign-pdf" class="text-reset">
+              <a href="/sign-pdf" className="text-reset">
                 Sign PDF
               </a>
             </p>
             <p>
-              <a href="/ai-image" class="text-reset">
+              <a href="/ai-image" className="text-reset">
                 AI Image Generation
               </a>
             </p>
           </div>
 
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 class="text-uppercase fw-bold mb-4">Information</h6>
+          <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 className="text-uppercase fw-bold mb-4">Information</h6>
             <p>
-              <a href="/about" class="text-reset">
+              <a href="/about" className="text-reset">
                 About us
               </a>
             </p>
             <p>
-              <a href="/privacy" class="text-reset">
+              <a href="/privacy" className="text-reset">
                 Privacy Policy
               </a>
             </p>
 
             <p>
-              <a href="/terms" class="text-reset">
+              <a href="/terms" className="text-reset">
                 Terms of Service
               </a>
             </p>
           </div>
 
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
             <p>Toronto, ON, Canada</p>
             <p>leohoncanada@gmail.com</p>
           </div>
@@ -113,7 +113,10 @@ const Footer = () => (
       </div>
     </section>
 
-    <div class="text-center p-4" style={{ borderTop: "1px solid lightgrey" }}>
+    <div
+      className="text-center p-4"
+      style={{ borderTop: "1px solid lightgrey" }}
+    >
       <p className="copyright">© 2024 SmartJPG - All rights reserved.</p>
     </div>
   </footer>
