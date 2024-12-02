@@ -102,6 +102,12 @@ const Footer = () => (
                 Terms of Service
               </a>
             </p>
+
+            <p>
+              <a href="mailto:leohoncanada@gmail.com" className="text-reset">
+                Report an Issue
+              </a>
+            </p>
           </div>
 
           <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

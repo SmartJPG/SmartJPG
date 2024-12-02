@@ -249,43 +249,46 @@ const Description = () => {
 
           <br />
           <br />
-          <div>
-            <div className="row">
-              <div className="col-12 col-md-6">
-                <h2 style={{ textAlign: "left" }}>
-                  Connect and Deliver Image Tools.
-                </h2>
-                <br />
-                <p style={{ textAlign: "left" }}>
-                  SmartJPG centralize image tools and make it simple,
-                  user-friendly. So you can find your wants and needs here.
-                </p>
-              </div>
-              <div className="col-12 col-md-6">
-                <Connect />
-              </div>
-            </div>
-          </div>
-          <br />
-          <br />
+        </div>
+      )}
 
+      <div className="illustion">
+        <div>
           <div className="row">
             <div className="col-12 col-md-6">
-              <h2 style={{ textAlign: "left" }}>Build,</h2>
-              <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
+              <h2 style={{ textAlign: "left" }}>
+                Connect and Deliver Image Tools.
+              </h2>
               <br />
               <p style={{ textAlign: "left" }}>
-                SmartJPG is a free online image tool that allows you to convert
-                images to JPG format, merge PDF files, remove image backgrounds,
-                and sign PDF documents digitally.
+                SmartJPG centralize image tools and make it simple,
+                user-friendly. So you can find your wants and needs here.
               </p>
             </div>
             <div className="col-12 col-md-6">
-              <Box />
+              <Connect />
             </div>
           </div>
         </div>
-      )}
+        <br />
+        <br />
+
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <h2 style={{ textAlign: "left" }}>Build,</h2>
+            <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
+            <br />
+            <p style={{ textAlign: "left" }}>
+              SmartJPG is a free online image tool that allows you to convert
+              images to JPG format, merge PDF files, remove image backgrounds,
+              and sign PDF documents digitally.
+            </p>
+          </div>
+          <div className="col-12 col-md-6">
+            <Box />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
