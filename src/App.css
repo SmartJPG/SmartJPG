@@ -697,8 +697,8 @@ footer {
 }
 
 .line-background-des {
-  background-image: url("../public/ssscribble.svg");
-  /* background-image: url("../public/square.png"); */
+  /* background-image: url("../public/ssscribble.svg"); */
+  background-image: url("../public/bbburst.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
