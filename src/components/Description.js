@@ -246,15 +246,15 @@ const Description = () => {
               <p>{content.whyChooseUs.content}</p>
             </>
           )}
-
-          <br />
-          <br />
         </div>
       )}
 
+      <br />
+      <br />
+
       <div className="illustion">
         <div>
-          <div className="row">
+          <div className="row slogan">
             <div className="col-12 col-md-6">
               <h2 style={{ textAlign: "left" }}>
                 Connect and Deliver Image Tools.
@@ -273,7 +273,7 @@ const Description = () => {
         <br />
         <br />
 
-        <div className="row">
+        <div className="row slogan">
           <div className="col-12 col-md-6">
             <h2 style={{ textAlign: "left" }}>Build,</h2>
             <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
@@ -286,6 +286,77 @@ const Description = () => {
           </div>
           <div className="col-12 col-md-6">
             <Box />
+          </div>
+        </div>
+
+        <br />
+        <br />
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Features</th>
+                <th>SmartJPG</th>
+                <th>Other Online tools</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Usage & Limitations</td>
+                <td>
+                  Unlimited usage, no watermarks, no sign-ups, no file size
+                  limit.
+                </td>
+                <td>
+                  Other converter tools may have file size limitations or
+                  restricted features in free versions. It allows free
+                  conversions with limitations and offers premium plans for
+                  extended features.
+                </td>
+              </tr>
+              <tr>
+                <td>Sign-Up Requirement</td>
+                <td>
+                  No sign-up required; users can access all features directly.
+                </td>
+                <td>
+                  Other converter tools may require registration for full
+                  functionality.
+                </td>
+              </tr>
+              <tr>
+                <td>Functions Offered</td>
+                <td>
+                  Provides AI image generation, image format conversion,
+                  background removal, and PDF merging/signing.
+                </td>
+                <td>
+                  Other converter tools may offer limited functions or focus on
+                  specific conversions.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+          <div className="question-container">
+            <h4>Still have questions?</h4>
+            <p>
+              Can't find the answer you're looking for? Please find our friendly
+              team.
+            </p>
+            <button
+              className="contact-btn"
+              onClick={() =>
+                (window.location.href = "mailto:leohoncanada@gmail.com")
+              }
+            >
+              Contact us
+            </button>
           </div>
         </div>
       </div>
