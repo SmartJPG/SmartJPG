@@ -1245,7 +1245,14 @@ const Main = ({ page }) => {
         <div
           className="input-container"
           onClick={handleContainerClick}
-          onDrop={handleDrop}
+          onDrop={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const droppedFiles = Array.from(e.dataTransfer.files);
+            if (droppedFiles.length > 0) {
+              handleFileChange({ target: { files: [droppedFiles[0]] } });
+            }
+          }}
           onDragOver={handleDragOver}
           style={{
             width: "50%",
