@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Box = () => {
   return (
@@ -208,6 +210,13 @@ const Description = () => {
   const location = useLocation();
   const content = contentMapping[location.pathname] || {};
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+      mirror: false,
+    });
+  }, []);
+
   return (
     <div>
       <div className="Description">
@@ -225,27 +234,29 @@ const Description = () => {
 
       {content.description && (
         <div className="line-background-des">
-          <h2>{content.description.title}</h2>
-          <br />
-          <p>{content.description.content}</p>
-          <br />
-          <br />
-          {content.process && (
-            <>
-              <h2>{content.process.title}</h2>
-              <br />
-              <p>{content.process.content}</p>
-              <br />
-              <br />
-            </>
-          )}
-          {content.whyChooseUs && (
-            <>
-              <h2>{content.whyChooseUs.title}</h2>
-              <br />
-              <p>{content.whyChooseUs.content}</p>
-            </>
-          )}
+          <div data-aos="fade-up">
+            <h2>{content.description.title}</h2>
+            <br />
+            <p>{content.description.content}</p>
+            <br />
+            <br />
+            {content.process && (
+              <>
+                <h2>{content.process.title}</h2>
+                <br />
+                <p>{content.process.content}</p>
+                <br />
+                <br />
+              </>
+            )}
+            {content.whyChooseUs && (
+              <>
+                <h2>{content.whyChooseUs.title}</h2>
+                <br />
+                <p>{content.whyChooseUs.content}</p>
+              </>
+            )}
+          </div>
         </div>
       )}
 
@@ -254,7 +265,7 @@ const Description = () => {
 
       <div className="illustion">
         <div>
-          <div className="row slogan">
+          <div className="row slogan" data-aos="fade-up">
             <div className="col-12 col-md-6">
               <h2 style={{ textAlign: "left" }}>
                 Connect and Deliver Image Tools.
@@ -273,7 +284,7 @@ const Description = () => {
         <br />
         <br />
 
-        <div className="row slogan">
+        <div className="row slogan" data-aos="fade-up">
           <div className="col-12 col-md-6">
             <h2 style={{ textAlign: "left" }}>Build,</h2>
             <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>

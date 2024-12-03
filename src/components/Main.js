@@ -3,25 +3,14 @@ import axios from "axios";
 import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoadingBar from "react-top-loading-bar";
-import { saveAs } from "file-saver";
 import Slogan from "./Slogan";
 import PdfComp from "./PdfComp";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import JSZip from "jszip";
 import heic2any from "heic2any";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { saveAs } from "file-saver";
 
 const { REACT_APP_API_URL } = process.env;
-
-// const JPG = () => {
-//   return (
-//     <DotLottieReact
-//       src="https://lottie.host/edadbe4e-d2c4-4a9d-8a8c-e51c9ec7841d/87sdIWA1Ji.lottie"
-//       loop
-//       autoplay
-//       style={{ width: "230px", margin: "auto" }}
-//     />
-//   );
-// };
 
 const JPG = () => {
   return (

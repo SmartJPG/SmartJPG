@@ -727,6 +727,7 @@ footer {
 }
 
 table {
+  width: 100%;
   text-align: left;
   border-collapse: separate !important;
   border-spacing: 0;
