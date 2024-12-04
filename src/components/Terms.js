@@ -6,7 +6,7 @@ const Terms = () => {
     <div style={{ padding: "10px" }}>
       <Helmet>
         <title>Terms of Service - SmartJPG</title>
-        <link rel="canonical" href="https://www.smartjpg.com/terms" />
+        <link rel="canonical" href="https://www.smartjpg.app/terms" />
         <meta name="description" content="SmartJPG Terms of Service" />
       </Helmet>
 

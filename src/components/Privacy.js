@@ -6,7 +6,7 @@ const Privacy = () => {
     <div style={{ padding: "10px" }}>
       <Helmet>
         <title>Privacy Policy - SmartJPG</title>
-        <link rel="canonical" href="https://www.smartjpg.com/privacy" />
+        <link rel="canonical" href="https://www.smartjpg.app/privacy" />
         <meta name="description" content="SmartJPG Privacy Policy" />
       </Helmet>
       <div className="Privacy">
