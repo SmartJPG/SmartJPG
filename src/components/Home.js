@@ -10,7 +10,7 @@ const Home = () => {
         <title>
           SmartJPG - Free Image Converter, Background Remover, & PNG Converter
         </title>
-        <link rel="canonical" href="https://www.smartjpg.com/" />
+        <link rel="canonical" href="https://www.smartjpg.app/" />
         <meta
           name="description"
           content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."

@@ -24,17 +24,6 @@ const AI = () => {
   );
 };
 
-const Generating = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/de57f3f0-0321-4c9c-b763-53b4dcf260f3/cylbDB6Jt5.lottie"
-      loop
-      autoplay
-      style={{ width: "300px" }}
-    />
-  );
-};
-
 const PNG = () => {
   return (
     <DotLottieReact
@@ -85,7 +74,7 @@ const About = () => {
     <div className="about-us">
       <Helmet>
         <title>About SmartJPG - Your Image Optimization Experts</title>
-        <link rel="canonical" href="https://www.smartjpg.com/about" />
+        <link rel="canonical" href="https://www.smartjpg.app/about" />
         <meta
           name="description"
           content="Learn more about SmartJPG, our mission to provide top-notch image compression, conversion, and background removal tools tailored to your needs."
