@@ -1,32 +1,16 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { Document, Page } from "react-pdf";
 import SignaturePad from "react-signature-canvas";
 import Draggable from "react-draggable";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-// import "react-pdf/dist/esm/Page/TextLayer.css";
-// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-// import { GlobalWorkerOptions } from "pdfjs-dist";
 import { pdfjs } from "react-pdf";
 import { Helmet } from "react-helmet";
 import Description from "./Description";
 import LoadingBar from "react-top-loading-bar";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-// GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
-// import "@react-pdf-viewer/core/lib/styles/index.css";
-// pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.worker.min.js`;
 
-const Sign = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/d998a890-8cc5-4654-95b5-180a91823250/9B7AS2nPMF.lottie"
-      loop
-      autoplay
-      style={{ width: "300px", margin: "auto" }}
-    />
-  );
-};
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.worker.min.js`;
 
 const SignPdf = () => {
   const [file, setFile] = useState(null);
@@ -70,6 +54,29 @@ const SignPdf = () => {
     setNumPages(numPages);
   };
 
+  const cachedFile = useMemo(
+    () => (file ? URL.createObjectURL(file) : null),
+    [file]
+  );
+
+  const pdfContent = useMemo(() => {
+    if (!cachedFile || !numPages) return null;
+
+    return (
+      <>
+        {Array.from(new Array(numPages), (el, index) => (
+          <Page
+            key={index}
+            pageNumber={index + 1}
+            width={pdfWidth}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        ))}
+      </>
+    );
+  }, [cachedFile, numPages, pdfWidth]);
+
   const saveSignature = () => {
     const dataURL = sigPadRef.current.getTrimmedCanvas().toDataURL("image/png");
     setSignature(dataURL);
@@ -94,34 +101,14 @@ const SignPdf = () => {
     }));
   };
 
-  // const downloadSignedPdf = async () => {
-  //   if (!pdfContainerRef.current) {
-  //     alert("No signed PDF to download.");
-  //     return;
-  //   }
-
-  //   const container = pdfContainerRef.current;
-
-  //   const canvas = await html2canvas(container, {
-  //     backgroundColor: null,
-  //     scale: 2,
-  //     useCORS: true,
-  //   });
-
-  //   const imgData = canvas.toDataURL("image/png");
-
-  //   const pdfWidth = 210;
-  //   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-  //   const pdf = new jsPDF({
-  //     orientation: "portrait",
-  //     unit: "mm",
-  //     format: [pdfWidth, pdfHeight],
-  //   });
-
-  //   pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-  //   pdf.save("signed.pdf");
-  // };
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
 
   const downloadSignedPdf = async () => {
     if (!pdfContainerRef.current) {
@@ -179,15 +166,6 @@ const SignPdf = () => {
     }
   };
 
-  const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
   return (
     <div style={{ marginBottom: "100px" }}>
       <LoadingBar color={loadingColor} ref={loadingBarRef} height={6} />
@@ -219,7 +197,12 @@ const SignPdf = () => {
                 onClick={() => document.getElementById("fileUpload").click()}
               >
                 <div>
-                  <Sign />
+                  <DotLottieReact
+                    src="https://lottie.host/d998a890-8cc5-4654-95b5-180a91823250/9B7AS2nPMF.lottie"
+                    loop
+                    autoplay
+                    style={{ width: "300px", margin: "auto" }}
+                  />
                   <p className="drag-and-drop-text">
                     Click to upload a PDF here 👋🏻
                   </p>
@@ -242,33 +225,12 @@ const SignPdf = () => {
                 ref={pdfContainerRef}
                 style={{ position: "relative", width: "100%" }}
               >
-                {/* <Document
-                file={file ? URL.createObjectURL(file) : null}
-                onLoadSuccess={onDocumentLoadSuccess}
-                onLoadError={(error) =>
-                  console.error("Error loading PDF:", error)
-                }
-              >
-                {Array.from(new Array(numPages), (el, index) => (
-                  <Page key={index} pageNumber={index + 1} width={pdfWidth} />
-                ))}
-              </Document> */}
                 <Document
-                  file={file ? URL.createObjectURL(file) : null}
+                  file={cachedFile}
                   onLoadSuccess={onDocumentLoadSuccess}
-                  onLoadError={(error) =>
-                    console.error("Error loading PDF:", error)
-                  }
                   options={{ cMapUrl: "cmaps/", cMapPacked: true }}
                 >
-                  {Array.from(new Array(numPages), (el, index) => (
-                    <Page
-                      pageNumber={index + 1}
-                      width={pdfWidth}
-                      renderTextLayer={false}
-                      renderAnnotationLayer={false}
-                    />
-                  ))}
+                  {pdfContent}
                 </Document>
                 {signature && (
                   <Draggable>
@@ -311,9 +273,7 @@ const SignPdf = () => {
                   },
                 }}
               />
-
               <br />
-
               <div className="d-flex">
                 <button className="swap save" onClick={saveSignature}>
                   Save Signature
