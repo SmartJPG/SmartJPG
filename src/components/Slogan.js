@@ -21,10 +21,9 @@ const Slogan = () => {
     <div className="slogan">
       <h1 className="slogan-item">
         <div className="slogan-item highlight-text-container">
-          FREE
-          <span className={`highlight ${step}`}></span>
+          FREE & Unlimited <span className={`highlight ${step}`}></span>
         </div>{" "}
-        Image & PDF Converter
+        Digital Tools.
       </h1>
     </div>
   );
