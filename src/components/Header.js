@@ -47,6 +47,15 @@ const Header = () => {
       <div className="container">
         {!isScrolled ? (
           <Link className="navbar-brand" to="/">
+            <img
+              src="SmartJPG.png"
+              alt="Icon"
+              style={{
+                width: "25px",
+                marginRight: "0.25rem",
+                marginBottom: "0.35rem",
+              }}
+            />
             SmartJPG
           </Link>
         ) : (
@@ -73,8 +82,8 @@ const Header = () => {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link
-                to="/"
-                className={`swap ${page === "/" ? "current" : ""} nav-link`}
+                to="/jpg"
+                className={`swap ${page === "/jpg" ? "current" : ""} nav-link`}
               >
                 To JPG
               </Link>
