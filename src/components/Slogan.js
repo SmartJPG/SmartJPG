@@ -17,6 +17,7 @@ const Slogan = () => {
       setStep("four");
     }, 300);
   }, []);
+
   return (
     <div className="slogan">
       <h1 className="slogan-item">

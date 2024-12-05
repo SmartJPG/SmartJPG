@@ -5,33 +5,137 @@ body {
   padding: 0;
   margin: auto;
   transition: all 0.5s ease !important;
-  background-image: url("../public/oooscillate.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 100%;
   height: 100%;
   background-color: white;
 }
 
-/* body.night {
-  --dot-bg: #161616;
-  --dot-color: rgb(50, 199, 50);
-  --dot-size: 2px;
-  --dot-space: 70px;
+.Home {
+  background-image: url("../public/ccchaos.svg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
 
-  background: linear-gradient(
-        90deg,
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    linear-gradient(
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    var(--dot-color);
-} */
+.hero {
+  padding: 40px !important;
+  height: 100%;
+}
+
+.service {
+  position: relative;
+  border-radius: 40px;
+  padding: 5px 10px;
+  border: 1.5px solid transparent;
+  background-image: linear-gradient(white, white),
+    linear-gradient(to right, #e66465, #9198e5);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  width: 250px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.service.ai {
+  width: 200px;
+}
+
+.service.doc {
+  width: 300px !important;
+}
+
+.icon {
+  position: absolute;
+  left: 15px;
+  width: 22px;
+  margin-right: 20px;
+}
+
+.icon.doc {
+  position: absolute;
+  left: 15px;
+  width: 22px;
+  height: 25px;
+  margin-right: 20px;
+}
+
+.hero h1 {
+  filter: blur(10px);
+  opacity: 0;
+  animation: blurToClear 0.8s ease-out forwards;
+}
+
+.hero h1:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.hero h1:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.hero-des {
+  width: 80%;
+  filter: blur(10px);
+  opacity: 0;
+  animation: blurToClear 0.8s ease-out 0.6s forwards;
+}
+
+.try-btn {
+  padding: 8px 25px;
+  border-radius: 40px;
+  border: 4px solid transparent;
+  background-image: linear-gradient(white, white),
+    linear-gradient(to right, #e66465, #9198e5);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transition: all 0.3s ease;
+  filter: blur(10px);
+  opacity: 0;
+  animation: blurToClear 0.8s ease-out 0.6s forwards;
+}
+
+.try-btn:hover {
+  transform: translateY(-3px) !important;
+  background-image: linear-gradient(to right, #e66465, #9198e5);
+  color: white;
+  transform: scale(1.05);
+}
+
+@keyframes blurToClear {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.tool-container {
+  width: 120px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  margin-bottom: 10px;
+  border-left: 2px solid transparent;
+  border-bottom: 1.5px solid transparent;
+  background-image: linear-gradient(white, white),
+    linear-gradient(to right, #e66465, #9198e5);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tool-container {
+  border: 1px solid lightgrey;
+}
 
 h1,
 h2,
@@ -93,6 +197,7 @@ p {
   max-width: 1500px !important;
 }
 
+.Home,
 .JPG,
 .PNG,
 .PDF,
@@ -361,7 +466,8 @@ svg {
 }
 
 .navbar-brand {
-  font-size: 1.7rem !important;
+  font-size: 1.5rem !important;
+  line-height: 2rem;
   font-weight: 800;
   background-image: linear-gradient(to right, #e66465, #9198e5) !important;
   -webkit-background-clip: text !important;
@@ -827,6 +933,12 @@ th {
     width: 75% !important;
   }
   .question-container {
+    width: 100%;
+  }
+  .col-12.col-md-6.text-left {
+    text-align: center !important;
+  }
+  .hero-des {
     width: 100%;
   }
 }
