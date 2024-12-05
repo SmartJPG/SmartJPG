@@ -44,10 +44,7 @@ const Footer = () => (
                 marginTop: "0",
               }}
             />
-            <p>
-              SmartJPG is a free online tool for AI image generation, image
-              conversion, background removal, and signing PDFs.
-            </p>
+            <p>Simple. Fast. Secure.</p>
           </div>
 
           <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">

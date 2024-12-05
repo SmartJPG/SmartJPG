@@ -71,7 +71,7 @@ const Home = () => {
             </div>
           </div>
           <div className="col-12 col-md-6">
-            <div className="hero">
+            <div className="hero right">
               <div>
                 <img
                   src="SmartJPG.png"
