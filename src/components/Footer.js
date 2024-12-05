@@ -53,7 +53,7 @@ const Footer = () => (
           <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 className="text-uppercase fw-bold mb-4">Tools</h6>
             <p>
-              <a href="/" className="text-reset">
+              <a href="/jpg" className="text-reset">
                 JPG
               </a>
             </p>

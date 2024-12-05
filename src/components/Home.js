@@ -100,7 +100,7 @@ const Home = () => {
                   onClick={() => (window.location.href = "/remove-bg")}
                 >
                   <img src="./doc.png" alt="file" className="icon doc" />
-                  Remove background
+                  Remove Background
                 </div>
                 <div
                   className="service pdf"
@@ -120,7 +120,7 @@ const Home = () => {
                   className="service ai"
                   onClick={() => (window.location.href = "/ai-image")}
                 >
-                  AI image
+                  AI Image
                 </div>
               </div>
             </div>
