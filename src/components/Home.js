@@ -82,14 +82,14 @@ const Home = () => {
               <br />
               <div className="services">
                 <div
-                  className="service doc"
+                  className="service jpg"
                   onClick={() => (window.location.href = "/jpg")}
                 >
                   <img src="./doc.png" alt="file" className="icon doc" />
                   .jpg Converter
                 </div>
                 <div
-                  className="service doc"
+                  className="service png"
                   onClick={() => (window.location.href = "/png")}
                 >
                   <img src="./doc.png" alt="file" className="icon doc" />
