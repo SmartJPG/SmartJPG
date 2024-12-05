@@ -47,7 +47,7 @@ const Header = () => {
       <div className="container">
         {!isScrolled ? (
           <Link className="navbar-brand" to="/">
-            <img
+            {/* <img
               src="SmartJPG.png"
               alt="Icon"
               style={{
@@ -55,7 +55,7 @@ const Header = () => {
                 marginRight: "0.25rem",
                 marginBottom: "0.35rem",
               }}
-            />
+            /> */}
             SmartJPG
           </Link>
         ) : (
