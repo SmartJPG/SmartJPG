@@ -513,6 +513,8 @@ svg:hover {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .slogan-item {
