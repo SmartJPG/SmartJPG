@@ -445,6 +445,22 @@ h3 {
   margin-left: 15px;
 }
 
+.arrow-container {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+
+.arrow-right {
+  width: 35px;
+}
+
+.arrow-right:hover {
+  border-radius: 0px;
+  box-shadow: none;
+  transform: translateY(0px);
+}
+
 .icon-control:hover {
   transform: translateY(0px);
   box-shadow: none;
@@ -882,6 +898,7 @@ th {
   padding: 40px;
   background-color: #ecedff;
   border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contact-btn {
