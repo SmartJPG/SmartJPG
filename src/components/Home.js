@@ -87,6 +87,17 @@ const Home = () => {
                 >
                   <img src="./doc.png" alt="file" className="icon doc" />
                   .jpg Converter
+                  <div className="arrow-container">
+                    <svg
+                      className="arrow-right"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 36 36"
+                      aria-hidden="true"
+                      role="img"
+                    >
+                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                    </svg>
+                  </div>
                 </div>
                 <div
                   className="service png"
@@ -94,6 +105,17 @@ const Home = () => {
                 >
                   <img src="./doc.png" alt="file" className="icon doc" />
                   .png Converter
+                  <div className="arrow-container">
+                    <svg
+                      className="arrow-right"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 36 36"
+                      aria-hidden="true"
+                      role="img"
+                    >
+                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                    </svg>
+                  </div>
                 </div>
                 <div
                   className="service rm"
@@ -101,6 +123,17 @@ const Home = () => {
                 >
                   <img src="./doc.png" alt="file" className="icon doc" />
                   Remove Background
+                  <div className="arrow-container">
+                    <svg
+                      className="arrow-right"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 36 36"
+                      aria-hidden="true"
+                      role="img"
+                    >
+                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                    </svg>
+                  </div>
                 </div>
                 <div
                   className="service pdf"
@@ -108,6 +141,17 @@ const Home = () => {
                 >
                   <img src="./pdf.png" alt="file" className="icon" />
                   Merge PDFs
+                  <div className="arrow-container">
+                    <svg
+                      className="arrow-right"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 36 36"
+                      aria-hidden="true"
+                      role="img"
+                    >
+                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                    </svg>
+                  </div>
                 </div>
                 <div
                   className="service sign"
@@ -115,12 +159,34 @@ const Home = () => {
                 >
                   <img src="./pdf.png" alt="file" className="icon" />
                   Sign PDF
+                  <div className="arrow-container">
+                    <svg
+                      className="arrow-right"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 36 36"
+                      aria-hidden="true"
+                      role="img"
+                    >
+                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                    </svg>
+                  </div>
                 </div>
                 <div
                   className="service ai"
                   onClick={() => (window.location.href = "/ai-image")}
                 >
                   AI Image
+                  <div className="arrow-container">
+                    <svg
+                      className="arrow-right"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 36 36"
+                      aria-hidden="true"
+                      role="img"
+                    >
+                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
