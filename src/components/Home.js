@@ -129,23 +129,21 @@ const Home = () => {
       </div>
       <div>
         <div className="illustion">
-          <div>
-            <div className="row slogan" data-aos="fade-up">
-              <div className="col-12 col-md-6">
-                <h2 style={{ textAlign: "left" }}>
-                  Connect and Deliver Image Tools.
-                </h2>
-                <br />
-                <p style={{ textAlign: "left" }}>
-                  SmartJPG centralize image tools and make it simple,
-                  user-friendly. So you can find your wants and needs here.
-                </p>
-              </div>
-              <div className="col-12 col-md-6">
-                <Connect />
-              </div>
+          <div className="row slogan" data-aos="fade-up">
+            <div className="col-12 col-md-6">
+              <h2 style={{ textAlign: "left" }}>Connect,</h2>
+              <h2 style={{ textAlign: "left" }}>Deliver Image Tools.</h2>
+              <br />
+              <p style={{ textAlign: "left" }}>
+                SmartJPG centralize image tools and make it simple,
+                user-friendly. So you can find your wants and needs here.
+              </p>
+            </div>
+            <div className="col-12 col-md-6">
+              <Connect />
             </div>
           </div>
+
           <br />
           <br />
 
