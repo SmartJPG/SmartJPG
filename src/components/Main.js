@@ -961,6 +961,7 @@ const Main = ({ page }) => {
             cursor: "pointer",
             border: "2px dashed grey",
             margin: "auto",
+            width: pdfFiles.length < 1 ? "50%" : "auto",
           }}
         >
           <input
