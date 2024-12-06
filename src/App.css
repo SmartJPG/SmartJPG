@@ -864,15 +864,9 @@ footer {
   align-items: center;
 }
 
-.table-container {
-  margin: auto;
-  padding: 30px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
 table {
-  width: 100%;
+  margin: auto;
+  width: 90%;
   text-align: left;
   border-collapse: separate !important;
   border-spacing: 0;
@@ -976,7 +970,7 @@ th {
     width: 75% !important;
   }
   .question-container {
-    width: 100%;
+    width: 90%;
   }
   .col-12.col-md-6.text-left {
     text-align: center !important;
