@@ -232,6 +232,9 @@ const Home = () => {
           <br />
           <br />
           <div className="table-container">
+            <h2>Why SmartJPG?</h2>
+            <br />
+
             <table>
               <thead>
                 <tr>
@@ -248,32 +251,22 @@ const Home = () => {
                     limit.
                   </td>
                   <td>
-                    Other converter tools may have file size limitations or
-                    restricted features in free versions. It allows free
-                    conversions with limitations and offers premium plans for
-                    extended features.
+                    Other tools have file size limitations or restricted
+                    features in free versions.
                   </td>
                 </tr>
                 <tr>
                   <td>Sign-Up Requirement</td>
-                  <td>
-                    No sign-up required; users can access all features directly.
-                  </td>
-                  <td>
-                    Other converter tools may require registration for full
-                    functionality.
-                  </td>
+                  <td>No sign-up required.</td>
+                  <td>Require registration for full functionality.</td>
                 </tr>
                 <tr>
                   <td>Functions Offered</td>
                   <td>
-                    Provides AI image generation, image format conversion,
-                    background removal, and PDF merging/signing.
+                    Image conversion, background removal, and PDF
+                    merging/signing and AI image generation.
                   </td>
-                  <td>
-                    Other converter tools may offer limited functions or focus
-                    on specific conversions.
-                  </td>
+                  <td>Limited functions or focus on specific conversions.</td>
                 </tr>
               </tbody>
             </table>
@@ -299,6 +292,8 @@ const Home = () => {
               </button>
             </div>
           </div>
+
+          {/* happening now. */}
         </div>
       </div>
       <br />
