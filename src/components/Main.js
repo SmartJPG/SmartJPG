@@ -51,7 +51,7 @@ const PNG = () => {
       src="https://lottie.host/50fb4c47-15cb-4534-a2da-94f1285f6681/ruH4Ynpa82.lottie"
       loop
       autoplay
-      style={{ width: "300px", margin: "auto" }}
+      style={{ margin: "auto" }}
     />
   );
 };
@@ -62,7 +62,7 @@ const PDF = () => {
       src="https://lottie.host/b5126674-204a-452f-aa5c-8464d75b0d10/p89IHgP2z9.lottie"
       loop
       autoplay
-      style={{ width: "230px", margin: "auto" }}
+      style={{ margin: "auto" }}
     />
   );
 };
@@ -73,7 +73,7 @@ const Remove = () => {
       src="https://lottie.host/8ca58875-60bc-4f55-943f-8ec0af3cffdf/4yleSubbm8.lottie"
       loop
       autoplay
-      style={{ width: "300px", margin: "auto" }}
+      style={{ margin: "auto" }}
     />
   );
 };
@@ -930,17 +930,15 @@ const Main = ({ page }) => {
         <>
           {/* <Logo /> */}
 
-          <img
+          {/* <img
             src="SmartJPG.png"
             alt="SmartJPG"
             className="logo"
             style={{ width: "80px", height: "80px" }}
-          />
+          /> */}
 
-          {page === "ai-image" || page === "chat" ? (
+          {page === "ai-image" && (
             <h1 className="slogan ai-text slogan-item">{displayText}</h1>
-          ) : (
-            <Slogan />
           )}
         </>
       ) : null}

@@ -864,6 +864,13 @@ footer {
   align-items: center;
 }
 
+.table-container {
+  margin: auto;
+  padding: 30px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 table {
   width: 100%;
   text-align: left;
@@ -890,6 +897,15 @@ th {
   padding: 10px 16px;
   border-radius: 40px;
   margin-top: 40px;
+  text-decoration: none !important;
+  color: white !important;
+  width: 60% !important;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  background-color: rgb(23, 138, 23);
 }
 
 .question-container {
@@ -899,12 +915,6 @@ th {
   background-color: #ecedff;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact-btn {
-  text-decoration: none !important;
-  color: white !important;
-  width: 60% !important;
 }
 
 @media screen and (min-width: 991px) {
