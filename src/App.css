@@ -11,8 +11,10 @@ body {
 }
 
 .Home {
-  background-image: url("../public/ccchaos.svg") !important;
+  /* background-image: url("../public/ccchaos.svg") !important; */
+  background-image: url("../public/uuundulate.svg") !important;
   background-size: cover;
+  /* background-size: 200%; */
   background-repeat: no-repeat;
   background-position: center;
   padding-top: 70px;
