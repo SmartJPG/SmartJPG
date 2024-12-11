@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-      <loc>https://smartjpg.app/</loc>
+      <loc>https://www.smartjpg.app/</loc>
       <lastmod>2024-11-07</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/jpg</loc>
+      <loc>https://www.smartjpg.app/jpg</loc>
       <lastmod>2024-11-07</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/pdf</loc>
+      <loc>https://www.smartjpg.app/pdf</loc>
       <lastmod>2024-11-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/sign-pdf</loc>
+      <loc>https://www.smartjpg.app/sign-pdf</loc>
       <lastmod>2024-11-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/png</loc>
+      <loc>https://www.smartjpg.app/png</loc>
       <lastmod>2024-11-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/remove-bg</loc>
+      <loc>https://www.smartjpg.app/remove-bg</loc>
        <lastmod>2024-11-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/ai-image</loc>
+      <loc>https://www.smartjpg.app/ai-image</loc>
       <lastmod>2024-11-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/about</loc>
+      <loc>https://www.smartjpg.app/about</loc>
       <lastmod>2024-11-07</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/privacy</loc>
+      <loc>https://www.smartjpg.app/privacy</loc>
       <lastmod>2024-11-07</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://smartjpg.app/terms</loc>
+      <loc>https://www.smartjpg.app/terms</loc>
       <lastmod>2024-11-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
