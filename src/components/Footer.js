@@ -50,6 +50,11 @@ const Footer = () => (
           <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 className="text-uppercase fw-bold mb-4">Tools</h6>
             <p>
+              <a href="/smartify" className="text-reset">
+                Smartify AI Image Converter
+              </a>
+            </p>
+            {/* <p>
               <a href="/jpg" className="text-reset">
                 JPG
               </a>
@@ -78,16 +83,16 @@ const Footer = () => (
               <a href="/ai-image" className="text-reset">
                 AI Image Generation
               </a>
-            </p>
+            </p> */}
           </div>
 
           <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 className="text-uppercase fw-bold mb-4">Information</h6>
-            <p>
+            {/* <p>
               <a href="/about" className="text-reset">
                 About us
               </a>
-            </p>
+            </p> */}
             <p>
               <a href="/privacy" className="text-reset">
                 Privacy Policy

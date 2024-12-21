@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Connect = () => {
   return (
@@ -36,6 +38,7 @@ const Home = () => {
 
   return (
     <div>
+      <Header />
       <div className="Home">
         <Helmet>
           <title>
@@ -51,9 +54,8 @@ const Home = () => {
         <div className="row col-12">
           <div className="col-12 col-md-6 text-left">
             <div className="hero">
-              <h1>Free</h1>
-              <h1>Unlimited</h1>
-              <h1>Digital Tools</h1>
+              <h1>AI-Powered</h1>
+              <h1>Converting Tools</h1>
               <br />
               <p className="hero-des">
                 Free online tool to help you convert, compress, and remove
@@ -64,9 +66,9 @@ const Home = () => {
 
               <button
                 className="try-btn"
-                onClick={() => (window.location.href = "/jpg")}
+                onClick={() => (window.location.href = "/smartify")}
               >
-                Try SmartJPG for free
+                Try Smartify AI
               </button>
             </div>
           </div>
@@ -81,61 +83,24 @@ const Home = () => {
               </div>
               <br />
               <div className="services">
-                <div
-                  className="service jpg"
-                  onClick={() => (window.location.href = "/jpg")}
-                >
+                <div className="service jpg">
                   <img src="./doc.png" alt="file" className="icon doc" />
                   .jpg Converter
-                  <div className="arrow-container">
-                    <svg
-                      className="arrow-right"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 36 36"
-                      aria-hidden="true"
-                      role="img"
-                    >
-                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                    </svg>
-                  </div>
                 </div>
-                <div
-                  className="service png"
-                  onClick={() => (window.location.href = "/png")}
-                >
+                <div className="service png">
                   <img src="./doc.png" alt="file" className="icon doc" />
                   .png Converter
-                  <div className="arrow-container">
-                    <svg
-                      className="arrow-right"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 36 36"
-                      aria-hidden="true"
-                      role="img"
-                    >
-                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                    </svg>
-                  </div>
                 </div>
-                <div
-                  className="service rm"
-                  onClick={() => (window.location.href = "/remove-bg")}
-                >
+                <div className="service rm">
                   <img src="./doc.png" alt="file" className="icon doc" />
                   Remove Background
-                  <div className="arrow-container">
-                    <svg
-                      className="arrow-right"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 36 36"
-                      aria-hidden="true"
-                      role="img"
-                    >
-                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                    </svg>
-                  </div>
                 </div>
-                <div
+
+                <div className="service rm">
+                  <img src="./doc.png" alt="file" className="icon doc" />
+                  Remove Background
+                </div>
+                {/* <div
                   className="service pdf"
                   onClick={() => (window.location.href = "/pdf")}
                 >
@@ -170,24 +135,8 @@ const Home = () => {
                       <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
                     </svg>
                   </div>
-                </div>
-                <div
-                  className="service ai"
-                  onClick={() => (window.location.href = "/ai-image")}
-                >
-                  AI Image
-                  <div className="arrow-container">
-                    <svg
-                      className="arrow-right"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 36 36"
-                      aria-hidden="true"
-                      role="img"
-                    >
-                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                    </svg>
-                  </div>
-                </div>
+                </div> */}
+                <div className="service ai">AI Image</div>
               </div>
             </div>
           </div>
@@ -219,9 +168,9 @@ const Home = () => {
               <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
               <br />
               <p style={{ textAlign: "left" }}>
-                SmartJPG is a free online image tool that allows you to convert
-                images to JPG format, merge PDF files, remove image backgrounds,
-                and sign PDF documents digitally.
+                SmartJPG is a free AI-powered image converting tool that allows
+                you to convert images to JPG/PNG format, and remove image
+                backgrounds digitally.
               </p>
             </div>
             <div className="col-12 col-md-6">
@@ -231,7 +180,7 @@ const Home = () => {
 
           <br />
           <br />
-          <div className="table-container">
+          {/* <div className="table-container">
             <h2>Why SmartJPG?</h2>
             <br />
 
@@ -260,17 +209,9 @@ const Home = () => {
                   <td>No sign-up required.</td>
                   <td>Require registration for full functionality.</td>
                 </tr>
-                <tr>
-                  <td>Functions Offered</td>
-                  <td>
-                    Image conversion, background removal, and PDF
-                    merging/signing and AI image generation.
-                  </td>
-                  <td>Limited functions or focus on specific conversions.</td>
-                </tr>
               </tbody>
             </table>
-          </div>
+          </div> */}
 
           <br />
           <br />
@@ -298,6 +239,7 @@ const Home = () => {
       </div>
       <br />
       <br />
+      <Footer />
     </div>
   );
 };

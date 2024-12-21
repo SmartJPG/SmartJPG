@@ -7,43 +7,12 @@
       <priority>1.0</priority>
     </url>
     <url>
-      <loc>https://www.smartjpg.app/jpg</loc>
+      <loc>https://www.smartjpg.app/smartify</loc>
       <lastmod>2024-11-07</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>1.0</priority>
-    </url>
-    <url>
-      <loc>https://www.smartjpg.app/pdf</loc>
-      <lastmod>2024-11-20</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
     <url>
-      <loc>https://www.smartjpg.app/sign-pdf</loc>
-      <lastmod>2024-11-20</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-    </url>
-    <url>
-      <loc>https://www.smartjpg.app/png</loc>
-      <lastmod>2024-11-20</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-    </url>
-    <url>
-      <loc>https://www.smartjpg.app/remove-bg</loc>
-       <lastmod>2024-11-20</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-    </url>
-    <url>
-      <loc>https://www.smartjpg.app/ai-image</loc>
-      <lastmod>2024-11-20</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-    </url>
-    <url>
-      <loc>https://www.smartjpg.app/about</loc>
       <lastmod>2024-11-07</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>

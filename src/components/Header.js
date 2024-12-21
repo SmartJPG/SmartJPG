@@ -47,15 +47,6 @@ const Header = () => {
       <div className="container">
         {!isScrolled ? (
           <Link className="navbar-brand" to="/">
-            {/* <img
-              src="SmartJPG.png"
-              alt="Icon"
-              style={{
-                width: "25px",
-                marginRight: "0.25rem",
-                marginBottom: "0.35rem",
-              }}
-            /> */}
             SmartJPG
           </Link>
         ) : (
@@ -81,6 +72,16 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
+              <Link
+                to="/smartify"
+                className={`swap ${
+                  page === "/smartify" ? "current" : ""
+                } nav-link`}
+              >
+                Smartify
+              </Link>
+            </li>
+            {/* <li className="nav-item">
               <Link
                 to="/jpg"
                 className={`swap ${page === "/jpg" ? "current" : ""} nav-link`}
@@ -125,9 +126,9 @@ const Header = () => {
                   </Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <button
                 className={`nav-link dropdown-toggle ${
                   ["/png", "/remove-bg"].includes(page) ? "current" : ""
@@ -162,9 +163,9 @@ const Header = () => {
                   </Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 to="/ai-image"
                 className={`swap ${
@@ -173,7 +174,7 @@ const Header = () => {
               >
                 Image Generator
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item coffee">
               <a
                 target="_blank"

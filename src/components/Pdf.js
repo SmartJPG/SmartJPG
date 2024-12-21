@@ -2,10 +2,13 @@ import React from "react";
 import Main from "./Main";
 import { Helmet } from "react-helmet";
 import Description from "./Description";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Pdf = () => {
   return (
     <div className="PDF">
+      <Header />
       <Helmet>
         <title>Merge PDFs - Fast and Easy PDF Creation | SmartJPG</title>
         <link rel="canonical" href="https://www.smartjpg.app/pdf" />
@@ -17,6 +20,8 @@ const Pdf = () => {
       <Main page="pdf" />
 
       <Description />
+
+      <Footer />
     </div>
   );
 };

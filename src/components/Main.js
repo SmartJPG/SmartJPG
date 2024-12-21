@@ -3,14 +3,15 @@ import axios from "axios";
 import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoadingBar from "react-top-loading-bar";
-import Slogan from "./Slogan";
 import PdfComp from "./PdfComp";
 import JSZip from "jszip";
 import heic2any from "heic2any";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { saveAs } from "file-saver";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-const { REACT_APP_API_URL } = process.env;
+const { REACT_APP_API_URL, REACT_APP_OPENAI_API_KEY } = process.env;
 
 const JPG = () => {
   return (
@@ -62,7 +63,7 @@ const PDF = () => {
       src="https://lottie.host/b5126674-204a-452f-aa5c-8464d75b0d10/p89IHgP2z9.lottie"
       loop
       autoplay
-      style={{ margin: "auto" }}
+      style={{ margin: "auto", width: "50%" }}
     />
   );
 };
@@ -182,11 +183,21 @@ const Main = ({ page }) => {
   const [preview, setPreview] = useState(null);
   const [previewLoading, setPreviewLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [loadingColor, setLoadingColor] = useState("#f11946");
   const [inputPrompt, setInputPrompt] = useState("");
   const [prompt, setPrompt] = useState("");
   const [loadingImage, setLoadingImage] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
+  const [genImage, setGenImage] = useState(false);
+  const chatContainerRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [asked, setAsked] = useState(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 500,
+      mirror: false,
+    });
+  }, []);
 
   useEffect(() => {
     if (file) {
@@ -208,11 +219,19 @@ const Main = ({ page }) => {
     }
   }, [imageUrl]);
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, []);
+
   const handlePromptChange = (e) => {
     setInputPrompt(e.target.value);
   };
 
   const handleSearch = async () => {
+    setAsked(true);
     setPrompt(inputPrompt);
     setLoadingImage(true);
 
@@ -241,6 +260,7 @@ const Main = ({ page }) => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
+      handleSendMessage();
     }
   };
 
@@ -272,107 +292,34 @@ const Main = ({ page }) => {
     return () => clearInterval(interval);
   }, [page]);
 
-  // const handleFileChange = async (e) => {
-  //   const selectedFile = e.target.files[0];
-  //   setFile(selectedFile);
-
-  //   if (selectedFile) {
-  //     setPreviewLoading(true);
-
-  //     if (selectedFile.type === "image/heic") {
-  //       try {
-  //         const formData = new FormData();
-  //         formData.append("image", selectedFile);
-
-  //         const response = await axios.post(
-  //           `${REACT_APP_API_URL}/convert`,
-  //           formData,
-  //           { responseType: "blob" }
-  //         );
-
-  //         if (preview) {
-  //           URL.revokeObjectURL(preview);
-  //         }
-
-  //         const convertedBlob = new Blob([response.data], {
-  //           type: "image/jpeg",
-  //         });
-  //         const previewUrl = URL.createObjectURL(convertedBlob);
-  //         setPreview(previewUrl);
-  //       } catch (error) {
-  //         console.error("HEIC conversion failed:", error);
-  //         alert("Failed to preview HEIC image.");
-  //       }
-  //     } else {
-  //       const reader = new FileReader();
-  //       reader.onloadend = () => {
-  //         if (preview) {
-  //           URL.revokeObjectURL(preview);
-  //         }
-  //         setPreview(reader.result);
-  //       };
-  //       reader.readAsDataURL(selectedFile);
-  //     }
-
-  //     setTimeout(() => {
-  //       setPreviewLoading(false);
-  //     }, 1000);
-  //   }
-  // };
-
+  const [fileType, setFileType] = useState("");
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
-
-  // const handleFileChange = async (e) => {
-  //   const selectedFiles = Array.from(e.target.files);
-  //   setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
-
-  //   setPreviewLoading(true);
-
-  //   const newPreviews = await Promise.all(
-  //     selectedFiles.map((file) => {
-  //       return new Promise((resolve, reject) => {
-  //         if (file.type === "image/heic") {
-  //           const reader = new FileReader();
-  //           reader.onload = async (event) => {
-  //             try {
-  //               const heicArrayBuffer = event.target.result;
-  //               const heicBlob = new Blob([heicArrayBuffer]);
-  //               const convertedBlob = await heic2any({
-  //                 blob: heicBlob,
-  //                 toType: "image/jpeg",
-  //               });
-  //               const previewUrl = URL.createObjectURL(convertedBlob);
-  //               resolve(previewUrl);
-  //             } catch (error) {
-  //               console.error("Error converting HEIC file:", error);
-  //               reject(error);
-  //             }
-  //           };
-  //           reader.readAsArrayBuffer(file);
-  //         } else {
-  //           const reader = new FileReader();
-  //           reader.onloadend = () => {
-  //             resolve(reader.result);
-  //           };
-  //           reader.readAsDataURL(file);
-  //         }
-  //       });
-  //     })
-  //   );
-
-  //   setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
-  //   setPreviewLoading(false);
-  // };
+  const [choice, setChoice] = useState("");
+  const [downloaded, setDownloaded] = useState(false);
 
   const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
+    setFiles(selectedFiles);
+    setGenImage(true);
 
-    // If single file mode (e.g., removeBg)
+    if (selectedFiles.length > 0) {
+      const file = selectedFiles[0];
+      if (file && file.name) {
+        const fileExtension = file.name.includes(".")
+          ? file.name.split(".").pop()
+          : "unknown";
+        console.log(`File extension: ${fileExtension}`);
+        setFileType(fileExtension);
+      } else {
+        console.warn("Invalid file or missing name property.");
+        setFileType("unknown");
+      }
+    }
+
     if (page === "RM") {
       const singleFile = selectedFiles[0];
       setFile(singleFile);
-
       setPreviewLoading(true);
 
       if (singleFile.type === "image/heic") {
@@ -383,7 +330,7 @@ const Main = ({ page }) => {
             const heicBlob = new Blob([heicArrayBuffer]);
             const convertedBlob = await heic2any({
               blob: heicBlob,
-              toType: "image/png", // Assuming PNG format for background removal
+              toType: "image/png",
             });
             const previewUrl = URL.createObjectURL(convertedBlob);
             setPreview(previewUrl);
@@ -404,7 +351,6 @@ const Main = ({ page }) => {
         setPreviewLoading(false);
       }
     } else {
-      // For multiple file modes (e.g., JPG/PNG conversion)
       setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
       setPreviewLoading(true);
 
@@ -445,18 +391,18 @@ const Main = ({ page }) => {
     }
   };
 
-  const handleConvert = async (e) => {
+  const handleConvert = async (e, choice) => {
     e.stopPropagation();
-
+    setChoice(choice);
     if (files.length === 0) {
       alert("Please upload at least one image.");
       return;
     }
 
-    setLoadingColor(getRandomColor());
+    // setLoadingColor(getRandomColor());
 
     try {
-      ref.current.continuousStart();
+      // ref.current.continuousStart();
 
       if (files.length === 1) {
         const formData = new FormData();
@@ -527,20 +473,57 @@ const Main = ({ page }) => {
         saveAs(zipBlob, "SmartJPG-converted-images.zip");
       }
 
-      ref.current.complete();
+      // ref.current.complete();
+      setDownloaded(true);
     } catch (error) {
       console.error("Image conversion failed:", error);
       alert("Failed to convert the images.");
-      ref.current.complete();
+      // ref.current.complete();
     }
   };
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const [fileTypes, setFileTypes] = useState([]);
 
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsDragging(false);
+    setGenImage(true);
 
     const droppedFiles = Array.from(e.dataTransfer.files);
+
+    const fileDetails = droppedFiles.map((file) => {
+      const fileExtension = file.name.split(".").pop().toLowerCase();
+      return {
+        file,
+        fileType: file.type || fileExtension,
+      };
+    });
+
+    console.log("File Details:", fileDetails);
+
     setFiles((prevFiles) => [...prevFiles, ...droppedFiles]);
+    setFileTypes((prevTypes) => [
+      ...prevTypes,
+      ...fileDetails.map((detail) => detail.fileType),
+    ]);
 
     setPreviewLoading(true);
 
@@ -579,70 +562,6 @@ const Main = ({ page }) => {
       setPreviewLoading(false);
     });
   };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
-  // const handleConvert = async (e) => {
-  //   e.stopPropagation();
-
-  //   if (!file) {
-  //     alert("Please upload an image.");
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append("image", file);
-
-  //   setLoadingColor(getRandomColor());
-
-  //   try {
-  //     ref.current.continuousStart();
-
-  //     const response = await axios.post(
-  //       `${REACT_APP_API_URL}/convert`,
-  //       formData,
-  //       {
-  //         responseType: "blob",
-  //         onUploadProgress: (progressEvent) => {
-  //           const percentCompleted = Math.round(
-  //             (progressEvent.loaded * 50) / progressEvent.total
-  //           );
-  //           setProgress(percentCompleted);
-  //         },
-  //         onDownloadProgress: (progressEvent) => {
-  //           const percentCompleted = Math.round(
-  //             50 + (progressEvent.loaded * 50) / progressEvent.total
-  //           );
-  //           setProgress(percentCompleted);
-  //         },
-  //       }
-  //     );
-
-  //     saveAs(response.data, "smartjpg-converted-image.jpg");
-  //     ref.current.complete();
-  //   } catch (error) {
-  //     console.error("Image conversion failed:", error);
-  //     alert("Failed to convert the image.");
-  //     ref.current.complete();
-  //   }
-  // };
 
   const [fileName, setFileName] = useState("SmartJPG-merged");
 
@@ -686,64 +605,16 @@ const Main = ({ page }) => {
     }
   };
 
-  // const handleConvertToPng = async (e) => {
-  //   e.stopPropagation();
-
-  //   if (!file) {
-  //     alert("Please upload an image.");
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append("image", file);
-
-  //   setLoadingColor(getRandomColor());
-
-  //   try {
-  //     ref.current.continuousStart();
-
-  //     const response = await axios.post(
-  //       `${REACT_APP_API_URL}/convert-to-png`,
-  //       formData,
-  //       {
-  //         responseType: "blob",
-  //         onUploadProgress: (progressEvent) => {
-  //           const percentCompleted = Math.round(
-  //             (progressEvent.loaded * 50) / progressEvent.total
-  //           );
-  //           setProgress(percentCompleted);
-  //         },
-  //         onDownloadProgress: (progressEvent) => {
-  //           const percentCompleted = Math.round(
-  //             50 + (progressEvent.loaded * 50) / progressEvent.total
-  //           );
-  //           setProgress(percentCompleted);
-  //         },
-  //       }
-  //     );
-
-  //     saveAs(response.data, "smartpng-converted-image.png");
-  //     ref.current.complete();
-  //   } catch (error) {
-  //     console.error("PNG conversion failed:", error);
-  //     alert("Failed to convert the image.");
-  //     ref.current.complete();
-  //   }
-  // };
-
-  const handleConvertToPng = async (e) => {
+  const handleConvertToPng = async (e, choice) => {
     e.stopPropagation();
+    setChoice(choice);
 
     if (files.length === 0) {
       alert("Please upload at least one image.");
       return;
     }
 
-    setLoadingColor(getRandomColor());
-
     try {
-      ref.current.continuousStart();
-
       if (files.length === 1) {
         const formData = new FormData();
         formData.append("image", files[0]);
@@ -813,11 +684,11 @@ const Main = ({ page }) => {
         saveAs(zipBlob, "SmartPNG-converted-images.zip");
       }
 
-      ref.current.complete();
+      // ref.current.complete();
     } catch (error) {
       console.error("PNG conversion failed:", error);
       alert("Failed to convert the images.");
-      ref.current.complete();
+      // ref.current.complete();
     }
   };
 
@@ -845,22 +716,23 @@ const Main = ({ page }) => {
     setPdfFiles(selectedFiles);
   };
 
-  const removeBg = async (e) => {
+  const removeBg = async (e, choice) => {
     e.stopPropagation();
+    setChoice(choice);
 
-    if (!file) {
+    if (!files) {
       alert("Please upload an image.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image", files[0]);
 
-    setLoadingColor(getRandomColor());
+    // setLoadingColor(getRandomColor());
     setPreviewLoading(true);
 
     try {
-      ref.current.continuousStart();
+      // ref.current.continuousStart();
 
       const response = await axios.post(
         `${REACT_APP_API_URL}/remove-bg`,
@@ -890,58 +762,95 @@ const Main = ({ page }) => {
 
       saveAs(response.data, "background-removed-image.png");
 
-      ref.current.complete();
+      // ref.current.complete();
     } catch (error) {
       console.error("Background removal failed:", error);
       alert("Reached the limit of free requests. Please try again later.");
-      ref.current.complete();
+      // ref.current.complete();
     } finally {
       setPreviewLoading(false);
-      ref.current.complete();
+      setDownloaded(true);
+      // ref.current.complete();
     }
   };
 
-  const resetFiles = (e) => {
-    e.stopPropagation();
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState("");
 
-    setFiles([]);
-    setFile(null);
-    setPreview(null);
-    setPreviews([]);
-    setPdfFiles([]);
-    setProgress(0);
+  const handleSendMessage = async () => {
+    if (!userInput.trim()) return;
 
-    if (preview) {
-      URL.revokeObjectURL(preview);
+    const userMessage = {
+      role: "user",
+      content: userInput,
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setUserInput("");
+
+    try {
+      const response = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          model: "gpt-3.5-turbo",
+          messages: [...messages, userMessage],
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${REACT_APP_OPENAI_API_KEY}`,
+          },
+        }
+      );
+
+      const aiMessage = {
+        role: "assistant",
+        content: response.data.choices[0].message.content,
+      };
+
+      setMessages((prev) => [...prev, aiMessage]);
+      console.log("hi");
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+      alert("Failed to get a response from AI.");
     }
+  };
+
+  const [showInput, setShowInput] = useState(false);
+
+  const startOver = () => {
+    setFiles([]);
+    setPreviews([]);
+    setChoice("");
+    setDownloaded(false);
+    setGenImage(false);
+    setAsked(false);
+    setDisplayText("");
+    setMessages([]);
+    setUserInput("");
+    setProgress(0);
+    setPreview(null);
+    setPreviewLoading(false);
+    setFileType("");
+    setFileTypes([]);
+    setPdfFiles([]);
+    setFileName("SmartJPG-merged");
+    setPrompt("");
+    setInputPrompt("");
+    setImageUrl(null);
+    setGenImage(false);
+    setShowInput(false);
   };
 
   return (
     <div className="main">
-      <LoadingBar
+      {/* <LoadingBar
         ref={ref}
         color={loadingColor}
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
         height={6}
-      />
-
-      {pdfFiles.length < 1 ? (
-        <>
-          {/* <Logo /> */}
-
-          {/* <img
-            src="SmartJPG.png"
-            alt="SmartJPG"
-            className="logo"
-            style={{ width: "80px", height: "80px" }}
-          /> */}
-
-          {page === "ai-image" && (
-            <h1 className="slogan ai-text slogan-item">{displayText}</h1>
-          )}
-        </>
-      ) : null}
+      /> */}
 
       {page === "pdf" && (
         <div
@@ -987,349 +896,10 @@ const Main = ({ page }) => {
               </button>
             </>
           ) : (
-            <div>
+            <div style={{ textAlign: "center" }}>
               <PDF />
               <p className="drag-and-drop-text">Click to upload PDFs here 👋🏻</p>
               <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* {page === "split" && (
-        <div
-          style={{
-            position: "relative",
-            maxWidth: "100%",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: "20px",
-            padding: "20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            zIndex: "5",
-            cursor: "pointer",
-            border: "2px dashed grey",
-          }}
-          onClick={!file ? handlePdfContainerClick : null}
-        >
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={handlePfFileSplitChange}
-            ref={pdfFileInputRef}
-            id="fileInput"
-            style={{ margin: "10px 0", display: "none" }}
-          />
-
-          {file ? (
-            <>
-              <h4>Reorder PDFs</h4>
-              <SortableList items={pdfFiles} setItems={setPdfFiles} />
-            </>
-          ) : (
-            <div>
-              <img
-                src="split.gif"
-                alt="Upload PDF files for merging"
-                style={{ width: "25%", marginBottom: "10px" }}
-                title="Click to upload PDFs here"
-              />
-              <p className="drag-and-drop-text">Click to upload PDF here 👋🏻</p>
-              <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
-            </div>
-          )}
-
-          {file && (
-            <div style={{ marginTop: "20px" }}>
-              <div>
-                <SinglePdfComp pdfFile={preview} />
-              </div>
-            </div>
-          )}
-        </div>
-      )} */}
-
-      {page === "jpg" && (
-        <div
-          className="input-container"
-          onClick={handleContainerClick}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          style={{
-            width: "50%",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: "20px",
-            padding: "20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            zIndex: "5",
-            cursor: "pointer",
-            border: "2px dashed grey",
-            margin: "auto",
-          }}
-        >
-          <input
-            ref={fileInputRef}
-            id="fileInput"
-            className="input"
-            type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
-            multiple
-            onChange={handleFileChange}
-            style={{ margin: "10px 0", display: "none" }}
-          />
-
-          <div>
-            {files.length > 0 ? (
-              <button className="convert-btn" onClick={handleConvert}>
-                Convert to JPG
-                <span>
-                  <svg
-                    className="icon-control icon-control-chevronright"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 36 36"
-                    aria-hidden="true"
-                    role="img"
-                  >
-                    <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                  </svg>
-                </span>
-              </button>
-            ) : (
-              <div>
-                <JPG />
-                <p className="drag-and-drop-text">Drag & drop images here 👋🏻</p>
-                <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
-                  Supported Formats: HEIC, JPEG, WEBP, AVIF, SVG
-                </h3>
-              </div>
-            )}
-          </div>
-
-          {previews.length > 0 && (
-            <div>
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "10px",
-                }}
-              >
-                {previews.map((preview, index) => (
-                  <img
-                    key={index}
-                    src={preview}
-                    alt={`Preview ${index + 1}`}
-                    style={{
-                      maxWidth: "250px",
-                      maxHeight: "150px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
-                  />
-                ))}
-              </div>
-              <button className="convert-btn" onClick={resetFiles}>
-                Reset
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-      {page === "png" && (
-        <div
-          className="input-container"
-          onClick={handleContainerClick}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          style={{
-            width: "50%",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: "20px",
-            padding: "20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            zIndex: "5",
-            cursor: "pointer",
-            border: "2px dashed grey",
-            margin: "auto",
-          }}
-        >
-          <input
-            ref={fileInputRef}
-            id="fileInput"
-            className="input"
-            type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
-            multiple
-            onChange={handleFileChange}
-            style={{ margin: "10px 0", display: "none" }}
-          />
-
-          <div>
-            {files.length > 0 ? (
-              <button className="convert-btn" onClick={handleConvertToPng}>
-                Convert to PNG
-                <span>
-                  <svg
-                    className="icon-control icon-control-chevronright"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 36 36"
-                    aria-hidden="true"
-                    role="img"
-                  >
-                    <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                  </svg>
-                </span>
-              </button>
-            ) : (
-              <div>
-                <PNG />
-                <p className="drag-and-drop-text">Drag & drop images here 👋🏻</p>
-                <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
-                  Supported Formats: HEIC, JPEG, PNG, WEBP, AVIF, SVG
-                </h3>
-              </div>
-            )}
-          </div>
-
-          {previews.length > 0 && (
-            <div>
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "10px",
-                }}
-              >
-                {previews.map((preview, index) => (
-                  <img
-                    key={index}
-                    src={preview}
-                    alt={`Preview ${index + 1}`}
-                    style={{
-                      maxWidth: "250px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
-                  />
-                ))}
-              </div>
-              <button className="convert-btn" onClick={resetFiles}>
-                Reset
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
-      {page === "RM" && (
-        <div
-          className="input-container"
-          onClick={handleContainerClick}
-          onDrop={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const droppedFiles = Array.from(e.dataTransfer.files);
-            if (droppedFiles.length > 0) {
-              handleFileChange({ target: { files: [droppedFiles[0]] } });
-            }
-          }}
-          onDragOver={handleDragOver}
-          style={{
-            width: "50%",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: "20px",
-            padding: "20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            zIndex: "5",
-            cursor: "pointer",
-            border: "2px dashed grey",
-            margin: "auto",
-          }}
-        >
-          <input
-            ref={fileInputRef}
-            id="fileInput"
-            className="input"
-            type="file"
-            accept="image/jpeg, image/png, image/webp, image/avif, image/heic"
-            onChange={handleFileChange}
-            style={{ margin: "10px 0", display: "none" }}
-          />
-
-          <div>
-            {fileLoaded ? (
-              <button className="convert-btn" onClick={removeBg}>
-                Remove Background
-                <span>
-                  <svg
-                    className="icon-control icon-control-chevronright"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 36 36"
-                    aria-hidden="true"
-                    role="img"
-                  >
-                    <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                  </svg>
-                </span>
-              </button>
-            ) : (
-              <div>
-                <Remove />
-                <p className="drag-and-drop-text">
-                  Drag & drop a PNG image here 👋🏻
-                </p>
-                <h3 style={{ fontSize: "13px", fontWeight: "default" }}>
-                  Supported Formats: PNG
-                </h3>
-              </div>
-            )}
-          </div>
-
-          {preview && (
-            <div
-              style={{
-                marginTop: "20px",
-                width: "100%",
-                overflow: "hidden",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "20px",
-                backgroundColor: "#fff",
-                minHeight: "200px",
-              }}
-            >
-              <div>
-                {previewLoading ? (
-                  <div>
-                    <Loading />
-                    <p>Loading, please wait...</p>
-                  </div>
-                ) : (
-                  <img
-                    src={preview}
-                    alt="Preview"
-                    style={{
-                      maxWidth: "350px",
-                      objectFit: "contain",
-                      display: "block",
-                    }}
-                  />
-                )}
-                <button className="convert-btn" onClick={resetFiles}>
-                  Reset
-                </button>
-              </div>
             </div>
           )}
         </div>
@@ -1382,14 +952,278 @@ const Main = ({ page }) => {
         </div>
       )}
 
-      {page === "chat" && (
-        <div>
-          <input
-            className="input-ai"
-            type="text"
-            placeholder="Enter your message"
-            style={{ width: "70%" }}
-          />
+      {page === "smartify" && (
+        <div className="col-12 row smartify">
+          <div className={genImage ? "col-10" : "col-12"}>
+            <div
+              className={`input-container ${isDragging ? "drag-over" : ""}`}
+              onDragEnter={handleDragEnter}
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              style={{
+                position: "absolute",
+                width: "100%",
+                zIndex: "5",
+                pointerEvents: previews.length > 0 ? "none" : "auto",
+              }}
+            >
+              <input
+                ref={fileInputRef}
+                id="fileInput"
+                className="input"
+                type="file"
+                accept="image/jpeg, image/png, image/webp, image/avif, image/heic, image/svg"
+                multiple
+                onChange={handleFileChange}
+                style={{ margin: "10px 0", display: "none" }}
+              />
+            </div>
+            <div className="title">
+              <span className="smartify-text">Smartify AI</span>
+            </div>
+            <div className="Chat" ref={chatContainerRef}>
+              <div className={genImage ? "full" : "eighty"}>
+                <div className="chat-content">
+                  {previews && previews.length === 0 && (
+                    <div className="chat-block d-flex">
+                      <div className="ai-icon">
+                        <img
+                          src="/SmartJPG.png"
+                          alt=""
+                          style={{ width: "40px", marginRight: "10px" }}
+                        />
+                      </div>
+                      <div className="chat-container ai">
+                        <div className="chat">
+                          <p className="text-length">
+                            Hi there 👋🏻, please start with uploading documents
+                            here.
+                            <br />
+                            <br />
+                            <strong>Instruction Guide:</strong>
+                            <ul>
+                              <li>Support one or more files: To .jpg / .png</li>
+                              <li>Only support one file: Remove background</li>
+                              <li>
+                                Or you can enter your prompt to generate an
+                                image below 👇🏻.
+                              </li>
+                            </ul>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {previews && previews.length > 0 && (
+                    <div className="chat-block">
+                      <div className="chat-container user">
+                        <div className="chat">
+                          <p className="text-length">
+                            You attached {previews.length} documents:
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {previews && previews.length > 0 && (
+                    <div className="chat-block d-flex">
+                      <div className="ai-icon">
+                        <img
+                          src="/SmartJPG.png"
+                          alt=""
+                          style={{ width: "40px", marginRight: "10px" }}
+                        />
+                      </div>
+                      <div className="chat-container ai">
+                        <div className="chat">
+                          {fileTypes.length > 0 && (
+                            <div>
+                              <p className="text-length">
+                                Looks like{" "}
+                                {Array.from(new Set(fileTypes)).join(", ")}{" "}
+                                files. Let me know which format you want to
+                                convert them to. 👇🏻
+                              </p>
+                            </div>
+                          )}
+
+                          <div className="d-flex choices">
+                            <div
+                              className="try-btn chat"
+                              onClick={(e) => handleConvert(e, ".jpg")}
+                            >
+                              .jpg
+                            </div>
+                            <div
+                              className="try-btn chat"
+                              onClick={(e) => handleConvertToPng(e, ".png")}
+                            >
+                              .png
+                            </div>
+
+                            {previews.length === 1 && (
+                              <div
+                                className="try-btn chat"
+                                onClick={(e) =>
+                                  removeBg(e, "transparent background")
+                                }
+                              >
+                                Remove Background
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {asked && (
+                    <div className="chat-block d-flex">
+                      <div className="chat-container ai">
+                        <div className="ai-icon">
+                          <img
+                            src="/SmartJPG.png"
+                            alt=""
+                            style={{ width: "40px", marginRight: "10px" }}
+                          />
+                        </div>
+                        <div className="chat">
+                          {loadingImage ? (
+                            <div>
+                              <Generating />
+                              <p className="generating smartify-text">
+                                Generating image...
+                              </p>
+                            </div>
+                          ) : (
+                            imageUrl && (
+                              <img
+                                src={imageUrl}
+                                alt="AI Generated"
+                                style={{
+                                  maxWidth: "300px",
+                                  borderRadius: "20px",
+                                }}
+                              />
+                            )
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {choice && (
+                    <div className="chat-block">
+                      <div className="chat-container user">
+                        <div className="chat">
+                          <p className="text-length">
+                            Convert to {choice} format.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {downloaded && (
+                    <div className="chat-block d-flex">
+                      <div className="chat-container ai">
+                        <div className="ai-icon">
+                          <img
+                            src="/SmartJPG.png"
+                            alt=""
+                            style={{ width: "40px", marginRight: "10px" }}
+                          />
+                        </div>
+                        <div className="chat">
+                          <p className="text-length">
+                            Success! Your files are downloaded 🎉.
+                          </p>
+
+                          <div>
+                            <button
+                              className="question show-input smartify-text"
+                              onClick={startOver}
+                            >
+                              Upload other documents?
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              {!genImage ? (
+                <div className="twenty">
+                  {showInput ? (
+                    <div style={{ width: "100%" }}>
+                      <div className="input-field">
+                        <input
+                          className="input-area"
+                          placeholder="Message to generate image"
+                          value={inputPrompt}
+                          onChange={handlePromptChange}
+                          onKeyDown={handleKeyDown}
+                        />
+
+                        <div className="send-container">
+                          <button className="send-btn">Send</button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      className="show-input smartify-text"
+                      onClick={() => setShowInput(true)}
+                    >
+                      Wanna generate image instead?
+                    </button>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          </div>
+
+          <div className={genImage ? "col-2" : "d-none"}>
+            <div className="preview">
+              {previews.length > 0 && (
+                <div>
+                  {previews.map((preview, index) => (
+                    <img
+                      className="preview-image"
+                      key={index}
+                      src={preview}
+                      alt={`Preview ${index + 1}`}
+                      style={{
+                        maxWidth: "90%",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                        marginBottom: "10px",
+                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* <div className="col-6">
+            <h4>Reorder PDFs</h4>
+            <SortableList items={pdfFiles} setItems={setPdfFiles} />
+            <input
+              className="file-name-input"
+              type="text"
+              placeholder="File name: SmartJPG-merged.pdf"
+              onChange={(e) => setFileName(e.target.value)}
+            />
+            <button className="swap download-pdf" onClick={handlePdfMerge}>
+              Merge PDFs
+            </button>
+          </div> */}
         </div>
       )}
     </div>
