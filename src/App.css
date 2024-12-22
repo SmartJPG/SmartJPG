@@ -211,7 +211,7 @@ p {
 .RM,
 .Image {
   width: 100%;
-  margin: 100px 0px;
+  margin: 100px auto;
   transition: all 0.5s ease;
 }
 
