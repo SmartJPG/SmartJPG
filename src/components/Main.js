@@ -905,58 +905,13 @@ const Main = ({ page }) => {
         </div>
       )}
 
-      {page === "ai-image" && (
-        <div
-          className="input-container ai-image"
-          style={{
-            width: "50%",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: "20px",
-            padding: "20px",
-            zIndex: "5",
-            margin: "auto",
-          }}
-        >
-          <input
-            className="input-ai"
-            type="text"
-            placeholder="Enter a prompt"
-            value={inputPrompt}
-            onChange={handlePromptChange}
-            onKeyDown={handleKeyDown}
-          />
-
-          {!imageUrl && !loadingImage && (
-            <div>
-              <AI />
-            </div>
-          )}
-
-          {loadingImage ? (
-            <div>
-              <Generating />
-              <p>Generating image...</p>
-            </div>
-          ) : (
-            imageUrl && (
-              <img
-                src={imageUrl}
-                alt="AI Generated"
-                style={{ maxWidth: "300px", borderRadius: "20px" }}
-              />
-            )
-          )}
-        </div>
-      )}
-
       {page === "smartify" && (
         <div className="col-12 row smartify">
           <div className={genImage ? "col-10" : "col-12"}>
             <div
-              className={`input-container ${isDragging ? "drag-over" : ""}`}
+              className={`${genImage || asked ? "" : "input-container"} ${
+                isDragging ? "drag-over" : ""
+              }`}
               onDragEnter={handleDragEnter}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
@@ -1105,6 +1060,8 @@ const Main = ({ page }) => {
                                 alt="AI Generated"
                                 style={{
                                   maxWidth: "300px",
+                                  objectFit: "cover",
+                                  width: "100%",
                                   borderRadius: "20px",
                                 }}
                               />
