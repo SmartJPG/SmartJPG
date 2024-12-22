@@ -41,9 +41,7 @@ const Home = () => {
       <Header />
       <div className="Home">
         <Helmet>
-          <title>
-            SmartJPG - Free Image Converter, Background Remover, & PNG Converter
-          </title>
+          <title>SmartJPG - AI-Powered Converting Tools</title>
           <link rel="canonical" href="https://www.smartjpg.app/" />
           <meta
             name="description"
