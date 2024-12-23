@@ -1127,7 +1127,9 @@ const Main = ({ page }) => {
                         />
 
                         <div className="send-container">
-                          <button className="send-btn">Send</button>
+                          <button className="send-btn" onClick={handleSearch}>
+                            Send
+                          </button>
                         </div>
                       </div>
                     </div>
