@@ -191,6 +191,7 @@ const Main = ({ page }) => {
   const chatContainerRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [asked, setAsked] = useState(false);
+  const [loadingPreviews, setLoadingPreviews] = useState([]);
 
   useEffect(() => {
     AOS.init({
@@ -297,68 +298,23 @@ const Main = ({ page }) => {
   const [previews, setPreviews] = useState([]);
   const [choice, setChoice] = useState("");
   const [downloaded, setDownloaded] = useState(false);
+  const [loadingFiles, setLoadingFiles] = useState(false);
 
   const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
     setFiles(selectedFiles);
     setGenImage(true);
 
-    if (selectedFiles.length > 0) {
-      const file = selectedFiles[0];
-      if (file && file.name) {
-        const fileExtension = file.name.includes(".")
-          ? file.name.split(".").pop()
-          : "unknown";
-        console.log(`File extension: ${fileExtension}`);
-        setFileType(fileExtension);
-      } else {
-        console.warn("Invalid file or missing name property.");
-        setFileType("unknown");
-      }
-    }
+    setLoadingPreviews(selectedFiles.map(() => true));
+    setLoadingFiles(true);
 
-    if (page === "RM") {
-      const singleFile = selectedFiles[0];
-      setFile(singleFile);
-      setPreviewLoading(true);
+    const newPreviews = await Promise.all(
+      selectedFiles.map(
+        (file, index) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
 
-      if (singleFile.type === "image/heic") {
-        const reader = new FileReader();
-        reader.onload = async (event) => {
-          try {
-            const heicArrayBuffer = event.target.result;
-            const heicBlob = new Blob([heicArrayBuffer]);
-            const convertedBlob = await heic2any({
-              blob: heicBlob,
-              toType: "image/png",
-            });
-            const previewUrl = URL.createObjectURL(convertedBlob);
-            setPreview(previewUrl);
-          } catch (error) {
-            console.error("Error converting HEIC file:", error);
-            alert("Failed to process HEIC file.");
-          } finally {
-            setPreviewLoading(false);
-          }
-        };
-        reader.readAsArrayBuffer(singleFile);
-      } else {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setPreview(reader.result);
-        };
-        reader.readAsDataURL(singleFile);
-        setPreviewLoading(false);
-      }
-    } else {
-      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
-      setPreviewLoading(true);
-
-      const newPreviews = await Promise.all(
-        selectedFiles.map((file) => {
-          return new Promise((resolve, reject) => {
             if (file.type === "image/heic") {
-              const reader = new FileReader();
               reader.onload = async (event) => {
                 try {
                   const heicArrayBuffer = event.target.result;
@@ -372,23 +328,33 @@ const Main = ({ page }) => {
                 } catch (error) {
                   console.error("Error converting HEIC file:", error);
                   reject(error);
+                } finally {
+                  setLoadingPreviews((prev) => {
+                    const updated = [...prev];
+                    updated[index] = false;
+                    return updated;
+                  });
                 }
               };
               reader.readAsArrayBuffer(file);
             } else {
-              const reader = new FileReader();
               reader.onloadend = () => {
                 resolve(reader.result);
+                setLoadingPreviews((prev) => {
+                  const updated = [...prev];
+                  updated[index] = false;
+                  return updated;
+                });
               };
               reader.readAsDataURL(file);
             }
-          });
-        })
-      );
+          })
+      )
+    );
 
-      setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
-      setPreviewLoading(false);
-    }
+    setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
+
+    setLoadingFiles(false);
   };
 
   const handleConvert = async (e, choice) => {
@@ -699,10 +665,6 @@ const Main = ({ page }) => {
     fileInputRef.current.click();
   };
 
-  const handlePdfContainerClick = () => {
-    pdfFileInputRef.current.click();
-  };
-
   const handlePdfFilesChange = (e) => {
     const selectedFiles = Array.from(e.target.files).filter(
       (file) => file.type === "application/pdf"
@@ -855,7 +817,7 @@ const Main = ({ page }) => {
       {page === "pdf" && (
         <div
           className="input-container"
-          onClick={pdfFiles.length < 1 ? handlePdfContainerClick : null}
+          onClick={handleContainerClick}
           style={{
             position: "relative",
             flexDirection: "column",
@@ -912,6 +874,7 @@ const Main = ({ page }) => {
               className={`${genImage || asked ? "" : "input-container"} ${
                 isDragging ? "drag-over" : ""
               }`}
+              onClick={handleContainerClick}
               onDragEnter={handleDragEnter}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
@@ -971,6 +934,25 @@ const Main = ({ page }) => {
                     </div>
                   )}
 
+                  {loadingFiles && (
+                    <div className="chat-block d-flex">
+                      <div className="ai-icon">
+                        <img
+                          src="/SmartJPG.png"
+                          alt=""
+                          style={{ width: "40px", marginRight: "10px" }}
+                        />
+                      </div>
+                      <div className="chat-container ai">
+                        <div className="chat">
+                          <p className="text-length">
+                            Please wait while we process your images...
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {previews && previews.length > 0 && (
                     <div className="chat-block">
                       <div className="chat-container user">
@@ -984,51 +966,90 @@ const Main = ({ page }) => {
                   )}
 
                   {previews && previews.length > 0 && (
-                    <div className="chat-block d-flex">
-                      <div className="ai-icon">
-                        <img
-                          src="/SmartJPG.png"
-                          alt=""
-                          style={{ width: "40px", marginRight: "10px" }}
-                        />
-                      </div>
-                      <div className="chat-container ai">
-                        <div className="chat">
-                          {fileTypes.length > 0 && (
-                            <div>
-                              <p className="text-length">
-                                Looks like{" "}
-                                {Array.from(new Set(fileTypes)).join(", ")}{" "}
-                                files. Let me know which format you want to
-                                convert them to. 👇🏻
-                              </p>
-                            </div>
-                          )}
-
-                          <div className="d-flex choices">
-                            <div
-                              className="try-btn chat"
-                              onClick={(e) => handleConvert(e, ".jpg")}
-                            >
-                              .jpg
-                            </div>
-                            <div
-                              className="try-btn chat"
-                              onClick={(e) => handleConvertToPng(e, ".png")}
-                            >
-                              .png
-                            </div>
-
-                            {previews.length === 1 && (
-                              <div
-                                className="try-btn chat"
-                                onClick={(e) =>
-                                  removeBg(e, "transparent background")
-                                }
-                              >
-                                Remove Background
+                    <div>
+                      <div className="chat-block d-flex">
+                        <div className="ai-icon">
+                          <img
+                            src="/SmartJPG.png"
+                            alt=""
+                            style={{ width: "40px", marginRight: "10px" }}
+                          />
+                        </div>
+                        <div className="chat-container ai">
+                          <div className="chat">
+                            {fileTypes.length > 0 && (
+                              <div>
+                                <p className="text-length">
+                                  Looks like{" "}
+                                  {Array.from(new Set(fileTypes)).join(", ")}{" "}
+                                  files. Let me know which format you want to
+                                  convert them to. 👇🏻
+                                </p>
                               </div>
                             )}
+
+                            <div className="d-flex choices">
+                              <div
+                                className="try-btn chat"
+                                onClick={(e) => handleConvert(e, ".jpg")}
+                              >
+                                .jpg
+                              </div>
+                              <div
+                                className="try-btn chat"
+                                onClick={(e) => handleConvertToPng(e, ".png")}
+                              >
+                                .png
+                              </div>
+
+                              {previews.length === 1 && (
+                                <div
+                                  className="try-btn chat"
+                                  onClick={(e) =>
+                                    removeBg(e, "transparent background")
+                                  }
+                                >
+                                  Remove Background
+                                </div>
+                              )}
+                            </div>
+
+                            {previews.length > 1 && (
+                              <p className="reminder">Scroll to view 👉🏻</p>
+                            )}
+
+                            <div className="preview mobile">
+                              {previews.length > 0 &&
+                                previews.map((preview, index) => (
+                                  <div key={index}>
+                                    <img
+                                      className="preview-image mobile"
+                                      src={preview}
+                                      alt={`Preview ${index + 1}`}
+                                      style={{
+                                        objectFit: "cover",
+                                        borderRadius: "5px",
+                                        boxShadow:
+                                          "0 0 10px rgba(0, 0, 0, 0.2)",
+                                        opacity: loadingPreviews[index]
+                                          ? 0.5
+                                          : 1,
+                                      }}
+                                    />
+                                  </div>
+                                ))}
+                            </div>
+
+                            <div
+                              style={{ margin: "auto", textAlign: "center" }}
+                            >
+                              <button
+                                className="question show-input smartify-text"
+                                onClick={startOver}
+                              >
+                                Wrong files? Upload other documents?
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1148,25 +1169,44 @@ const Main = ({ page }) => {
 
           <div className={genImage ? "col-2" : "d-none"}>
             <div className="preview">
-              {previews.length > 0 && (
-                <div>
-                  {previews.map((preview, index) => (
+              {previews.length > 0 &&
+                previews.map((preview, index) => (
+                  <div
+                    key={index}
+                    style={{ position: "relative", display: "inline-block" }}
+                  >
+                    {loadingPreviews[index] && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          zIndex: 10,
+                          backgroundColor: "rgba(0, 0, 0, 0.5)",
+                          color: "white",
+                          padding: "10px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Loading...
+                      </div>
+                    )}
                     <img
                       className="preview-image"
-                      key={index}
                       src={preview}
                       alt={`Preview ${index + 1}`}
                       style={{
-                        maxWidth: "90%",
+                        maxWidth: "100%",
                         objectFit: "cover",
                         borderRadius: "10px",
                         marginBottom: "10px",
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                        opacity: loadingPreviews[index] ? 0.5 : 1,
                       }}
                     />
-                  ))}
-                </div>
-              )}
+                  </div>
+                ))}
             </div>
           </div>
 

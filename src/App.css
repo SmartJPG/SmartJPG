@@ -1120,6 +1120,36 @@ th {
   margin-top: 20px;
 }
 
+.preview.mobile {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: none;
+}
+
+.preview.mobile > div {
+  flex: 0 0 auto;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-image.mobile {
+  width: 80%;
+  height: auto;
+  margin: 0 !important;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  margin-top: 5px !important;
+}
+
+.reminder {
+  color: white !important;
+  display: none;
+}
+
 @media screen and (min-width: 991px) {
   .theme-container:hover > .theme-text {
     max-height: 200px;
@@ -1193,6 +1223,16 @@ th {
   }
   .hero-des {
     width: 100%;
+  }
+
+  .col-2 {
+    display: none;
+  }
+  .col-10 {
+    width: 100% !important;
+  }
+  .preview.mobile {
+    display: block;
   }
 }
 
