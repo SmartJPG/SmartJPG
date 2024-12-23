@@ -968,6 +968,10 @@ th {
   transition: all 0.5s ease !important;
 }
 
+.chat-content {
+  width: 100%;
+}
+
 .heading {
   padding-bottom: 5px;
   text-align: left;
@@ -1015,10 +1019,11 @@ th {
   background-color: rgb(100, 100, 100);
   border-radius: 20px;
   margin: auto;
-  width: 80%;
+  width: 60%;
   padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: popup-animation 0.5s ease-out;
+  transition: all 0.5s ease !important;
 }
 
 .input-area {
@@ -1133,6 +1138,7 @@ th {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .preview-image.mobile {
@@ -1233,6 +1239,9 @@ th {
   }
   .preview.mobile {
     display: block;
+  }
+  .input-field {
+    width: 80%;
   }
 }
 
