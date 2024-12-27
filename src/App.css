@@ -272,9 +272,11 @@ p {
   transition: all ease 0.5s;
 }
 
-.input-container.drag-over {
+.input-container.drag-over,
+.input-container:hover {
   border: 3px dashed #e66465 !important;
   background-color: rgba(88, 88, 88, 0.6) !important;
+  cursor: pointer;
 }
 
 .original-theme {
@@ -536,10 +538,10 @@ svg {
   text-align: center;
 }
 
-svg:hover {
+/* svg:hover {
   transform: translateY(-1px);
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-}
+} */
 
 .absolute {
   position: absolute;
@@ -1089,21 +1091,22 @@ th {
   text-align: left;
 }
 
-.send-container {
-  text-align: left;
-}
-
 .send-btn {
   margin-top: 20px;
   background-color: white;
   border: 0px;
-  padding: 5px 20px;
-  border-radius: 10px;
   transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 35px;
+  text-align: center;
+  padding: 5px 5px;
+  cursor: pointer;
+  margin-right: 0px;
+  margin-left: auto;
 }
 
 .send-btn:hover {
-  background-color: rgb(232, 232, 232);
+  background-color: rgb(204, 204, 204);
 }
 
 .choices {

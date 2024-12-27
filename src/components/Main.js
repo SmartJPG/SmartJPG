@@ -9,6 +9,8 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { saveAs } from "file-saver";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 const { REACT_APP_API_URL, REACT_APP_OPENAI_API_KEY } = process.env;
 
@@ -88,16 +90,16 @@ const PdfViewer = ({ pdfUrl }) => (
   </div>
 );
 
-const Loading = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/3cee3565-689b-44df-a329-d04cb0da4f8c/M39SVlV3es.lottie"
-      loop
-      autoplay
-      style={{ width: "300px", margin: "auto" }}
-    />
-  );
-};
+// const Loading = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/3cee3565-689b-44df-a329-d04cb0da4f8c/M39SVlV3es.lottie"
+//       loop
+//       autoplay
+//       style={{ width: "300px", margin: "auto" }}
+//     />
+//   );
+// };
 
 const SortableItem = ({
   file,
@@ -257,6 +259,7 @@ const Main = ({ page }) => {
       setLoadingImage(false);
     }
   };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
@@ -1075,18 +1078,52 @@ const Main = ({ page }) => {
                             </div>
                           ) : (
                             imageUrl && (
-                              <img
-                                src={imageUrl}
-                                alt="AI Generated"
-                                style={{
-                                  maxWidth: "300px",
-                                  objectFit: "cover",
-                                  width: "100%",
-                                  borderRadius: "20px",
-                                }}
-                              />
+                              <div>
+                                <img
+                                  src={imageUrl}
+                                  alt="AI Generated"
+                                  style={{
+                                    maxWidth: "300px",
+                                    objectFit: "cover",
+                                    width: "100%",
+                                    borderRadius: "20px",
+                                  }}
+                                />
+                              </div>
                             )
                           )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {asked && imageUrl && (
+                    <div className="chat-block d-flex">
+                      <div className="chat-container ai">
+                        <div className="ai-icon">
+                          <img
+                            // src="/SmartJPG.png"
+                            alt=""
+                            style={{ width: "40px", marginRight: "10px" }}
+                          />
+                        </div>
+                        <div className="chat">
+                          <div>
+                            <p className="text-length">
+                              There you go! What do you think? 😊
+                            </p>
+
+                            <div
+                              style={{ margin: "auto", textAlign: "center" }}
+                            >
+                              <button
+                                className="question show-input smartify-text"
+                                onClick={startOver}
+                              >
+                                Wanna switch to converting files?
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1147,9 +1184,13 @@ const Main = ({ page }) => {
                         />
 
                         <div className="send-container">
-                          <button className="send-btn" onClick={handleSearch}>
-                            Send
-                          </button>
+                          <div className="send-btn">
+                            <FontAwesomeIcon
+                              icon={faArrowUp}
+                              onClick={handleSearch}
+                              size="lg"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
