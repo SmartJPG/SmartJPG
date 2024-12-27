@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import axios from "axios";
 import "./../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import LoadingBar from "react-top-loading-bar";
 import PdfComp from "./PdfComp";
 import JSZip from "jszip";
 import heic2any from "heic2any";
@@ -13,27 +12,27 @@ import "aos/dist/aos.css";
 
 const { REACT_APP_API_URL, REACT_APP_OPENAI_API_KEY } = process.env;
 
-const JPG = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/0769f4e1-df15-498a-99af-00fb60a60c39/qt9XGtqX0e.lottie"
-      loop
-      autoplay
-      style={{ margin: "auto" }}
-    />
-  );
-};
+// const JPG = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/0769f4e1-df15-498a-99af-00fb60a60c39/qt9XGtqX0e.lottie"
+//       loop
+//       autoplay
+//       style={{ margin: "auto" }}
+//     />
+//   );
+// };
 
-const AI = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/41025657-829d-4653-9b43-d2d976a17236/8S7xCManYf.lottie"
-      loop
-      autoplay
-      style={{ width: "250px" }}
-    />
-  );
-};
+// const AI = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/41025657-829d-4653-9b43-d2d976a17236/8S7xCManYf.lottie"
+//       loop
+//       autoplay
+//       style={{ width: "250px" }}
+//     />
+//   );
+// };
 
 const Generating = () => {
   return (
@@ -41,21 +40,21 @@ const Generating = () => {
       src="https://lottie.host/de57f3f0-0321-4c9c-b763-53b4dcf260f3/cylbDB6Jt5.lottie"
       loop
       autoplay
-      style={{ width: "300px" }}
+      style={{ width: "100%", maxWidth: "300px" }}
     />
   );
 };
 
-const PNG = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/50fb4c47-15cb-4534-a2da-94f1285f6681/ruH4Ynpa82.lottie"
-      loop
-      autoplay
-      style={{ margin: "auto" }}
-    />
-  );
-};
+// const PNG = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/50fb4c47-15cb-4534-a2da-94f1285f6681/ruH4Ynpa82.lottie"
+//       loop
+//       autoplay
+//       style={{ margin: "auto" }}
+//     />
+//   );
+// };
 
 const PDF = () => {
   return (
@@ -68,16 +67,16 @@ const PDF = () => {
   );
 };
 
-const Remove = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/8ca58875-60bc-4f55-943f-8ec0af3cffdf/4yleSubbm8.lottie"
-      loop
-      autoplay
-      style={{ margin: "auto" }}
-    />
-  );
-};
+// const Remove = () => {
+//   return (
+//     <DotLottieReact
+//       src="https://lottie.host/8ca58875-60bc-4f55-943f-8ec0af3cffdf/4yleSubbm8.lottie"
+//       loop
+//       autoplay
+//       style={{ margin: "auto" }}
+//     />
+//   );
+// };
 
 const PdfViewer = ({ pdfUrl }) => (
   <div>
