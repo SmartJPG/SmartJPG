@@ -10,7 +10,7 @@ import { saveAs } from "file-saver";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const { REACT_APP_API_URL, REACT_APP_OPENAI_API_KEY } = process.env;
 
@@ -301,6 +301,18 @@ const Main = ({ page }) => {
   const [choice, setChoice] = useState("");
   const [downloaded, setDownloaded] = useState(false);
   const [loadingFiles, setLoadingFiles] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(() => {
+    const storedValue = localStorage.getItem("showDisclaimer");
+    return storedValue !== "false";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("showDisclaimer", showDisclaimer);
+  }, [showDisclaimer]);
+
+  const handleCloseDisclaimer = () => {
+    setShowDisclaimer(false);
+  };
 
   const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -873,9 +885,14 @@ const Main = ({ page }) => {
         <div className="col-12 row smartify">
           <div className={genImage ? "col-10" : "col-12"}>
             <div
-              className={`${genImage || asked ? "" : "input-container"} ${
-                isDragging ? "drag-over" : ""
-              }`}
+              className={`${genImage || asked ? "" : "input-container"}
+${showDisclaimer && !(genImage || asked) ? "sixty" : ""}
+${
+  showDisclaimer !== null && showDisclaimer === "false" && !(genImage || asked)
+    ? "eighty"
+    : ""
+}
+${isDragging ? "drag-over" : ""}`}
               onClick={handleContainerClick}
               onDragEnter={handleDragEnter}
               onDrop={handleDrop}
@@ -903,7 +920,11 @@ const Main = ({ page }) => {
               <span className="smartify-text">Smartify AI</span>
             </div>
             <div className="Chat" ref={chatContainerRef}>
-              <div className={genImage ? "full" : "eighty"}>
+              <div
+                className={
+                  genImage ? "full" : showDisclaimer ? "sixty" : "eighty"
+                }
+              >
                 <div className="chat-content">
                   {previews && previews.length === 0 && (
                     <div className="chat-block d-flex">
@@ -1171,9 +1192,47 @@ const Main = ({ page }) => {
                 </div>
               </div>
               {!genImage ? (
-                <div className="twenty">
-                  {showInput ? (
-                    <div style={{ width: "100%" }}>
+                <div className={`${showDisclaimer ? "fourty" : "twenty"}`}>
+                  <div style={{ width: "100%" }}>
+                    {showDisclaimer && (
+                      <div className="disclaimer">
+                        <div className="hide" onClick={handleCloseDisclaimer}>
+                          <FontAwesomeIcon
+                            icon={faXmark}
+                            size="xl"
+                            color="white"
+                          />
+                        </div>
+                        <h5 className="disclaimer-text">
+                          Welcome to{" "}
+                          <span className="smartify-text">Smartify</span>, your
+                          personal AI assistant.
+                        </h5>
+
+                        <p className="disclaimer-text">
+                          <a
+                            href="https://www.smartjpg.app/terms"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Smartify Terms
+                          </a>{" "}
+                          Opens in a new window and the{" "}
+                          <a
+                            href="https://www.smartjpg.app/privacy"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Smartify Privacy
+                          </a>{" "}
+                          Notice Opens in a new window apply. Chats will not be
+                          reviews at this moment. Smartify can make mistakes, so
+                          double-check it.
+                        </p>
+                      </div>
+                    )}
+
+                    {showInput ? (
                       <div className="input-field">
                         <input
                           className="input-area"
@@ -1193,15 +1252,17 @@ const Main = ({ page }) => {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    <button
-                      className="show-input smartify-text"
-                      onClick={() => setShowInput(true)}
-                    >
-                      Wanna generate image instead?
-                    </button>
-                  )}
+                    ) : (
+                      <div style={{ textAlign: "center" }}>
+                        <button
+                          className="show-input smartify-text"
+                          onClick={() => setShowInput(true)}
+                        >
+                          Wanna generate image instead?
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ) : null}
             </div>
