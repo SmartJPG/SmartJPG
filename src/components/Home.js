@@ -89,10 +89,6 @@ const Home = () => {
                   <img src="./doc.png" alt="file" className="icon doc" />
                   .png Converter
                 </div>
-                <div className="service rm">
-                  <img src="./doc.png" alt="file" className="icon doc" />
-                  Remove Background
-                </div>
 
                 <div className="service rm">
                   <img src="./doc.png" alt="file" className="icon doc" />
@@ -134,7 +130,7 @@ const Home = () => {
                     </svg>
                   </div>
                 </div> */}
-                <div className="service ai">AI Image</div>
+                <div className="service ai">AI Generated Image</div>
               </div>
             </div>
           </div>

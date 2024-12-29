@@ -38,7 +38,7 @@ body {
   padding: 5px 10px;
   border: 1.5px solid transparent;
   background-image: linear-gradient(white, white),
-    linear-gradient(to right, #e66465, #9198e5);
+    linear-gradient(to right, #9198e5, #e66465);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   width: 250px;
