@@ -926,7 +926,7 @@ ${isDragging ? "drag-over" : ""}`}
                 }
               >
                 <div className="chat-content">
-                  {previews && previews.length === 0 && (
+                  {previews && previews.length === 0 && !asked && (
                     <div className="chat-block d-flex">
                       <div className="ai-icon">
                         <img
@@ -935,6 +935,7 @@ ${isDragging ? "drag-over" : ""}`}
                           style={{ width: "40px", marginRight: "10px" }}
                         />
                       </div>
+
                       <div className="chat-container ai">
                         <div className="chat">
                           <p className="text-length">
