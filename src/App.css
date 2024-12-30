@@ -260,6 +260,14 @@ p {
   text-align: center;
 }
 
+.input-container {
+  height: 80vh;
+  position: relative;
+  z-index: 5;
+  background-color: transparent;
+  transition: all ease 0.5s;
+}
+
 .input-container.eighty {
   height: 80vh;
   position: relative;
