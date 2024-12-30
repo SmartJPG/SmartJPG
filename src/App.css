@@ -987,7 +987,6 @@ th {
 
 .chat-content {
   width: 100%;
-  min-height: 100%;
   margin-top: 30px;
   padding-top: 10px;
 }
@@ -1009,22 +1008,18 @@ th {
 
 .full {
   height: 95vh;
-  overflow-y: auto;
 }
 
 .eighty {
   height: 75vh;
-  overflow-y: auto;
 }
 
 .sixty {
   height: 55vh;
-  overflow-y: auto;
 }
 
 .fourty {
   height: 40vh;
-  overflow-y: auto;
   padding: 16px;
   padding-bottom: 0px;
 }
@@ -1036,6 +1031,18 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.greeting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.greeting.des {
+  color: white !important;
+  margin-top: 20px;
 }
 
 ::placeholder {
@@ -1138,6 +1145,7 @@ th {
 }
 
 .choices {
+  flex-wrap: wrap;
   margin-top: 10px;
   justify-content: center;
   align-items: center;
