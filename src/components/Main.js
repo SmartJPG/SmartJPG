@@ -928,8 +928,10 @@ ${isDragging ? "drag-over" : ""}`}
                 <div className="chat-content">
                   {previews && previews.length === 0 && !asked && (
                     <div>
-                      <div className="greeting smartify-text">
-                        <h2>Hello, click or upload to start.</h2>
+                      <div className="greeting">
+                        <span className="greeting smartify-text">
+                          Hello, click or drag to start.
+                        </span>
                       </div>
                       <p className="greeting des">Current only accept images</p>
                     </div>

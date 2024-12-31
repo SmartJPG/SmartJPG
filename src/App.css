@@ -543,6 +543,7 @@ svg {
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
+  z-index: 1000;
 }
 
 .generating {
@@ -1040,6 +1041,10 @@ th {
   height: 100%;
 }
 
+.greeting.smartify-text {
+  font-size: 2rem !important;
+}
+
 .greeting.des {
   color: white !important;
   margin-top: 20px;
@@ -1272,7 +1277,6 @@ th {
   .check-here-div {
     display: none;
   }
-
   .theme-container {
     display: none;
     margin-top: 5px;
