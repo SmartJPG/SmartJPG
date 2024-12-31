@@ -264,6 +264,7 @@ const Main = ({ page }) => {
     if (e.key === "Enter") {
       handleSearch();
       handleSendMessage();
+      setInputPrompt("");
     }
   };
 
@@ -980,16 +981,12 @@ ${isDragging ? "drag-over" : ""}`}
                         </div>
                         <div className="chat-container ai">
                           <div className="chat">
-                            {fileTypes.length > 0 && (
-                              <div>
-                                <p className="text-length">
-                                  Looks like{" "}
-                                  {Array.from(new Set(fileTypes)).join(", ")}{" "}
-                                  files. Let me know which format you want to
-                                  convert them to. 👇🏻
-                                </p>
-                              </div>
-                            )}
+                            <div>
+                              <p className="text-length">
+                                Let me know which format you want to convert
+                                them to. 👇🏻
+                              </p>
+                            </div>
 
                             <div className="d-flex choices">
                               <div
@@ -1054,6 +1051,18 @@ ${isDragging ? "drag-over" : ""}`}
                               </button>
                             </div>
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {asked && (
+                    <div className="chat-block">
+                      <div className="chat-container user">
+                        <div className="chat">
+                          <p className="text-length">
+                            Image prompt: "{prompt}"
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1222,7 +1231,15 @@ ${isDragging ? "drag-over" : ""}`}
                           onKeyDown={handleKeyDown}
                         />
 
-                        <div className="send-container">
+                        <div className="send-btn">
+                          <FontAwesomeIcon
+                            icon={faArrowUp}
+                            onClick={handleSearch}
+                            size="lg"
+                          />
+                        </div>
+
+                        {/* <div className="send-container">
                           <div className="send-btn">
                             <FontAwesomeIcon
                               icon={faArrowUp}
@@ -1230,7 +1247,7 @@ ${isDragging ? "drag-over" : ""}`}
                               size="lg"
                             />
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     ) : (
                       <div style={{ textAlign: "center" }}>
@@ -1286,6 +1303,7 @@ ${isDragging ? "drag-over" : ""}`}
                         opacity: loadingPreviews[index] ? 0.5 : 1,
                       }}
                     />
+                    <p className="preview-text">{files[index].name}</p>
                   </div>
                 ))}
             </div>
