@@ -917,7 +917,7 @@ ${isDragging ? "drag-over" : ""}`}
               />
             </div>
             <div className="title">
-              <span className="smartify-text">Smartify AI</span>
+              <span className="model-name">Smartify 1.0</span>
             </div>
             <div className="Chat" ref={chatContainerRef}>
               <div
