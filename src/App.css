@@ -197,7 +197,7 @@ p {
 }
 
 .navbar.scrolled {
-  width: 60% !important;
+  width: 30% !important;
 }
 
 .Home,
@@ -347,8 +347,8 @@ p {
 }
 
 .main {
-  /* padding: 10px; */
-  width: 100%;
+  max-width: 1500px;
+  margin: auto;
 }
 
 .SmartJPG {
@@ -418,14 +418,6 @@ h3 {
   margin-top: 20px;
 }
 
-.swap.download-pdf {
-  background-color: rgb(28, 160, 28);
-  color: white;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  margin-top: 20px;
-  width: 80%;
-}
-
 .resize {
   width: 100%;
   height: 100%;
@@ -443,13 +435,6 @@ h3 {
 .coffee {
   margin: auto;
   text-align: center;
-}
-
-.download {
-  background: linear-gradient(#e66465, #9198e5) !important;
-  color: white !important;
-  font-weight: bold !important;
-  border-radius: 10px !important;
 }
 
 .swap.current {
@@ -1317,7 +1302,7 @@ th {
     width: 100% !important;
   }
   .navbar.scrolled {
-    width: 75% !important;
+    width: 60% !important;
   }
   .question-container {
     width: 90%;
