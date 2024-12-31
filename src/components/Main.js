@@ -927,35 +927,6 @@ ${isDragging ? "drag-over" : ""}`}
               >
                 <div className="chat-content">
                   {previews && previews.length === 0 && !asked && (
-                    // <div className="chat-block d-flex">
-                    //   <div className="ai-icon">
-                    //     <img
-                    //       src="/SmartJPG.png"
-                    //       alt=""
-                    //       style={{ width: "40px", marginRight: "10px" }}
-                    //     />
-                    //   </div>
-
-                    //   <div className="chat-container ai">
-                    //     <div className="chat">
-                    //       <p className="text-length">
-                    //         Hi there 👋🏻, please start with uploading documents
-                    //         here.
-                    //         <br />
-                    //         <br />
-                    //         <strong>Instruction Guide:</strong>
-                    //         <ul>
-                    //           <li>Support one or more files: To .jpg / .png</li>
-                    //           <li>Only support one file: Remove background</li>
-                    //           <li>
-                    //             Or you can enter your prompt to generate an
-                    //             image below 👇🏻.
-                    //           </li>
-                    //         </ul>
-                    //       </p>
-                    //     </div>
-                    //   </div>
-                    // </div>
                     <div>
                       <div className="greeting smartify-text">
                         <h2>Hello, click or upload to start.</h2>
