@@ -261,7 +261,8 @@ p {
 }
 
 .input-container {
-  height: 80vh;
+  margin-top: 40px;
+  height: 75vh;
   position: relative;
   z-index: 5;
   background-color: transparent;
@@ -269,7 +270,7 @@ p {
 }
 
 .input-container.eighty {
-  height: 80vh;
+  height: 75vh;
   position: relative;
   z-index: 5;
   background-color: transparent;
@@ -277,7 +278,7 @@ p {
 }
 
 .input-container.sixty {
-  height: 60vh;
+  height: 55vh;
   position: relative;
   z-index: 5;
   background-color: transparent;
@@ -1065,11 +1066,14 @@ th {
 }
 
 .input-field {
+  position: relative;
   background-color: rgb(100, 100, 100);
-  border-radius: 20px;
+  border-radius: 40px;
   margin: auto;
   width: 60%;
-  padding: 10px 20px;
+  padding: 15px 20px;
+  padding-right: 50px;
+  padding-left: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: popup-animation 0.5s ease-out;
   transition: all 0.5s ease !important;
@@ -1095,6 +1099,10 @@ th {
 
 .preview-image {
   animation: popup-animation 0.5s ease-out;
+}
+.preview-text {
+  font-size: 0.8rem;
+  color: white !important;
 }
 
 @keyframes popup-animation {
@@ -1140,7 +1148,7 @@ th {
 }
 
 .send-btn {
-  margin-top: 20px;
+  position: absolute;
   background-color: white;
   border: 0px;
   transition: all 0.3s ease;
@@ -1149,8 +1157,8 @@ th {
   text-align: center;
   padding: 5px 5px;
   cursor: pointer;
-  margin-right: 0px;
-  margin-left: auto;
+  right: 10px;
+  top: 10px;
 }
 
 .send-btn:hover {
@@ -1333,9 +1341,4 @@ th {
   .disclaimer {
     width: 100%;
   }
-}
-
-::selection {
-  background-color: rgba(189, 186, 20, 0.4);
-  color: white;
 }
