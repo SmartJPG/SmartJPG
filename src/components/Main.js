@@ -927,16 +927,21 @@ ${isDragging ? "drag-over" : ""}`}
                 }
               >
                 <div className="chat-content">
-                  {previews && previews.length === 0 && !asked && (
-                    <div>
-                      <div className="greeting">
-                        <span className="greeting smartify-text">
-                          Hello, click or drag to start.
-                        </span>
+                  {!loadingFiles &&
+                    previews &&
+                    previews.length === 0 &&
+                    !asked && (
+                      <div>
+                        <div className="greeting">
+                          <span className="greeting smartify-text">
+                            Hello, click or drag to start.
+                          </span>
+                        </div>
+                        <p className="greeting des">
+                          Current only accept images
+                        </p>
                       </div>
-                      <p className="greeting des">Current only accept images</p>
-                    </div>
-                  )}
+                    )}
 
                   {loadingFiles && (
                     <div className="chat-block d-flex">
@@ -1296,6 +1301,7 @@ ${isDragging ? "drag-over" : ""}`}
                       alt={`Preview ${index + 1}`}
                       style={{
                         maxWidth: "100%",
+                        width: "100%",
                         objectFit: "cover",
                         borderRadius: "10px",
                         marginBottom: "10px",
