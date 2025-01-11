@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-// import Main from "./Main";
 import { Helmet } from "react-helmet";
-// import Description from "./Description";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import AOS from "aos";
 import "aos/dist/aos.css";

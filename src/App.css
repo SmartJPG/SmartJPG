@@ -1084,6 +1084,10 @@ th {
   animation: popup-animation 0.5s ease-out;
 }
 
+.preview {
+  width: 100%;
+}
+
 .preview-image {
   animation: popup-animation 0.5s ease-out;
 }

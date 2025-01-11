@@ -1274,10 +1274,7 @@ ${isDragging ? "drag-over" : ""}`}
             <div className="preview">
               {previews.length > 0 &&
                 previews.map((preview, index) => (
-                  <div
-                    key={index}
-                    style={{ position: "relative", display: "inline-block" }}
-                  >
+                  <div key={index}>
                     {loadingPreviews[index] && (
                       <div
                         style={{
