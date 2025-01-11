@@ -138,23 +138,30 @@ const Home = () => {
         <div className="illustion">
           <div className="row slogan" data-aos="fade-up">
             <div className="col-12 col-md-6">
-              <h2 style={{ textAlign: "left" }}>Connect,</h2>
-              <h2 style={{ textAlign: "left" }}>Deliver Image Tools.</h2>
+              <h2 style={{ textAlign: "left" }}>Ask,</h2>
+              <h2 style={{ textAlign: "left" }}>We do it for you.</h2>
               <br />
-              <p style={{ textAlign: "left" }}>
-                SmartJPG centralize image tools and make it simple,
-                user-friendly. So you can find your wants and needs here.
-              </p>
+              <p style={{ textAlign: "left" }}></p>
             </div>
             <div className="col-12 col-md-6">
-              <Connect />
+              <video
+                width="100%"
+                height="100%"
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ borderRadius: "20px" }}
+              >
+                <source src="demo.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
 
-          <br />
-          <br />
+          {/* <br />
+          <br /> */}
 
-          <div className="row slogan" data-aos="fade-up">
+          {/* <div className="row slogan" data-aos="fade-up">
             <div className="col-12 col-md-6">
               <h2 style={{ textAlign: "left" }}>Build,</h2>
               <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
@@ -168,7 +175,7 @@ const Home = () => {
             <div className="col-12 col-md-6">
               <Box />
             </div>
-          </div>
+          </div> */}
 
           <br />
           <br />
