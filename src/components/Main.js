@@ -931,15 +931,10 @@ ${isDragging ? "drag-over" : ""}`}
                     previews &&
                     previews.length === 0 &&
                     !asked && (
-                      <div>
-                        <div className="greeting">
-                          <span className="greeting smartify-text">
-                            Hello, click or drag to start.
-                          </span>
-                        </div>
-                        <p className="greeting des">
-                          Current only accept images
-                        </p>
+                      <div className="greeting">
+                        <span className="smartify-text">
+                          Hello, click or drag image(s) to start.
+                        </span>
                       </div>
                     )}
 
@@ -1260,7 +1255,7 @@ ${isDragging ? "drag-over" : ""}`}
                           className="show-input smartify-text"
                           onClick={() => setShowInput(true)}
                         >
-                          Wanna generate image instead?
+                          Generate image instead?
                         </button>
                       </div>
                     )}
