@@ -531,7 +531,6 @@ svg {
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
-  z-index: 1000;
 }
 
 .generating {
@@ -616,6 +615,7 @@ svg {
 footer {
   width: 100%;
   font-size: 0.875rem;
+  margin: auto;
 }
 
 .copyright {
@@ -626,7 +626,7 @@ footer {
 .github-icon {
   font-size: 20px;
   text-decoration: none !important;
-  color: rgb(56, 56, 56);
+  color: rgb(56, 56, 56) !important;
   margin: 10px;
 }
 
@@ -883,8 +883,6 @@ footer {
 }
 
 .line-background-des {
-  /* background-image: url("../public/ssscribble.svg"); */
-  background-image: url("../public/bbburst.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -978,6 +976,8 @@ th {
   width: 100%;
   margin-top: 30px;
   padding-top: 10px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .heading {
@@ -1215,6 +1215,7 @@ th {
   padding-bottom: 20px;
   border-radius: 20px;
   background-color: #252728;
+  z-index: 1000;
 }
 
 .disclaimer-text {
