@@ -1029,12 +1029,12 @@ th {
   height: 100%;
 }
 
-.greeting.smartify-text {
+.smartify-text {
   font-size: 2rem !important;
   text-align: center;
 }
 
-.greeting.des {
+.des {
   color: white !important;
   margin-top: 20px;
 }
@@ -1169,6 +1169,10 @@ th {
   font-weight: normal !important;
   border: 0px;
   font-size: 17px;
+}
+
+.show-input.smartify-text {
+  font-size: 1.1rem !important;
 }
 
 .question {
