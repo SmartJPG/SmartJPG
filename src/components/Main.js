@@ -927,50 +927,19 @@ ${isDragging ? "drag-over" : ""}`}
                 }
               >
                 <div className="chat-content">
-                  {!loadingFiles &&
-                    previews &&
-                    previews.length === 0 &&
-                    !asked && (
-                      <div className="greeting">
-                        <span className="smartify-text">
-                          Hello, click or drag image(s) to start.
-                        </span>
-                      </div>
-                    )}
-
-                  {loadingFiles && (
-                    <div className="chat-block d-flex">
-                      <div className="ai-icon">
-                        <img
-                          src="/SmartJPG.png"
-                          alt=""
-                          style={{ width: "40px", marginRight: "10px" }}
-                        />
-                      </div>
-                      <div className="chat-container ai">
-                        <div className="chat">
-                          <p className="text-length">
-                            Please wait while we process your images...
-                          </p>
+                  <div>
+                    {!loadingFiles &&
+                      previews &&
+                      previews.length === 0 &&
+                      !asked && (
+                        <div className="greeting">
+                          <span className="smartify-text">
+                            Hello, click or drag image(s) to start.
+                          </span>
                         </div>
-                      </div>
-                    </div>
-                  )}
+                      )}
 
-                  {previews && previews.length > 0 && (
-                    <div className="chat-block">
-                      <div className="chat-container user">
-                        <div className="chat">
-                          <p className="text-length">
-                            You attached {previews.length} documents:
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {previews && previews.length > 0 && (
-                    <div>
+                    {loadingFiles && (
                       <div className="chat-block d-flex">
                         <div className="ai-icon">
                           <img
@@ -981,203 +950,236 @@ ${isDragging ? "drag-over" : ""}`}
                         </div>
                         <div className="chat-container ai">
                           <div className="chat">
-                            <div>
-                              <p className="text-length">
-                                Let me know which format you want to convert
-                                them to. 👇🏻
-                              </p>
-                            </div>
+                            <p className="text-length">
+                              Please wait while we process your images...
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
-                            <div className="d-flex choices">
-                              <div
-                                className="try-btn chat"
-                                onClick={(e) => handleConvert(e, ".jpg")}
-                              >
-                                .jpg
-                              </div>
-                              <div
-                                className="try-btn chat"
-                                onClick={(e) => handleConvertToPng(e, ".png")}
-                              >
-                                .png
+                    {previews && previews.length > 0 && (
+                      <div className="chat-block">
+                        <div className="chat-container user">
+                          <div className="chat">
+                            <p className="text-length">
+                              You attached {previews.length} documents:
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {previews && previews.length > 0 && (
+                      <div>
+                        <div className="chat-block d-flex">
+                          <div className="ai-icon">
+                            <img
+                              src="/SmartJPG.png"
+                              alt=""
+                              style={{ width: "40px", marginRight: "10px" }}
+                            />
+                          </div>
+                          <div className="chat-container ai">
+                            <div className="chat">
+                              <div>
+                                <p className="text-length">
+                                  Let me know which format you want to convert
+                                  them to. 👇🏻
+                                </p>
                               </div>
 
-                              {previews.length === 1 && (
+                              <div className="d-flex choices">
                                 <div
                                   className="try-btn chat"
-                                  onClick={(e) =>
-                                    removeBg(e, "transparent background")
-                                  }
+                                  onClick={(e) => handleConvert(e, ".jpg")}
                                 >
-                                  Remove Background
+                                  .jpg
                                 </div>
-                              )}
-                            </div>
+                                <div
+                                  className="try-btn chat"
+                                  onClick={(e) => handleConvertToPng(e, ".png")}
+                                >
+                                  .png
+                                </div>
 
-                            {previews.length > 1 && (
-                              <p className="reminder">Scroll to view 👉🏻</p>
-                            )}
-
-                            <div className="preview mobile">
-                              {previews.length > 0 &&
-                                previews.map((preview, index) => (
-                                  <div key={index}>
-                                    <img
-                                      className="preview-image mobile"
-                                      src={preview}
-                                      alt={`Preview ${index + 1}`}
-                                      style={{
-                                        objectFit: "cover",
-                                        borderRadius: "5px",
-                                        boxShadow:
-                                          "0 0 10px rgba(0, 0, 0, 0.2)",
-                                        opacity: loadingPreviews[index]
-                                          ? 0.5
-                                          : 1,
-                                      }}
-                                    />
+                                {previews.length === 1 && (
+                                  <div
+                                    className="try-btn chat"
+                                    onClick={(e) =>
+                                      removeBg(e, "transparent background")
+                                    }
+                                  >
+                                    Remove Background
                                   </div>
-                                ))}
-                            </div>
+                                )}
+                              </div>
 
-                            <div
-                              style={{ margin: "auto", textAlign: "center" }}
-                            >
-                              <button
-                                className="question show-input smartify-text"
-                                onClick={startOver}
+                              {previews.length > 1 && (
+                                <p className="reminder">Scroll to view 👉🏻</p>
+                              )}
+
+                              <div className="preview mobile">
+                                {previews.length > 0 &&
+                                  previews.map((preview, index) => (
+                                    <div key={index}>
+                                      <img
+                                        className="preview-image mobile"
+                                        src={preview}
+                                        alt={`Preview ${index + 1}`}
+                                        style={{
+                                          objectFit: "cover",
+                                          borderRadius: "5px",
+                                          boxShadow:
+                                            "0 0 10px rgba(0, 0, 0, 0.2)",
+                                          opacity: loadingPreviews[index]
+                                            ? 0.5
+                                            : 1,
+                                        }}
+                                      />
+                                    </div>
+                                  ))}
+                              </div>
+
+                              <div
+                                style={{ margin: "auto", textAlign: "center" }}
                               >
-                                Wrong files? Upload other documents?
-                              </button>
+                                <button
+                                  className="question show-input smartify-text"
+                                  onClick={startOver}
+                                >
+                                  Wrong files? Upload other documents?
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {asked && (
-                    <div className="chat-block">
-                      <div className="chat-container user">
-                        <div className="chat">
-                          <p className="text-length">
-                            Image prompt: "{prompt}"
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {asked && (
-                    <div className="chat-block d-flex">
-                      <div className="chat-container ai">
-                        <div className="ai-icon">
-                          <img
-                            src="/SmartJPG.png"
-                            alt=""
-                            style={{ width: "40px", marginRight: "10px" }}
-                          />
-                        </div>
-                        <div className="chat">
-                          {loadingImage ? (
-                            <div>
-                              <Generating />
-                              <p className="generating smartify-text">
-                                Generating image...
-                              </p>
-                            </div>
-                          ) : (
-                            imageUrl && (
-                              <div>
-                                <img
-                                  src={imageUrl}
-                                  alt="AI Generated"
-                                  style={{
-                                    maxWidth: "300px",
-                                    objectFit: "cover",
-                                    width: "100%",
-                                    borderRadius: "20px",
-                                  }}
-                                />
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {asked && imageUrl && (
-                    <div className="chat-block d-flex">
-                      <div className="chat-container ai">
-                        <div className="ai-icon">
-                          <img
-                            // src="/SmartJPG.png"
-                            alt=""
-                            style={{ width: "40px", marginRight: "10px" }}
-                          />
-                        </div>
-                        <div className="chat">
-                          <div>
+                    {asked && (
+                      <div className="chat-block">
+                        <div className="chat-container user">
+                          <div className="chat">
                             <p className="text-length">
-                              There you go! What do you think? 😊
+                              Image prompt: "{prompt}"
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {asked && (
+                      <div className="chat-block d-flex">
+                        <div className="chat-container ai">
+                          <div className="ai-icon">
+                            <img
+                              src="/SmartJPG.png"
+                              alt=""
+                              style={{ width: "40px", marginRight: "10px" }}
+                            />
+                          </div>
+                          <div className="chat">
+                            {loadingImage ? (
+                              <div>
+                                <Generating />
+                                <p className="generating smartify-text">
+                                  Generating image...
+                                </p>
+                              </div>
+                            ) : (
+                              imageUrl && (
+                                <div>
+                                  <img
+                                    src={imageUrl}
+                                    alt="AI Generated"
+                                    style={{
+                                      maxWidth: "300px",
+                                      objectFit: "cover",
+                                      width: "100%",
+                                      borderRadius: "20px",
+                                    }}
+                                  />
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {asked && imageUrl && (
+                      <div className="chat-block d-flex">
+                        <div className="chat-container ai">
+                          <div className="ai-icon">
+                            <img
+                              // src="/SmartJPG.png"
+                              alt=""
+                              style={{ width: "40px", marginRight: "10px" }}
+                            />
+                          </div>
+                          <div className="chat">
+                            <div>
+                              <p className="text-length">
+                                There you go! What do you think? 😊
+                              </p>
+
+                              <div
+                                style={{ margin: "auto", textAlign: "center" }}
+                              >
+                                <button
+                                  className="question show-input smartify-text"
+                                  onClick={startOver}
+                                >
+                                  Wanna switch to converting files?
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {choice && (
+                      <div className="chat-block">
+                        <div className="chat-container user">
+                          <div className="chat">
+                            <p className="text-length">
+                              Convert to {choice} format.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {downloaded && (
+                      <div className="chat-block d-flex">
+                        <div className="chat-container ai">
+                          <div className="ai-icon">
+                            <img
+                              src="/SmartJPG.png"
+                              alt=""
+                              style={{ width: "40px", marginRight: "10px" }}
+                            />
+                          </div>
+                          <div className="chat">
+                            <p className="text-length">
+                              Success! Your files are downloaded 🎉.
                             </p>
 
-                            <div
-                              style={{ margin: "auto", textAlign: "center" }}
-                            >
+                            <div>
                               <button
                                 className="question show-input smartify-text"
                                 onClick={startOver}
                               >
-                                Wanna switch to converting files?
+                                Upload other documents?
                               </button>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-
-                  {choice && (
-                    <div className="chat-block">
-                      <div className="chat-container user">
-                        <div className="chat">
-                          <p className="text-length">
-                            Convert to {choice} format.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {downloaded && (
-                    <div className="chat-block d-flex">
-                      <div className="chat-container ai">
-                        <div className="ai-icon">
-                          <img
-                            src="/SmartJPG.png"
-                            alt=""
-                            style={{ width: "40px", marginRight: "10px" }}
-                          />
-                        </div>
-                        <div className="chat">
-                          <p className="text-length">
-                            Success! Your files are downloaded 🎉.
-                          </p>
-
-                          <div>
-                            <button
-                              className="question show-input smartify-text"
-                              onClick={startOver}
-                            >
-                              Upload other documents?
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
               {!genImage ? (

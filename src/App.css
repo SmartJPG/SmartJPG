@@ -533,15 +533,10 @@ svg {
   color: transparent !important;
 }
 
-.generating {
+.generating.smartify-text {
   font-size: 1.1rem !important;
   text-align: center;
 }
-
-/* svg:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-} */
 
 .absolute {
   position: absolute;
@@ -974,10 +969,15 @@ th {
 
 .chat-content {
   width: 100%;
-  margin-top: 30px;
-  padding-top: 10px;
   height: 100%;
   overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-content > div {
+  width: 100%;
 }
 
 .heading {
@@ -1027,6 +1027,7 @@ th {
   justify-content: center;
   align-items: center;
   height: 100%;
+  padding: 0px 20px;
 }
 
 .smartify-text {
