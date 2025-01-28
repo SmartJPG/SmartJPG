@@ -51,48 +51,14 @@ const Footer = () => (
             <h6 className="text-uppercase fw-bold mb-4">Tools</h6>
             <p>
               <a href="/smartify" className="text-reset">
-                Smartify AI Image Converter
+                Smartify
               </a>
             </p>
-            {/* <p>
-              <a href="/jpg" className="text-reset">
-                JPG
-              </a>
-            </p>
-            <p>
-              <a href="/png" className="text-reset">
-                PNG
-              </a>
-            </p>
-            <p>
-              <a href="/remove-bg" className="text-reset">
-                Remove Background
-              </a>
-            </p>
-            <p>
-              <a href="/pdf" className="text-reset">
-                PDF
-              </a>
-            </p>
-            <p>
-              <a href="/sign-pdf" className="text-reset">
-                Sign PDF
-              </a>
-            </p>
-            <p>
-              <a href="/ai-image" className="text-reset">
-                AI Image Generation
-              </a>
-            </p> */}
           </div>
 
           <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 className="text-uppercase fw-bold mb-4">Information</h6>
-            {/* <p>
-              <a href="/about" className="text-reset">
-                About us
-              </a>
-            </p> */}
+
             <p>
               <a href="/privacy" className="text-reset">
                 Privacy Policy
@@ -125,7 +91,7 @@ const Footer = () => (
       className="text-center p-4"
       style={{ borderTop: "1px solid lightgrey" }}
     >
-      <p className="copyright">© 2024 SmartJPG - All rights reserved.</p>
+      <p className="copyright">© 2025 SmartJPG - All rights reserved.</p>
     </div>
   </footer>
 );
