@@ -1,30 +1,10 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Header from "./Header";
 import Footer from "./Footer";
-
-const Connect = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/b0f4f643-601a-42d4-9a4e-fd7e3ea9dda2/wKQB4jRk6H.lottie"
-      loop
-      autoplay
-    />
-  );
-};
-
-const Box = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/82af52a1-4ed3-4024-8549-59b00caaac48/Oknd6yAYfZ.lottie"
-      loop
-      autoplay
-    />
-  );
-};
+import Faq from "react-faq-component";
 
 const Home = () => {
   useEffect(() => {
@@ -33,6 +13,26 @@ const Home = () => {
       mirror: false,
     });
   }, []);
+
+  const data = {
+    rows: [
+      {
+        title: "Streamline Your Workflow",
+        content:
+          "Combine all image conversion and PDF tasks into one intuitive platform, eliminating the need for multiple tools and websites.",
+      },
+      {
+        title: "Easy and Fast Image Conversion",
+        content:
+          "Convert images to various formats (JPG, PNG, and GIF) quickly and effortlessly with a user-friendly interface.",
+      },
+      {
+        title: "Secure and Privacy-Focused",
+        content:
+          "All uploaded files are processed securely, and no data is stored after the task is completed.",
+      },
+    ],
+  };
 
   return (
     <div>
@@ -79,55 +79,11 @@ const Home = () => {
               </div>
               <br />
               <div className="services">
-                <div className="service jpg">
-                  <img src="./doc.png" alt="file" className="icon doc" />
-                  .jpg Converter
-                </div>
-                <div className="service png">
-                  <img src="./doc.png" alt="file" className="icon doc" />
-                  .png Converter
-                </div>
+                <div className="service jpg">.jpg Converter</div>
+                <div className="service png">.png Converter</div>
 
-                <div className="service rm">
-                  <img src="./doc.png" alt="file" className="icon doc" />
-                  Remove Background
-                </div>
-                {/* <div
-                  className="service pdf"
-                  onClick={() => (window.location.href = "/pdf")}
-                >
-                  <img src="./pdf.png" alt="file" className="icon" />
-                  Merge PDFs
-                  <div className="arrow-container">
-                    <svg
-                      className="arrow-right"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 36 36"
-                      aria-hidden="true"
-                      role="img"
-                    >
-                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  className="service sign"
-                  onClick={() => (window.location.href = "/sign-pdf")}
-                >
-                  <img src="./pdf.png" alt="file" className="icon" />
-                  Sign PDF
-                  <div className="arrow-container">
-                    <svg
-                      className="arrow-right"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 36 36"
-                      aria-hidden="true"
-                      role="img"
-                    >
-                      <path d="M22.56 16.94l-5.51-5.5a1.49 1.49 0 0 0-2.12 2.12l4.44 4.44-4.44 4.44a1.49 1.49 0 1 0 2.12 2.12l5.51-5.5c.28-.28.44-.66.44-1.06s-.16-.78-.44-1.06z" />
-                    </svg>
-                  </div>
-                </div> */}
+                <div className="service rm">Remove Background</div>
+
                 <div className="service ai">AI Generated Image</div>
               </div>
             </div>
@@ -136,88 +92,41 @@ const Home = () => {
       </div>
       <div>
         <div className="illustion">
-          <div className="row slogan" data-aos="fade-up">
-            <div className="col-12 col-md-6">
-              <h2 style={{ textAlign: "left" }}>Ask,</h2>
-              <h2 style={{ textAlign: "left" }}>We do it for you.</h2>
-              <br />
-              <p style={{ textAlign: "left" }}></p>
-            </div>
-            <div className="col-12 col-md-6">
-              <video
-                width="100%"
-                height="100%"
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{ borderRadius: "20px" }}
-              >
-                <source src="demo.mp4" type="video/mp4" />
-              </video>
+          <div className="slogan" data-aos="fade-up">
+            <div className="row">
+              <div className="col-md-6 col-12 illustion-des">
+                <div>
+                  <h2 style={{ textAlign: "left" }}>Ask,</h2>
+                  <h2 style={{ textAlign: "left" }}>We do it for you.</h2>
+                  <br />
+                  <Faq data={data} />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-12">
+                <video
+                  width="100%"
+                  height="100%"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{ borderRadius: "20px" }}
+                >
+                  <source src="demo.mp4" type="video/mp4" />
+                </video>
+              </div>
             </div>
           </div>
 
-          {/* <br />
-          <br /> */}
-
-          {/* <div className="row slogan" data-aos="fade-up">
-            <div className="col-12 col-md-6">
-              <h2 style={{ textAlign: "left" }}>Build,</h2>
-              <h2 style={{ textAlign: "left" }}>Merge, Create.</h2>
-              <br />
-              <p style={{ textAlign: "left" }}>
-                SmartJPG is a free AI-powered image converting tool that allows
-                you to convert images to JPG/PNG format, and remove image
-                backgrounds digitally.
-              </p>
-            </div>
-            <div className="col-12 col-md-6">
-              <Box />
-            </div>
-          </div> */}
-
           <br />
           <br />
-          {/* <div className="table-container">
-            <h2>Why SmartJPG?</h2>
-            <br />
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Features</th>
-                  <th>SmartJPG</th>
-                  <th>Other Online tools</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Usage & Limitations</td>
-                  <td>
-                    Unlimited usage, no watermarks, no sign-ups, no file size
-                    limit.
-                  </td>
-                  <td>
-                    Other tools have file size limitations or restricted
-                    features in free versions.
-                  </td>
-                </tr>
-                <tr>
-                  <td>Sign-Up Requirement</td>
-                  <td>No sign-up required.</td>
-                  <td>Require registration for full functionality.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div> */}
-
           <br />
           <br />
 
-          <div>
+          <div className="question-section">
             <div className="question-container">
-              <h4>Still have questions?</h4>
+              <h1>Still have questions?</h1>
               <p>
                 Can't find the answer you're looking for? Please find our
                 friendly team.
@@ -232,10 +141,10 @@ const Home = () => {
               </button>
             </div>
           </div>
-
-          {/* happening now. */}
         </div>
       </div>
+      <br />
+      <br />
       <br />
       <br />
       <Footer />

@@ -10,31 +10,15 @@ import { saveAs } from "file-saver";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUp,
+  faXmark,
+  faCrop,
+  faImage,
+  faFileImage,
+} from "@fortawesome/free-solid-svg-icons";
 
 const { REACT_APP_API_URL, REACT_APP_OPENAI_API_KEY } = process.env;
-
-// const JPG = () => {
-//   return (
-//     <DotLottieReact
-//       src="https://lottie.host/0769f4e1-df15-498a-99af-00fb60a60c39/qt9XGtqX0e.lottie"
-//       loop
-//       autoplay
-//       style={{ margin: "auto" }}
-//     />
-//   );
-// };
-
-// const AI = () => {
-//   return (
-//     <DotLottieReact
-//       src="https://lottie.host/41025657-829d-4653-9b43-d2d976a17236/8S7xCManYf.lottie"
-//       loop
-//       autoplay
-//       style={{ width: "250px" }}
-//     />
-//   );
-// };
 
 const Generating = () => {
   return (
@@ -47,39 +31,6 @@ const Generating = () => {
   );
 };
 
-// const PNG = () => {
-//   return (
-//     <DotLottieReact
-//       src="https://lottie.host/50fb4c47-15cb-4534-a2da-94f1285f6681/ruH4Ynpa82.lottie"
-//       loop
-//       autoplay
-//       style={{ margin: "auto" }}
-//     />
-//   );
-// };
-
-const PDF = () => {
-  return (
-    <DotLottieReact
-      src="https://lottie.host/b5126674-204a-452f-aa5c-8464d75b0d10/p89IHgP2z9.lottie"
-      loop
-      autoplay
-      style={{ margin: "auto", width: "50%" }}
-    />
-  );
-};
-
-// const Remove = () => {
-//   return (
-//     <DotLottieReact
-//       src="https://lottie.host/8ca58875-60bc-4f55-943f-8ec0af3cffdf/4yleSubbm8.lottie"
-//       loop
-//       autoplay
-//       style={{ margin: "auto" }}
-//     />
-//   );
-// };
-
 const PdfViewer = ({ pdfUrl }) => (
   <div>
     {pdfUrl ? (
@@ -89,17 +40,6 @@ const PdfViewer = ({ pdfUrl }) => (
     )}
   </div>
 );
-
-// const Loading = () => {
-//   return (
-//     <DotLottieReact
-//       src="https://lottie.host/3cee3565-689b-44df-a329-d04cb0da4f8c/M39SVlV3es.lottie"
-//       loop
-//       autoplay
-//       style={{ width: "300px", margin: "auto" }}
-//     />
-//   );
-// };
 
 const SortableItem = ({
   file,
@@ -821,14 +761,6 @@ const Main = ({ page }) => {
 
   return (
     <div className="main">
-      {/* <LoadingBar
-        ref={ref}
-        color={loadingColor}
-        progress={progress}
-        onLoaderFinished={() => setProgress(0)}
-        height={6}
-      /> */}
-
       {/* {page === "pdf" && (
         <div
           className="input-container"
@@ -991,26 +923,41 @@ ${isDragging ? "drag-over" : ""}`}
 
                               <div className="d-flex choices">
                                 <div
-                                  className="try-btn chat"
+                                  className="choice"
                                   onClick={(e) => handleConvert(e, ".jpg")}
                                 >
+                                  <FontAwesomeIcon
+                                    icon={faFileImage}
+                                    style={{ marginRight: "10px" }}
+                                    color="green"
+                                  />
                                   .jpg
                                 </div>
                                 <div
-                                  className="try-btn chat"
+                                  className="choice"
                                   onClick={(e) => handleConvertToPng(e, ".png")}
                                 >
+                                  <FontAwesomeIcon
+                                    icon={faImage}
+                                    style={{ marginRight: "10px" }}
+                                    color="orange"
+                                  />
                                   .png
                                 </div>
 
                                 {previews.length === 1 && (
                                   <div
-                                    className="try-btn chat"
+                                    className="choice"
                                     onClick={(e) =>
                                       removeBg(e, "transparent background")
                                     }
                                   >
-                                    Remove Background
+                                    <FontAwesomeIcon
+                                      icon={faCrop}
+                                      style={{ marginRight: "10px" }}
+                                      color="yellow"
+                                    />
+                                    Remove bg
                                   </div>
                                 )}
                               </div>
@@ -1113,7 +1060,6 @@ ${isDragging ? "drag-over" : ""}`}
                         <div className="chat-container ai">
                           <div className="ai-icon">
                             <img
-                              // src="/SmartJPG.png"
                               alt=""
                               style={{ width: "40px", marginRight: "10px" }}
                             />

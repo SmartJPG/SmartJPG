@@ -58,7 +58,8 @@ body {
   width: 300px !important;
 }
 
-.service:hover {
+.service:hover,
+.choice:hover {
   transform: translateY(-3px);
 }
 
@@ -171,9 +172,18 @@ button {
   font-weight: bold !important;
 }
 
-p {
+p,
+.row-content-text {
   margin: 0px !important;
   color: rgb(77, 77, 77) !important;
+}
+
+.row-content-text {
+  font-size: 0.9rem !important;
+}
+
+.row-title-text {
+  font-weight: 500;
 }
 
 .container {
@@ -555,12 +565,9 @@ svg {
 }
 
 .slogan {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding-left: 30px;
-  padding-right: 30px;
+  width: 80%;
+  margin: auto;
+  padding: 15px;
 }
 
 .slogan-item {
@@ -569,6 +576,10 @@ svg {
   font-weight: 700;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.illustion-des > div {
+  padding: 0px 15px;
 }
 
 .highlight-text-container {
@@ -947,15 +958,42 @@ th {
   transform: translateY(-3px);
   background-color: rgb(23, 138, 23);
 }
+.question-section {
+  position: relative;
+  background-image: linear-gradient(to right, #9198e5, #e66465);
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.question-section::before,
+.question-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.question-section::before {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
 
 .question-container {
   width: 60%;
   margin: auto;
-  padding: 40px;
-  background-color: #ecedff;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  position: relative; /* Ensure content is above the fade */
+  z-index: 2; /* Ensure content is above the fades */
 }
 
 .Chat {
@@ -1020,6 +1058,10 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.col-md-6 {
+  margin: 10px 0px;
 }
 
 .greeting {
@@ -1119,12 +1161,21 @@ th {
 }
 
 .chat {
-  height: 100vh;
   width: auto;
   height: auto;
   background-color: rgb(79, 79, 79);
   border-radius: 20px;
   padding: 15px 20px;
+}
+
+.choice {
+  color: white;
+  padding: 6px 20px;
+  margin: 10px;
+  border-radius: 40px;
+  border: 1px solid rgb(173, 171, 171);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .text-length {
@@ -1259,6 +1310,9 @@ th {
 @media screen and (max-width: 991px) {
   .square-container {
     display: none;
+  }
+  .slogan {
+    width: 100%;
   }
 }
 
