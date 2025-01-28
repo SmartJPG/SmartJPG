@@ -881,7 +881,7 @@ ${isDragging ? "drag-over" : ""}`}
                           />
                         </div>
                         <div className="chat-container ai">
-                          <div className="chat">
+                          <div className="chat ai">
                             <p className="text-length">
                               Please wait while we process your images...
                             </p>
@@ -893,7 +893,7 @@ ${isDragging ? "drag-over" : ""}`}
                     {previews && previews.length > 0 && (
                       <div className="chat-block">
                         <div className="chat-container user">
-                          <div className="chat">
+                          <div className="chat user">
                             <p className="text-length">
                               You attached {previews.length} documents:
                             </p>
@@ -913,7 +913,7 @@ ${isDragging ? "drag-over" : ""}`}
                             />
                           </div>
                           <div className="chat-container ai">
-                            <div className="chat">
+                            <div className="chat ai">
                               <div>
                                 <p className="text-length">
                                   Let me know which format you want to convert
@@ -1007,7 +1007,7 @@ ${isDragging ? "drag-over" : ""}`}
                     {asked && (
                       <div className="chat-block">
                         <div className="chat-container user">
-                          <div className="chat">
+                          <div className="chat user">
                             <p className="text-length">
                               Image prompt: "{prompt}"
                             </p>
@@ -1026,13 +1026,11 @@ ${isDragging ? "drag-over" : ""}`}
                               style={{ width: "40px", marginRight: "10px" }}
                             />
                           </div>
-                          <div className="chat">
+                          <div className="chat ai">
                             {loadingImage ? (
                               <div>
                                 <Generating />
-                                <p className="generating smartify-text">
-                                  Generating image...
-                                </p>
+                                <p className="generating">Generating...</p>
                               </div>
                             ) : (
                               imageUrl && (
@@ -1064,7 +1062,7 @@ ${isDragging ? "drag-over" : ""}`}
                               style={{ width: "40px", marginRight: "10px" }}
                             />
                           </div>
-                          <div className="chat">
+                          <div className="chat ai">
                             <div>
                               <p className="text-length">
                                 There you go! What do you think? 😊
@@ -1089,7 +1087,7 @@ ${isDragging ? "drag-over" : ""}`}
                     {choice && (
                       <div className="chat-block">
                         <div className="chat-container user">
-                          <div className="chat">
+                          <div className="chat user">
                             <p className="text-length">
                               Convert to {choice} format.
                             </p>
@@ -1108,7 +1106,7 @@ ${isDragging ? "drag-over" : ""}`}
                               style={{ width: "40px", marginRight: "10px" }}
                             />
                           </div>
-                          <div className="chat">
+                          <div className="chat ai">
                             <p className="text-length">
                               Success! Your files are downloaded 🎉.
                             </p>

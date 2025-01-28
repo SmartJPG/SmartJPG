@@ -543,9 +543,10 @@ svg {
   color: transparent !important;
 }
 
-.generating.smartify-text {
-  font-size: 1.1rem !important;
+.generating {
+  font-size: 0.9rem !important;
   text-align: center;
+  color: white !important;
 }
 
 .absolute {
@@ -1226,6 +1227,14 @@ th {
   background-color: rgb(79, 79, 79);
   border-radius: 20px;
   padding: 15px 20px;
+}
+
+.chat.ai {
+  border-top-left-radius: 5px;
+}
+
+.chat.user {
+  border-top-right-radius: 5px;
 }
 
 .choice {
