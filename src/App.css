@@ -582,6 +582,66 @@ svg {
   padding: 0px 15px;
 }
 
+.trend {
+  margin: auto;
+  text-align: left;
+}
+
+.trend > h2 {
+  width: 80%;
+  margin: auto;
+}
+
+.second {
+  border-top: 1px solid #9198e5;
+  border-bottom: 1px solid #e66465;
+}
+
+.square {
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.square.left {
+  justify-content: flex-start;
+}
+
+.square.right {
+  justify-content: flex-end;
+}
+
+.one {
+  background-color: #9198e5;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(230, 100, 101, 0.9);
+  padding: 10px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.one-text {
+  color: white !important;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.four {
+  background-color: #e66465;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -4px -4px 8px rgba(145, 152, 229, 0.9);
+  padding: 10px;
+  text-align: center;
+}
+
 .highlight-text-container {
   position: relative;
 }

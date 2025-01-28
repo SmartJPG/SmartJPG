@@ -24,7 +24,7 @@ const Home = () => {
       {
         title: "Easy and Fast Image Conversion",
         content:
-          "Convert images to various formats (JPG, PNG, and GIF) quickly and effortlessly with a user-friendly interface.",
+          "Convert images to various formats (JPG and PNG) quickly and effortlessly with a user-friendly interface.",
       },
       {
         title: "Secure and Privacy-Focused",
@@ -117,6 +117,59 @@ const Home = () => {
                 </video>
               </div>
             </div>
+          </div>
+
+          <br />
+          <br />
+          <br />
+          <br />
+
+          <div className="slogan second">
+            <br />
+            <br />
+            <div className="row">
+              <div className="col-md-6 col-12 illustion-des">
+                <div>
+                  <h2>
+                    SmartJPG<span className="smartify-text">.ai</span> is moving
+                    beyond traditional methods.
+                  </h2>
+                  <br />
+                  <p>
+                    Our AI-powered tools are designed to help you save time and
+                    resources. We are committed to providing top-notch image
+                    conversion, compression, and background removal tools
+                    tailored to your needs.
+                  </p>
+                  <br />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-12">
+                <div className="col-12 row">
+                  <div className="col-6 square right">
+                    <div className="one">
+                      <p className="one-text">Images Conversion</p>
+                    </div>
+                  </div>
+                  <div className="col-6 square">
+                    <div className="two"></div>
+                  </div>
+                </div>
+                <div className="col-12 row">
+                  <div className="col-6 square">
+                    <div className="three"></div>
+                  </div>
+                  <div className="col-6 square left">
+                    <div className="four">
+                      <p className="one-text">Smartify AI</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
           </div>
 
           <br />
