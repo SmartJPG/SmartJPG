@@ -58,6 +58,11 @@ const Footer = () => (
 
           <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 className="text-uppercase fw-bold mb-4">Information</h6>
+            <p>
+              <a href="/privacy" className="text-reset">
+                About Us
+              </a>
+            </p>
 
             <p>
               <a href="/privacy" className="text-reset">
