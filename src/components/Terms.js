@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 
 const Terms = () => {
   return (
-    <div style={{ padding: "10px" }}>
+    <div className="layer" style={{ padding: "10px" }}>
       <Helmet>
         <title>Terms of Service - SmartJPG</title>
         <link rel="canonical" href="https://www.smartjpg.app/terms" />

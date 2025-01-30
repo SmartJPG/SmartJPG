@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 
 const Privacy = () => {
   return (
-    <div style={{ padding: "10px" }}>
+    <div className="layer" style={{ padding: "10px" }}>
       <Helmet>
         <title>Privacy Policy - SmartJPG</title>
         <link rel="canonical" href="https://www.smartjpg.app/privacy" />

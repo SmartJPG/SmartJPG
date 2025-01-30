@@ -17,17 +17,17 @@ const Home = () => {
   const data = {
     rows: [
       {
-        title: "Streamline Your Workflow",
+        title: "1. Streamline Your Workflow",
         content:
           "Combine all image conversion and PDF tasks into one intuitive platform, eliminating the need for multiple tools and websites.",
       },
       {
-        title: "Easy and Fast Image Conversion",
+        title: "2. Easy and Fast Image Conversion",
         content:
           "Convert images to various formats (JPG and PNG) quickly and effortlessly with a user-friendly interface.",
       },
       {
-        title: "Secure and Privacy-Focused",
+        title: "3. Secure and Privacy-Focused",
         content:
           "All uploaded files are processed securely, and no data is stored after the task is completed.",
       },
@@ -106,14 +106,13 @@ const Home = () => {
               <div className="col-md-6 col-12">
                 <video
                   width="100%"
-                  height="100%"
                   autoPlay
                   loop
                   muted
                   playsInline
                   style={{ borderRadius: "20px" }}
                 >
-                  <source src="demo.mp4" type="video/mp4" />
+                  <source src="demo.mp4" type="video/mp4" height="433px" />
                 </video>
               </div>
             </div>
