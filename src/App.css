@@ -258,6 +258,7 @@ p,
   z-index: 5;
   background-color: transparent;
   transition: all ease 0.5s;
+  cursor: pointer;
 }
 
 .input-container.eighty {

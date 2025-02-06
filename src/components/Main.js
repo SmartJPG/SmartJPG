@@ -1105,7 +1105,9 @@ ${isDragging ? "drag-over" : ""}`}
                                 <Generating />
                                 <p
                                   className={`generating ${
-                                    !showDarkMode ? "white" : ""
+                                    !showDarkMode || getTheme === "light"
+                                      ? "white"
+                                      : ""
                                   }`}
                                 >
                                   Generating...
@@ -1239,7 +1241,9 @@ ${isDragging ? "drag-over" : ""}`}
                   <div style={{ width: "100%" }}>
                     {showDisclaimer && (
                       <div
-                        className={`disclaimer ${!showDarkMode ? "white" : ""}`}
+                        className={`disclaimer ${
+                          !showDarkMode || getTheme === "light" ? "white" : ""
+                        }`}
                       >
                         <div className="hide" onClick={handleCloseDisclaimer}>
                           <FontAwesomeIcon
@@ -1250,7 +1254,7 @@ ${isDragging ? "drag-over" : ""}`}
                         </div>
                         <h5
                           className={`disclaimer-text ${
-                            !showDarkMode ? "white" : ""
+                            !showDarkMode || getTheme === "light" ? "white" : ""
                           }`}
                         >
                           Welcome to{" "}
@@ -1262,7 +1266,7 @@ ${isDragging ? "drag-over" : ""}`}
 
                         <p
                           className={`disclaimer-text ${
-                            !showDarkMode ? "white" : ""
+                            !showDarkMode || getTheme === "light" ? "white" : ""
                           }`}
                         >
                           <a
@@ -1290,12 +1294,12 @@ ${isDragging ? "drag-over" : ""}`}
                     {showInput ? (
                       <div
                         className={`input-field ${
-                          !showDarkMode ? "white" : ""
+                          !showDarkMode || getTheme === "light" ? "white" : ""
                         }`}
                       >
                         <input
                           className={`input-area ${
-                            !showDarkMode ? "white" : ""
+                            !showDarkMode || getTheme === "light" ? "white" : ""
                           }`}
                           placeholder="Message to generate image"
                           value={inputPrompt}
