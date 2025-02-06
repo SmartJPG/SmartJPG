@@ -806,7 +806,13 @@ footer {
 .ai-icon {
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.ai-icon > img {
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+  border-radius: 50%;
 }
 
 .input-ai {

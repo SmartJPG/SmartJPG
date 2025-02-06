@@ -64,7 +64,17 @@ const Home = () => {
                 className="try-btn"
                 onClick={() => (window.location.href = "/smartify")}
               >
-                Try Smartify AI
+                Try Smartify AI{" "}
+                <img
+                  style={{
+                    width: "25px",
+                    height: "25px",
+                    borderRadius: "50%",
+                    marginLeft: "5px",
+                  }}
+                  src="/ffflux.svg"
+                  alt="Smartify AI"
+                />
               </button>
             </div>
           </div>
