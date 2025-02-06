@@ -243,27 +243,8 @@ p,
   text-align: center !important;
 }
 
-.Theme {
-  position: relative;
-}
-
-.theme-text {
-  max-height: 0;
-  padding: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.5s ease;
-  margin: 0px;
-}
-
 .service-text.night {
   color: white !important;
-}
-
-.theme-container {
-  height: 100%;
-  justify-content: center;
-  align-items: center;
 }
 
 .table-container > h2 {
@@ -532,6 +513,11 @@ svg {
   height: 5vh;
   background-color: rgb(49, 49, 49);
   padding-left: 10px;
+  transition: all 0.5s ease;
+}
+
+.title.white {
+  background-color: white !important;
 }
 
 .smartify-text {
@@ -547,6 +533,10 @@ svg {
   font-size: 0.9rem !important;
   text-align: center;
   color: white !important;
+}
+
+.generating.white {
+  color: rgb(77, 77, 77) !important;
 }
 
 .absolute {
@@ -883,12 +873,21 @@ footer {
   width: 100%;
 }
 
+.col-12.row.smartify {
+  position: relative;
+}
+
 .col-2 {
   overflow-y: auto;
   height: 100vh;
   padding: 10px !important;
   background-color: rgb(49, 49, 49);
   border-left: 1px solid rgb(77, 77, 77);
+}
+
+.col-2.white {
+  background-color: #e9eef6;
+  border-color: white;
 }
 
 .signature-container {
@@ -1069,6 +1068,26 @@ th {
   transition: all 0.5s ease !important;
   padding: 0;
   margin: 0;
+  transition: all 0.5s ease !important;
+}
+
+.Chat.white {
+  background-color: white !important;
+}
+
+.theme {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  width: 35px !important;
+  height: 35px !important;
+  padding: 0px !important;
+}
+
+.theme-btn {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 .chat-content {
@@ -1155,6 +1174,10 @@ th {
   color: white;
 }
 
+.model-name.white {
+  color: rgb(77, 77, 77) !important;
+}
+
 ::placeholder {
   background-image: linear-gradient(to right, #9198e5, #e66465) !important;
   -webkit-background-clip: text !important;
@@ -1205,6 +1228,10 @@ th {
   color: white !important;
 }
 
+.preview-text.white {
+  color: rgb(77, 77, 77) !important;
+}
+
 @keyframes popup-animation {
   0% {
     opacity: 0;
@@ -1234,6 +1261,10 @@ th {
   padding: 15px 20px;
 }
 
+.chat.white {
+  background-color: #e9eef6;
+}
+
 .chat.ai {
   border-top-left-radius: 5px;
 }
@@ -1252,6 +1283,10 @@ th {
   transition: all 0.3s ease;
 }
 
+.choice.white {
+  color: rgb(77, 77, 77) !important;
+}
+
 .text-length {
   display: inline-block;
   width: fit-content;
@@ -1262,6 +1297,10 @@ th {
   word-wrap: break-word;
   white-space: normal;
   text-align: left;
+}
+
+.text-length.white {
+  color: rgb(77, 77, 77) !important;
 }
 
 .send-btn {
@@ -1287,7 +1326,6 @@ th {
   margin-top: 10px;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid rgb(77, 77, 77);
 }
 
 .show-input {
@@ -1374,13 +1412,6 @@ th {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-@media screen and (min-width: 991px) {
-  .theme-container:hover > .theme-text {
-    max-height: 200px;
-    opacity: 1;
-  }
-}
-
 @media screen and (max-width: 991px) {
   .square-container {
     display: none;
@@ -1417,11 +1448,6 @@ th {
   }
   .check-here-div {
     display: none;
-  }
-  .theme-container {
-    display: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
   }
   .container {
     padding-left: 10px !important;
@@ -1465,5 +1491,9 @@ th {
   }
   .disclaimer {
     width: 100%;
+  }
+  .theme {
+    left: 10px;
+    bottom: 10px;
   }
 }

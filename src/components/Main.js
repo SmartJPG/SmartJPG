@@ -16,6 +16,7 @@ import {
   faCrop,
   faImage,
   faFileImage,
+  faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 
 const { REACT_APP_API_URL, REACT_APP_OPENAI_API_KEY } = process.env;
@@ -133,6 +134,9 @@ const Main = ({ page }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [asked, setAsked] = useState(false);
   const [loadingPreviews, setLoadingPreviews] = useState([]);
+  const [showDarkMode, setShowDarkMode] = useState(true);
+
+  const getTheme = localStorage.getItem("theme");
 
   useEffect(() => {
     AOS.init({
@@ -849,10 +853,25 @@ ${isDragging ? "drag-over" : ""}`}
                 style={{ margin: "10px 0", display: "none" }}
               />
             </div>
-            <div className="title">
-              <span className="model-name">Smartify 1.0</span>
+            <div
+              className={`title ${
+                !showDarkMode || getTheme === "light" ? "white" : ""
+              }`}
+            >
+              <span
+                className={`model-name ${
+                  !showDarkMode || getTheme === "light" ? "white" : ""
+                }`}
+              >
+                Smartify 1.0
+              </span>
             </div>
-            <div className="Chat" ref={chatContainerRef}>
+            <div
+              className={`Chat ${
+                !showDarkMode || getTheme === "light" ? "white" : ""
+              }`}
+              ref={chatContainerRef}
+            >
               <div
                 className={
                   genImage ? "full" : showDisclaimer ? "sixty" : "eighty"
@@ -881,8 +900,20 @@ ${isDragging ? "drag-over" : ""}`}
                           />
                         </div>
                         <div className="chat-container ai">
-                          <div className="chat ai">
-                            <p className="text-length">
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } ai`}
+                          >
+                            <p
+                              className={`text-length ${
+                                !showDarkMode || getTheme === "light"
+                                  ? "white"
+                                  : ""
+                              }`}
+                            >
                               Please wait while we process your images...
                             </p>
                           </div>
@@ -893,8 +924,20 @@ ${isDragging ? "drag-over" : ""}`}
                     {previews && previews.length > 0 && (
                       <div className="chat-block">
                         <div className="chat-container user">
-                          <div className="chat user">
-                            <p className="text-length">
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } user`}
+                          >
+                            <p
+                              className={`text-length ${
+                                !showDarkMode || getTheme === "light"
+                                  ? "white"
+                                  : ""
+                              }`}
+                            >
                               You attached {previews.length} documents:
                             </p>
                           </div>
@@ -913,9 +956,21 @@ ${isDragging ? "drag-over" : ""}`}
                             />
                           </div>
                           <div className="chat-container ai">
-                            <div className="chat ai">
+                            <div
+                              className={`chat ${
+                                !showDarkMode || getTheme === "light"
+                                  ? "white"
+                                  : ""
+                              } ai`}
+                            >
                               <div>
-                                <p className="text-length">
+                                <p
+                                  className={`text-length ${
+                                    !showDarkMode || getTheme === "light"
+                                      ? "white"
+                                      : ""
+                                  }`}
+                                >
                                   Let me know which format you want to convert
                                   them to. 👇🏻
                                 </p>
@@ -923,7 +978,11 @@ ${isDragging ? "drag-over" : ""}`}
 
                               <div className="d-flex choices">
                                 <div
-                                  className="choice"
+                                  className={`choice ${
+                                    !showDarkMode || getTheme === "light"
+                                      ? "white"
+                                      : ""
+                                  }`}
                                   onClick={(e) => handleConvert(e, ".jpg")}
                                 >
                                   <FontAwesomeIcon
@@ -934,7 +993,11 @@ ${isDragging ? "drag-over" : ""}`}
                                   .jpg
                                 </div>
                                 <div
-                                  className="choice"
+                                  className={`choice ${
+                                    !showDarkMode || getTheme === "light"
+                                      ? "white"
+                                      : ""
+                                  }`}
                                   onClick={(e) => handleConvertToPng(e, ".png")}
                                 >
                                   <FontAwesomeIcon
@@ -947,7 +1010,11 @@ ${isDragging ? "drag-over" : ""}`}
 
                                 {previews.length === 1 && (
                                   <div
-                                    className="choice"
+                                    className={`choice ${
+                                      !showDarkMode || getTheme === "light"
+                                        ? "white"
+                                        : ""
+                                    }`}
                                     onClick={(e) =>
                                       removeBg(e, "transparent background")
                                     }
@@ -1007,8 +1074,20 @@ ${isDragging ? "drag-over" : ""}`}
                     {asked && (
                       <div className="chat-block">
                         <div className="chat-container user">
-                          <div className="chat user">
-                            <p className="text-length">
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } user`}
+                          >
+                            <p
+                              className={`text-length ${
+                                !showDarkMode || getTheme === "light"
+                                  ? "white"
+                                  : ""
+                              }`}
+                            >
                               Image prompt: "{prompt}"
                             </p>
                           </div>
@@ -1026,11 +1105,23 @@ ${isDragging ? "drag-over" : ""}`}
                               style={{ width: "40px", marginRight: "10px" }}
                             />
                           </div>
-                          <div className="chat ai">
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } ai`}
+                          >
                             {loadingImage ? (
                               <div>
                                 <Generating />
-                                <p className="generating">Generating...</p>
+                                <p
+                                  className={`generating ${
+                                    !showDarkMode ? "white" : ""
+                                  }`}
+                                >
+                                  Generating...
+                                </p>
                               </div>
                             ) : (
                               imageUrl && (
@@ -1062,9 +1153,21 @@ ${isDragging ? "drag-over" : ""}`}
                               style={{ width: "40px", marginRight: "10px" }}
                             />
                           </div>
-                          <div className="chat ai">
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } ai`}
+                          >
                             <div>
-                              <p className="text-length">
+                              <p
+                                className={`text-length ${
+                                  !showDarkMode || getTheme === "light"
+                                    ? "white"
+                                    : ""
+                                }`}
+                              >
                                 There you go! What do you think? 😊
                               </p>
 
@@ -1087,8 +1190,20 @@ ${isDragging ? "drag-over" : ""}`}
                     {choice && (
                       <div className="chat-block">
                         <div className="chat-container user">
-                          <div className="chat user">
-                            <p className="text-length">
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } user`}
+                          >
+                            <p
+                              className={`text-length ${
+                                !showDarkMode || getTheme === "light"
+                                  ? "white"
+                                  : ""
+                              }`}
+                            >
                               Convert to {choice} format.
                             </p>
                           </div>
@@ -1106,8 +1221,20 @@ ${isDragging ? "drag-over" : ""}`}
                               style={{ width: "40px", marginRight: "10px" }}
                             />
                           </div>
-                          <div className="chat ai">
-                            <p className="text-length">
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } ai`}
+                          >
+                            <p
+                              className={`text-length ${
+                                !showDarkMode || getTheme === "light"
+                                  ? "white"
+                                  : ""
+                              }`}
+                            >
                               Success! Your files are downloaded 🎉.
                             </p>
 
@@ -1184,16 +1311,6 @@ ${isDragging ? "drag-over" : ""}`}
                             size="lg"
                           />
                         </div>
-
-                        {/* <div className="send-container">
-                          <div className="send-btn">
-                            <FontAwesomeIcon
-                              icon={faArrowUp}
-                              onClick={handleSearch}
-                              size="lg"
-                            />
-                          </div>
-                        </div> */}
                       </div>
                     ) : (
                       <div style={{ textAlign: "center" }}>
@@ -1211,7 +1328,15 @@ ${isDragging ? "drag-over" : ""}`}
             </div>
           </div>
 
-          <div className={genImage ? "col-2" : "d-none"}>
+          <div
+            className={
+              genImage
+                ? `col-2 ${
+                    !showDarkMode || getTheme === "light" ? "white" : ""
+                  }`
+                : "d-none"
+            }
+          >
             <div className="preview">
               {previews.length > 0 &&
                 previews.map((preview, index) => (
@@ -1247,7 +1372,13 @@ ${isDragging ? "drag-over" : ""}`}
                         opacity: loadingPreviews[index] ? 0.5 : 1,
                       }}
                     />
-                    <p className="preview-text">{files[index].name}</p>
+                    <p
+                      className={`preview-text ${
+                        !showDarkMode || getTheme === "light" ? "white" : ""
+                      }`}
+                    >
+                      {files[index].name}
+                    </p>
                   </div>
                 ))}
             </div>
@@ -1266,6 +1397,25 @@ ${isDragging ? "drag-over" : ""}`}
               Merge PDFs
             </button>
           </div> */}
+
+          <div className="theme">
+            <div className="theme-btn">
+              <FontAwesomeIcon
+                icon={faMoon}
+                color={
+                  !showDarkMode || getTheme === "light" ? "darkgray" : "white"
+                }
+                size="2xl"
+                onClick={() => {
+                  setShowDarkMode(!showDarkMode);
+                  localStorage.setItem(
+                    "theme",
+                    showDarkMode ? "light" : "dark"
+                  );
+                }}
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>
