@@ -592,6 +592,45 @@ svg {
   border-top: 1px solid #9198e5;
   border-bottom: 1px solid #e66465;
 }
+.graphic {
+  position: relative;
+  transition: all 0.3s ease !important;
+}
+
+.left,
+.right {
+  transition: opacity 0.3s ease, visibility 0.3s ease !important;
+  opacity: 1;
+  visibility: visible;
+}
+
+.graphic:hover .left,
+.graphic:hover .right {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.graphic:hover .smartify-ai-graphic {
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.smartify-ai-graphic-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+
+.smartify-ai-graphic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
 
 .square {
   height: 100px;

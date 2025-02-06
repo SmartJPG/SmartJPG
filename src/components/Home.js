@@ -71,6 +71,7 @@ const Home = () => {
                     height: "25px",
                     borderRadius: "50%",
                     marginLeft: "5px",
+                    boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.3)",
                   }}
                   src="/ffflux.svg"
                   alt="Smartify AI"
@@ -154,7 +155,15 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-md-6 col-12">
+              <div className="col-md-6 col-12 graphic">
+                <div className="smartify-ai-graphic-div">
+                  <img
+                    className="smartify-ai-graphic"
+                    src="./ffflux.svg"
+                    alt="Smartify AI"
+                  />
+                </div>
+
                 <div className="col-12 row">
                   <div className="col-6 square right">
                     <div className="one">
