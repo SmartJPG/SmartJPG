@@ -186,7 +186,7 @@ const Home = () => {
               <button
                 className="contact-btn"
                 onClick={() =>
-                  (window.location.href = "mailto:leohoncanada@gmail.com")
+                  (window.location.href = "mailto:info@smartjpg.app")
                 }
               >
                 Contact us
@@ -195,9 +195,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
+
       <br />
       <Footer />
     </div>
