@@ -63,7 +63,7 @@ const Privacy = () => {
         <h2>Contact Us</h2>
         <p>
           If you have any questions or concerns about this Privacy Policy,
-          please reach out to us at leohoncanada@gmail.com.
+          please reach out to us at info@smartjpg.app.
         </p>
 
         <button className="back" onClick={() => (window.location.href = "/")}>

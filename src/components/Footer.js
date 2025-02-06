@@ -77,7 +77,7 @@ const Footer = () => (
             </p>
 
             <p>
-              <a href="mailto:leohoncanada@gmail.com" className="text-reset">
+              <a href="mailto:info@smartjpg.app" className="text-reset">
                 Report an Issue
               </a>
             </p>
@@ -86,7 +86,7 @@ const Footer = () => (
           <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
             <p>Toronto, ON, Canada</p>
-            <p>leohoncanada@gmail.com</p>
+            <p>info@smartjpg.app</p>
           </div>
         </div>
       </div>
