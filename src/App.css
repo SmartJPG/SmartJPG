@@ -529,6 +529,10 @@ svg {
   color: transparent !important;
 }
 
+.smartify-text.brand-name {
+  font-size: 1.2rem !important;
+}
+
 .generating {
   font-size: 0.9rem !important;
   text-align: center;
@@ -1198,6 +1202,10 @@ th {
   transition: all 0.5s ease !important;
 }
 
+.input-field.white {
+  background-color: #e9eef6 !important;
+}
+
 .input-area {
   display: flex;
   justify-content: center;
@@ -1208,6 +1216,11 @@ th {
   color: white;
   outline: none;
   transition: all 0.5s ease !important;
+}
+
+.input-area.white {
+  background-color: #e9eef6 !important;
+  color: rgb(77, 77, 77) !important;
 }
 
 .chat-block {
@@ -1386,10 +1399,18 @@ th {
   z-index: 1000;
 }
 
+.disclaimer.white {
+  background-color: #e9eef6 !important;
+}
+
 .disclaimer-text {
   color: white !important;
   margin: 20px 24px;
   width: 85%;
+}
+
+.disclaimer-text.white {
+  color: rgb(77, 77, 77) !important;
 }
 
 .disclaimer > p {

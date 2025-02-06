@@ -1257,7 +1257,9 @@ ${isDragging ? "drag-over" : ""}`}
                 <div className={`${showDisclaimer ? "fourty" : "twenty"}`}>
                   <div style={{ width: "100%" }}>
                     {showDisclaimer && (
-                      <div className="disclaimer">
+                      <div
+                        className={`disclaimer ${!showDarkMode ? "white" : ""}`}
+                      >
                         <div className="hide" onClick={handleCloseDisclaimer}>
                           <FontAwesomeIcon
                             icon={faXmark}
@@ -1265,13 +1267,23 @@ ${isDragging ? "drag-over" : ""}`}
                             color="white"
                           />
                         </div>
-                        <h5 className="disclaimer-text">
+                        <h5
+                          className={`disclaimer-text ${
+                            !showDarkMode ? "white" : ""
+                          }`}
+                        >
                           Welcome to{" "}
-                          <span className="smartify-text">Smartify</span>, your
-                          personal AI assistant.
+                          <span className="smartify-text brand-name">
+                            Smartify
+                          </span>
+                          , your personal AI assistant.
                         </h5>
 
-                        <p className="disclaimer-text">
+                        <p
+                          className={`disclaimer-text ${
+                            !showDarkMode ? "white" : ""
+                          }`}
+                        >
                           <a
                             href="https://www.smartjpg.app/terms"
                             target="_blank"
@@ -1295,9 +1307,15 @@ ${isDragging ? "drag-over" : ""}`}
                     )}
 
                     {showInput ? (
-                      <div className="input-field">
+                      <div
+                        className={`input-field ${
+                          !showDarkMode ? "white" : ""
+                        }`}
+                      >
                         <input
-                          className="input-area"
+                          className={`input-area ${
+                            !showDarkMode ? "white" : ""
+                          }`}
                           placeholder="Message to generate image"
                           value={inputPrompt}
                           onChange={handlePromptChange}
