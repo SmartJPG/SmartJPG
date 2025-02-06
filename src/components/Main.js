@@ -893,11 +893,7 @@ ${isDragging ? "drag-over" : ""}`}
                     {loadingFiles && (
                       <div className="chat-block d-flex">
                         <div className="ai-icon">
-                          <img
-                            src="/SmartJPG.png"
-                            alt=""
-                            style={{ width: "40px", marginRight: "10px" }}
-                          />
+                          <img src="/ffflux.svg" alt="Smartify AI" />
                         </div>
                         <div className="chat-container ai">
                           <div
@@ -949,11 +945,7 @@ ${isDragging ? "drag-over" : ""}`}
                       <div>
                         <div className="chat-block d-flex">
                           <div className="ai-icon">
-                            <img
-                              src="/SmartJPG.png"
-                              alt=""
-                              style={{ width: "40px", marginRight: "10px" }}
-                            />
+                            <img src="/ffflux.svg" alt="Smartify AI" />
                           </div>
                           <div className="chat-container ai">
                             <div
@@ -1099,11 +1091,7 @@ ${isDragging ? "drag-over" : ""}`}
                       <div className="chat-block d-flex">
                         <div className="chat-container ai">
                           <div className="ai-icon">
-                            <img
-                              src="/SmartJPG.png"
-                              alt=""
-                              style={{ width: "40px", marginRight: "10px" }}
-                            />
+                            <img src="/ffflux.svg" alt="Smartify AI" />
                           </div>
                           <div
                             className={`chat ${
@@ -1148,10 +1136,7 @@ ${isDragging ? "drag-over" : ""}`}
                       <div className="chat-block d-flex">
                         <div className="chat-container ai">
                           <div className="ai-icon">
-                            <img
-                              alt=""
-                              style={{ width: "40px", marginRight: "10px" }}
-                            />
+                            <img src="/ffflux.svg" alt="Smartify AI" />
                           </div>
                           <div
                             className={`chat ${
@@ -1215,11 +1200,7 @@ ${isDragging ? "drag-over" : ""}`}
                       <div className="chat-block d-flex">
                         <div className="chat-container ai">
                           <div className="ai-icon">
-                            <img
-                              src="/SmartJPG.png"
-                              alt=""
-                              style={{ width: "40px", marginRight: "10px" }}
-                            />
+                            <img src="/ffflux.svg" alt="Smartify AI" />
                           </div>
                           <div
                             className={`chat ${
