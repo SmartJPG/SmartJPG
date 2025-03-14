@@ -6,7 +6,7 @@ const Smartify = () => {
   return (
     <div className="Smartify">
       <Helmet>
-        <title>Smartify | SmartJPG</title>
+        <title>Smartify AI</title>
         <link rel="canonical" href="https://www.smartjpg.app/smartify" />
         <meta
           name="description"
