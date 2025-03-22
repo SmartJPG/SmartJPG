@@ -339,8 +339,7 @@ p,
 }
 
 .main {
-  max-width: 1500px;
-  margin: auto;
+  background-color: rgb(49, 49, 49);
 }
 
 .SmartJPG {
@@ -924,6 +923,8 @@ footer {
 }
 
 .col-12.row.smartify {
+  max-width: 1500px;
+  margin: auto !important;
   position: relative;
 }
 
