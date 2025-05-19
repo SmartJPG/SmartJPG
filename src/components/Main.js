@@ -118,7 +118,6 @@ const SortableList = ({ items, setItems }) => {
 };
 
 const Main = ({ page }) => {
-  const ref = useRef(null);
   const [file, setFile] = useState(null);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [fileLoaded, setFileLoaded] = useState(false);
@@ -137,6 +136,7 @@ const Main = ({ page }) => {
   const [showDarkMode, setShowDarkMode] = useState(true);
 
   const getTheme = localStorage.getItem("theme");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     AOS.init({
@@ -198,6 +198,7 @@ const Main = ({ page }) => {
       }
     } catch (error) {
       console.error("Error fetching image:", error);
+      setError("❌ Oops—failed to download your files. Please try again.");
       alert("Failed to generate image.");
     } finally {
       setLoadingImage(false);
@@ -286,6 +287,9 @@ const Main = ({ page }) => {
                   resolve(previewUrl);
                 } catch (error) {
                   console.error("Error converting HEIC file:", error);
+                  setError(
+                    "❌ Oops—failed to download your files. Please try again."
+                  );
                   reject(error);
                 } finally {
                   setLoadingPreviews((prev) => {
@@ -324,11 +328,7 @@ const Main = ({ page }) => {
       return;
     }
 
-    // setLoadingColor(getRandomColor());
-
     try {
-      // ref.current.continuousStart();
-
       if (files.length === 1) {
         const formData = new FormData();
         formData.append("image", files[0]);
@@ -398,12 +398,10 @@ const Main = ({ page }) => {
         saveAs(zipBlob, "SmartJPG-converted-images.zip");
       }
 
-      // ref.current.complete();
       setDownloaded(true);
     } catch (error) {
       console.error("Image conversion failed:", error);
-      alert("Failed to convert the images.");
-      // ref.current.complete();
+      setError("❌ Oops—failed to download your files. Please try again.");
     }
   };
 
@@ -468,6 +466,9 @@ const Main = ({ page }) => {
               resolve(previewUrl);
             } catch (error) {
               console.error("Error converting HEIC file:", error);
+              setError(
+                "❌ Oops—failed to download your files. Please try again."
+              );
               reject(error);
             }
           };
@@ -490,45 +491,45 @@ const Main = ({ page }) => {
 
   const [fileName, setFileName] = useState("SmartJPG-merged");
 
-  const handlePdfMerge = async () => {
-    if (pdfFiles.length < 2) {
-      alert("Please select at least two PDFs to merge.");
-      return;
-    }
+  // const handlePdfMerge = async () => {
+  //   if (pdfFiles.length < 2) {
+  //     alert("Please select at least two PDFs to merge.");
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    pdfFiles.forEach((file) => formData.append("pdfs", file));
+  //   const formData = new FormData();
+  //   pdfFiles.forEach((file) => formData.append("pdfs", file));
 
-    try {
-      ref.current.continuousStart();
-      const response = await axios.post(
-        `${REACT_APP_API_URL}/merge-pdfs`,
-        formData,
-        {
-          responseType: "blob",
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              (progressEvent.loaded * 50) / progressEvent.total
-            );
-            setProgress(percentCompleted);
-          },
-          onDownloadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              50 + (progressEvent.loaded * 50) / progressEvent.total
-            );
-            setProgress(percentCompleted);
-          },
-        }
-      );
+  //   try {
+  //     ref.current.continuousStart();
+  //     const response = await axios.post(
+  //       `${REACT_APP_API_URL}/merge-pdfs`,
+  //       formData,
+  //       {
+  //         responseType: "blob",
+  //         onUploadProgress: (progressEvent) => {
+  //           const percentCompleted = Math.round(
+  //             (progressEvent.loaded * 50) / progressEvent.total
+  //           );
+  //           setProgress(percentCompleted);
+  //         },
+  //         onDownloadProgress: (progressEvent) => {
+  //           const percentCompleted = Math.round(
+  //             50 + (progressEvent.loaded * 50) / progressEvent.total
+  //           );
+  //           setProgress(percentCompleted);
+  //         },
+  //       }
+  //     );
 
-      saveAs(response.data, fileName + ".pdf");
-      ref.current.complete();
-    } catch (error) {
-      console.error("PDF merging failed:", error);
-      alert("Failed to merge PDFs.");
-      ref.current.complete();
-    }
-  };
+  //     saveAs(response.data, fileName + ".pdf");
+  //     ref.current.complete();
+  //   } catch (error) {
+  //     console.error("PDF merging failed:", error);
+  //     alert("Failed to merge PDFs.");
+  //     ref.current.complete();
+  //   }
+  // };
 
   const handleConvertToPng = async (e, choice) => {
     e.stopPropagation();
@@ -608,34 +609,31 @@ const Main = ({ page }) => {
         const zipBlob = await zip.generateAsync({ type: "blob" });
         saveAs(zipBlob, "SmartPNG-converted-images.zip");
       }
-
-      // ref.current.complete();
     } catch (error) {
       console.error("PNG conversion failed:", error);
-      alert("Failed to convert the images.");
-      // ref.current.complete();
+      setError("❌ Oops—failed to download your files. Please try again.");
     }
   };
 
   const fileInputRef = useRef(null);
-  const pdfFileInputRef = useRef(null);
+  // const pdfFileInputRef = useRef(null);
 
   const handleContainerClick = () => {
     fileInputRef.current.click();
   };
 
-  const handlePdfFilesChange = (e) => {
-    const selectedFiles = Array.from(e.target.files).filter(
-      (file) => file.type === "application/pdf"
-    );
+  // const handlePdfFilesChange = (e) => {
+  //   const selectedFiles = Array.from(e.target.files).filter(
+  //     (file) => file.type === "application/pdf"
+  //   );
 
-    if (selectedFiles.length < 2) {
-      alert("Please upload at least two PDFs to merge.");
-      return;
-    }
+  //   if (selectedFiles.length < 2) {
+  //     alert("Please upload at least two PDFs to merge.");
+  //     return;
+  //   }
 
-    setPdfFiles(selectedFiles);
-  };
+  //   setPdfFiles(selectedFiles);
+  // };
 
   const removeBg = async (e, choice) => {
     e.stopPropagation();
@@ -649,12 +647,9 @@ const Main = ({ page }) => {
     const formData = new FormData();
     formData.append("image", files[0]);
 
-    // setLoadingColor(getRandomColor());
     setPreviewLoading(true);
 
     try {
-      // ref.current.continuousStart();
-
       const response = await axios.post(
         `${REACT_APP_API_URL}/remove-bg`,
         formData,
@@ -682,16 +677,12 @@ const Main = ({ page }) => {
       setPreview(resultUrl);
 
       saveAs(response.data, "background-removed-image.png");
-
-      // ref.current.complete();
     } catch (error) {
       console.error("Background removal failed:", error);
-      alert("Reached the limit of free requests. Please try again later.");
-      // ref.current.complete();
+      setError("❌ Oops—failed to download your files. Please try again.");
     } finally {
       setPreviewLoading(false);
       setDownloaded(true);
-      // ref.current.complete();
     }
   };
 
@@ -733,7 +724,7 @@ const Main = ({ page }) => {
       console.log("hi");
     } catch (error) {
       console.error("Error fetching AI response:", error);
-      alert("Failed to get a response from AI.");
+      setError("❌ Failed to get a response from AI.");
     }
   };
 
@@ -761,63 +752,11 @@ const Main = ({ page }) => {
     setImageUrl(null);
     setGenImage(false);
     setShowInput(false);
+    setError(null);
   };
 
   return (
     <div className="main">
-      {/* {page === "pdf" && (
-        <div
-          className="input-container"
-          onClick={handleContainerClick}
-          style={{
-            position: "relative",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: "20px",
-            padding: "20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            zIndex: "5",
-            cursor: "pointer",
-            border: "2px dashed grey",
-            margin: "auto",
-            width: pdfFiles.length < 1 ? "50%" : "auto",
-          }}
-        >
-          <input
-            type="file"
-            ref={pdfFileInputRef}
-            id="fileInput"
-            accept="application/pdf"
-            multiple
-            onChange={handlePdfFilesChange}
-            style={{ margin: "10px 0", display: "none" }}
-          />
-
-          {pdfFiles.length > 0 ? (
-            <>
-              <h4>Reorder PDFs</h4>
-              <SortableList items={pdfFiles} setItems={setPdfFiles} />
-              <input
-                className="file-name-input"
-                type="text"
-                placeholder="File name: SmartJPG-merged.pdf"
-                onChange={(e) => setFileName(e.target.value)}
-              />
-              <button className="swap download-pdf" onClick={handlePdfMerge}>
-                Merge PDFs
-              </button>
-            </>
-          ) : (
-            <div style={{ textAlign: "center" }}>
-              <PDF />
-              <p className="drag-and-drop-text">Click to upload PDFs here 👋🏻</p>
-              <h3 style={{ fontSize: "13px" }}>Files must be in PDF format</h3>
-            </div>
-          )}
-        </div>
-      )} */}
-
       {page === "smartify" && (
         <div className="col-12 row smartify">
           <div className={genImage ? "col-10" : "col-12"}>
@@ -1198,7 +1137,7 @@ ${isDragging ? "drag-over" : ""}`}
                       </div>
                     )}
 
-                    {downloaded && (
+                    {downloaded && !error && (
                       <div className="chat-block d-flex">
                         <div className="chat-container ai">
                           <div className="ai-icon">
@@ -1218,17 +1157,49 @@ ${isDragging ? "drag-over" : ""}`}
                                   : ""
                               }`}
                             >
-                              Success! Your files are downloaded 🎉.
+                              ✅ Success! Your files are downloaded 🎉
                             </p>
+                            <br />
+                            <button
+                              className="question show-input smartify-text"
+                              onClick={startOver}
+                            >
+                              Upload other documents?
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
-                            <div>
-                              <button
-                                className="question show-input smartify-text"
-                                onClick={startOver}
-                              >
-                                Upload other documents?
-                              </button>
-                            </div>
+                    {error && (
+                      <div className="chat-block d-flex">
+                        <div className="chat-container ai">
+                          <div className="ai-icon">
+                            <img src="/ffflux.svg" alt="Smartify AI" />
+                          </div>
+                          <div
+                            className={`chat ${
+                              !showDarkMode || getTheme === "light"
+                                ? "white"
+                                : ""
+                            } ai`}
+                          >
+                            <p
+                              className={`text-length ${
+                                !showDarkMode || getTheme === "light"
+                                  ? "white"
+                                  : ""
+                              }`}
+                            >
+                              {error}
+                            </p>
+                            <br />
+                            <button
+                              className="question show-input smartify-text"
+                              onClick={startOver}
+                            >
+                              Try again
+                            </button>
                           </div>
                         </div>
                       </div>
