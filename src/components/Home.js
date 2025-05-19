@@ -134,6 +134,27 @@ const Home = () => {
           <br />
           <br />
 
+          <div className="speed-container">
+            <div className="row">
+              <div className="speed-des">
+                <h2>
+                  <span className="smartify-text" style={{ fontSize: "4rem" }}>
+                    {"Woah! < 1.00 Second"}
+                  </span>
+                  <br />
+                  {"per image conversion."}
+                </h2>
+                <br />
+                <p>Lightweight and fast, SmartJPG is designed to be quick.</p>
+              </div>
+            </div>
+          </div>
+
+          <br />
+          <br />
+          <br />
+          <br />
+
           <div className="slogan second">
             <br />
             <br />
