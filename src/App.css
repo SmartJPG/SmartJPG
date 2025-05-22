@@ -339,7 +339,15 @@ p,
 }
 
 .main {
+  transition: all 0.5s ease;
+}
+
+.main.darkgray {
   background-color: rgb(49, 49, 49);
+}
+
+.main.white {
+  background-color: white;
 }
 
 .SmartJPG {
@@ -1296,6 +1304,7 @@ th {
 .preview-text {
   font-size: 0.8rem;
   color: white !important;
+  word-wrap: break-word;
 }
 
 .preview-text.white {
