@@ -756,7 +756,11 @@ const Main = ({ page }) => {
   };
 
   return (
-    <div className="main">
+    <div
+      className={`main ${
+        !showDarkMode || getTheme === "light" ? "white" : "darkgray"
+      }`}
+    >
       {page === "smartify" && (
         <div className="col-12 row smartify">
           <div className={genImage ? "col-10" : "col-12"}>
